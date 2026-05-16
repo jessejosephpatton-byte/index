@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cocktail Book">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a0f05">
+<title>The Cocktail Book</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1a0f05;
+  --surface: #231508;
+  --card: #2c1a09;
+  --card-hover: #341f0b;
+  --amber: #c87941;
+  --amber-light: #e09458;
+  --amber-dim: #8a5228;
+  --gold: #d4a853;
+  --paper: #f0e4cc;
+  --paper-dim: #c8b899;
+  --text: #e8d8bc;
+  --text-muted: #9a8468;
+  --rule: #3d2410;
+  --rule-light: #5a3518;
+  --red: #8b2020;
+  --green: #2a5c3a;
+  --radius: 2px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow: hidden;
+  height: 100dvh;
+}
+
+/* ─── APP SHELL ─── */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  padding-top: var(--safe-top);
+  padding-bottom: var(--safe-bottom);
+}
+
+/* ─── HEADER ─── */
+.header {
+  background: linear-gradient(180deg, #0e0802 0%, var(--surface) 100%);
+  border-bottom: 1px solid var(--rule-light);
+  padding: 14px 20px 12px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber-dim), transparent);
+}
+
+.header-eyebrow {
+  font-family: 'Inconsolata', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber-dim);
+  margin-bottom: 2px;
+}
+
+.header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--paper);
+  letter-spacing: 0.01em;
+}
+
+.header-title em {
+  color: var(--amber-light);
+  font-style: italic;
+}
+
+.header-sub {
+  font-family: 'Inconsolata', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* ─── MAIN CONTENT ─── */
+.main {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─── VIEWS ─── */
+.view {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: none;
+  padding: 16px;
+}
+
+.view.active { display: block; }
+
+/* ─── RECIPE LIST ─── */
+.list-section-label {
+  font-family: 'Inconsolata', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber-dim);
+  padding: 16px 4px 8px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 10px;
+}
+
+.list-section-label:first-child { padding-top: 4px; }
+
+.recipe-card {
+  background: var(--card);
+  border: 1px solid var(--rule-light);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.recipe-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--amber-dim);
+  transition: background 0.15s;
+}
+
+.recipe-card.original::before { background: var(--gold); }
+.recipe-card.extended::before { background: var(--text-muted); }
+
+.recipe-card:active {
+  background: var(--card-hover);
+  border-color: var(--amber-dim);
+}
+
+.recipe-card:active::before { background: var(--amber-light); }
+
+.card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--paper);
+  margin-bottom: 3px;
+}
+
+.card-spec {
+  font-family: 'Inconsolata', monospace;
+  font-size: 10px;
+  color: var(--amber);
+  letter-spacing: 0.08em;
+  margin-bottom: 5px;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.card-arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--rule-light);
+  font-size: 18px;
+  font-family: 'Inconsolata', monospace;
+}
+
+/* ─── RECIPE DETAIL ─── */
+.detail-view {
+  padding: 0;
+}
+
+.detail-hero {
+  background: linear-gradient(180deg, #0e0802 0%, var(--surface) 100%);
+  padding: 20px 20px 24px;
+  border-bottom: 1px solid var(--rule-light);
+  position: relative;
+}
+
+.back-btn {
+  font-family: 'Inconsolata', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.back-btn::before { content: '←'; font-size: 14px; }
+
+.detail-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--paper);
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+
+.detail-name em { color: var(--amber-light); font-style: italic; }
+
+.detail-spec {
+  font-family: 'Inconsolata', monospace;
+  font-size: 10px;
+  color: var(--amber-dim);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.detail-desc {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  font-style: italic;
+}
+
+.detail-body {
+  padding: 20px;
+}
+
+.section-head {
+  font-family: 'Inconsolata', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber-dim);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  margin-top: 24px;
+}
+
+.section-head:first-child { margin-top: 0; }
+
+/* Ingredients */
+.ingredient-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--rule);
+  gap: 12px;
+}
+
+.ingredient-row:last-child { border-bottom: none; }
+
+.ing-name {
+  font-size: 15px;
+  color: var(--text);
+  flex: 1;
+}
+
+.ing-amt {
+  font-family: 'Inconsolata', monospace;
+  font-size: 12px;
+  color: var(--amber);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Steps */
+.step {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.step-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--rule-light);
+  line-height: 1.2;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: right;
+}
+
+.step-text {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.65;
+  padding-top: 2px;
+}
+
+/* Notes */
+.note-box {
+  background: rgba(200,121,65,0.07);
+  border: 1px solid var(--rule-light);
+  border-left: 3px solid var(--amber-dim);
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  margin-top: 8px;
+}
+
+.note-box p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 8px;
+}
+
+.note-box p:last-child { margin-bottom: 0; }
+
+.note-box strong {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+/* Glassware badge */
+.glass-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--card);
+  border: 1px solid var(--rule-light);
+  padding: 5px 12px;
+  border-radius: var(--radius);
+  font-family: 'Inconsolata', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+/* ─── TAB BAR ─── */
+.tab-bar {
+  background: var(--surface);
+  border-top: 1px solid var(--rule-light);
+  display: flex;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.tab-bar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber-dim), transparent);
+}
+
+.tab-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  padding: 10px 8px calc(10px + var(--safe-bottom));
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  transition: color 0.15s;
+  min-height: 56px;
+}
+
+.tab-btn.active { color: var(--amber-light); }
+
+.tab-icon { font-size: 18px; line-height: 1; }
+
+.tab-label {
+  font-family: 'Inconsolata', monospace;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ─── PALATE VIEW ─── */
+.palate-card {
+  background: var(--card);
+  border: 1px solid var(--rule-light);
+  padding: 18px;
+  margin-bottom: 12px;
+  border-radius: var(--radius);
+}
+
+.palate-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--amber-light);
+  margin-bottom: 10px;
+}
+
+.palate-body {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.tag {
+  font-family: 'Inconsolata', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid;
+}
+
+.tag.seek {
+  color: var(--amber);
+  border-color: var(--amber-dim);
+  background: rgba(200,121,65,0.08);
+}
+
+.tag.avoid {
+  color: #b05050;
+  border-color: #6b3030;
+  background: rgba(139,32,32,0.08);
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--rule-light); border-radius: 2px; }
+
+/* ─── EMPTY STATE ─── */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 15px;
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-eyebrow">Personal Reference</div>
+    <div class="header-title">The <em>Cocktail</em> Book</div>
+    <div class="header-sub">9 recipes · spirit-forward · smoke-led</div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <!-- LIST VIEW -->
+    <div class="view active" id="view-list">
+
+      <div class="list-section-label">Core Wheelhouse</div>
+
+      <div class="recipe-card" onclick="openRecipe('black-manhattan')">
+        <div class="card-name">Black Manhattan</div>
+        <div class="card-spec">Stirred · Coupe or Nick & Nora</div>
+        <div class="card-desc">The classic with Averna amaro in place of sweet vermouth. Deeper, more bitter.</div>
+        <div class="card-arrow">›</div>
+      </div>
+
+      <div class="recipe-card" onclick="openRecipe('toronto')">
+        <div class="card-name">Toronto</div>
+        <div class="card-spec">Stirred · Coupe</div>
+        <div class="card-desc">Rye and Fernet-Branca. Bold and medicinal, very booze-forward.</div>
+        <div class="card-arrow">›</div>
+      </div>
+
+      <div class="recipe-card" onclick="openRecipe('vieux-carre')">
+        <div class="card-name">Vieux Carré</div>
+        <div class="card-spec">Stirred · Rocks</div>
+        <div class="card-desc">Rye, cognac, Bénédictine, both vermouths, both bitters. New Orleans classic.</div>
+        <div class="card-arrow">›</div>
+      </div>
+
+      <div class="recipe-card" onclick="openRecipe('penicillin')">
+        <div class="card-name">Penicillin</div>
+        <div class="card-spec">Shaken · Rocks</div>
+        <div class="card-desc">Blended Scotch, honey-ginger syrup, lemon, peated Islay float. Smoke leads.</div>
+        <div class="card-arrow">›</div>
+      </div>
+
+      <div class="list-section-label">Extended Repertoire</div>
+
+      <div class="recipe-card extended" onclick="openRecipe('oaxacan-of')">
+        <div class="card-name">Oaxacan Old Fashioned</div>
+        <div class="card-spec">Stirred · Rocks</div>
+        <div class="card-desc">Tequila-mezcal split base, agave, mole bitters. Phil Ward's classic.</div>
+        <div class="card-arrow">›</div>
+      </div>
+
+      <div class="recipe-card extended" onclick="openRecipe('naked-famous')">
+        <div class="card-name">Naked and Famous</div>
+        <div class="card-spec">Shaken · Coupe</div>
+        <div class="card-desc">Equal parts mezcal, Aperol, Chartreuse, lime. Smoke anchors the balance.</div>
+        <div class="card-arrow">›</div>
+      </div>
+
+      <div class="recipe-card extended" onclick="openRecipe('de-la-louisiane')">
+        <div class="card-name">De La Louisiane</div>
+        <div class="card-spec">Stirred · Coupe</div>
+        <div class="card-desc">Rye, Bénédictine, sweet vermouth, Peychaud's, absinthe rinse.</div>
+        <div class="card-arrow">›</div>
+      </div>
+
+      <div class="recipe-card extended" onclick="openRecipe('scotch-boulevardier')">
+        <div class="card-name">Scotch Boulevardier</div>
+        <div class="card-spec">Stirred · Rocks</div>
+        <div class="card-desc">Swap the bourbon for blended Scotch. Same structure, smokier soul.</div>
+        <div class="card-arrow">›</div>
+      </div>
+
+      <div class="list-section-label">Original</div>
+
+      <div class="recipe-card original" onclick="openRecipe('winnequah')">
+        <div class="card-name">The Winnequah</div>
+        <div class="card-spec">Stirred · Rocks · Original</div>
+        <div class="card-desc">Rye–Islay split, Bénédictine, Barolo Chinato, Peychaud's, absinthe whisper.</div>
+        <div class="card-arrow">›</div>
+      </div>
+
+    </div>
+
+    <!-- DETAIL VIEW -->
+    <div class="view detail-view" id="view-detail">
+      <!-- populated by JS -->
+    </div>
+
+    <!-- PALATE VIEW -->
+    <div class="view" id="view-palate">
+
+      <div class="palate-card" style="margin-top: 4px;">
+        <div class="palate-title">The Profile</div>
+        <div class="palate-body">
+          Whiskey-forward and unapologetically spirit-led. Drawn to bold, assertive modifiers — amaro, Campari, Fernet, Bénédictine — that announce themselves rather than whisper. Bitters are essential, not optional. Sweetness is welcome only as counterbalance, never as the point. Smoke is consistently compelling: Laphroaig, mezcal, peated Scotch. Stirred and spirit-forward is the default mode; shaken only when the build demands it.
+        </div>
+      </div>
+
+      <div class="palate-card">
+        <div class="palate-title">Seek Out</div>
+        <div class="tag-row">
+          <span class="tag seek">Bourbon</span>
+          <span class="tag seek">Rye</span>
+          <span class="tag seek">Scotch</span>
+          <span class="tag seek">Mezcal</span>
+          <span class="tag seek">Amaro</span>
+          <span class="tag seek">Fernet</span>
+          <span class="tag seek">Campari</span>
+          <span class="tag seek">Bénédictine</span>
+          <span class="tag seek">Angostura</span>
+          <span class="tag seek">Peychaud's</span>
+          <span class="tag seek">Mole Bitters</span>
+          <span class="tag seek">Absinthe Rinse</span>
+          <span class="tag seek">Dry Vermouth</span>
+          <span class="tag seek">Rocks Format</span>
+          <span class="tag seek">Stirred</span>
+          <span class="tag seek">Split Base</span>
+        </div>
+      </div>
+
+      <div class="palate-card">
+        <div class="palate-title">Avoid</div>
+        <div class="tag-row">
+          <span class="tag avoid">Overly Sweet</span>
+          <span class="tag avoid">Fruit-Forward</span>
+          <span class="tag avoid">Tropical</span>
+          <span class="tag avoid">Cream / Egg Foam</span>
+          <span class="tag avoid">Blended / Frozen</span>
+          <span class="tag avoid">Too Much Citrus</span>
+        </div>
+      </div>
+
+      <div class="palate-card">
+        <div class="palate-title">The Penicillin Lesson</div>
+        <div class="palate-body">
+          Even sour-format drinks work when smoke and bitterness lead, and citrus/honey play a structural rather than starring role. The Laphroaig float means the first thing that hits is peat and smoke — the lemon and honey are the backbone, not the headline.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TAB BAR -->
+  <div class="tab-bar">
+    <button class="tab-btn active" id="tab-recipes" onclick="switchTab('recipes')">
+      <div class="tab-icon">🥃</div>
+      <div class="tab-label">Recipes</div>
+    </button>
+    <button class="tab-btn" id="tab-palate" onclick="switchTab('palate')">
+      <div class="tab-icon">◈</div>
+      <div class="tab-label">Palate</div>
+    </button>
+  </div>
+
+</div>
+
+<script>
+// ─── RECIPE DATA ───
+const recipes = {
+
+  'black-manhattan': {
+    name: 'Black Manhattan',
+    spec: 'Stirred · Coupe or Nick & Nora · Spirit-Forward',
+    desc: 'The classic Manhattan with Averna amaro swapped for sweet vermouth. The amaro adds herbal bitterness and a deeper sweetness — hits the "touch of sweetness" note without going cloying.',
+    glass: 'Coupe or Nick & Nora · No ice',
+    ingredients: [
+      { name: 'Bourbon or Rye', amt: '2 oz' },
+      { name: 'Averna Amaro', amt: '1 oz' },
+      { name: 'Angostura Bitters', amt: '2 dashes' },
+      { name: 'Orange Bitters', amt: '1 dash' },
+      { name: 'Maraschino Cherry', amt: 'garnish' },
+    ],
+    steps: [
+      'Combine bourbon (or rye), Averna, and both bitters in a mixing glass.',
+      'Add ice and stir for 20–25 seconds until well-chilled and diluted.',
+      'Strain into a chilled coupe or Nick & Nora. No ice.',
+      'Garnish with a Luxardo maraschino cherry.',
+    ],
+    notes: [
+      '<strong>Bourbon vs Rye:</strong> Bourbon gives a sweeter, rounder drink; rye adds spice and sharpness. Either works — try both.',
+      '<strong>Averna:</strong> The key ingredient. It\'s sweeter and more caramel-forward than most amari. If you want more bitterness, try Ramazzotti or Cynar instead.',
+    ]
+  },
+
+  'toronto': {
+    name: 'Toronto',
+    spec: 'Stirred · Coupe · Spirit-Forward',
+    desc: 'Rye whiskey, Fernet-Branca, simple syrup, and Angostura. The Fernet is bold and medicinal but the rye keeps it grounded. A touch bitter, a touch sweet, very booze-forward.',
+    glass: 'Coupe · No ice',
+    ingredients: [
+      { name: 'Rye Whiskey', amt: '2 oz' },
+      { name: 'Fernet-Branca', amt: '¼ oz' },
+      { name: 'Simple Syrup', amt: '¼ oz' },
+      { name: 'Angostura Bitters', amt: '2 dashes' },
+      { name: 'Orange peel', amt: 'garnish' },
+    ],
+    steps: [
+      'Combine all ingredients in a mixing glass with ice.',
+      'Stir for 20–25 seconds until well-chilled.',
+      'Strain into a chilled coupe.',
+      'Express an orange peel over the glass, run it around the rim, and either drop it in or discard.',
+    ],
+    notes: [
+      '<strong>Fernet-Branca:</strong> This is a quarter ounce, not a half — Fernet is aggressive. Start here and dial up if you want more intensity.',
+      '<strong>Simple syrup:</strong> 1:1 sugar to water. The sweetness is just enough to round the Fernet\'s sharp edges.',
+    ]
+  },
+
+  'vieux-carre': {
+    name: 'Vieux Carré',
+    spec: 'Stirred · Rocks · Split Base',
+    desc: 'A New Orleans classic and a natural fit for your palate — it\'s essentially a Manhattan split between rye and cognac, with Bénédictine adding herbal depth and both vermouths playing together.',
+    glass: 'Rocks glass · Single large ice cube',
+    ingredients: [
+      { name: 'Rye Whiskey', amt: '¾ oz' },
+      { name: 'Cognac', amt: '¾ oz' },
+      { name: 'Sweet Vermouth', amt: '¾ oz' },
+      { name: 'Bénédictine', amt: '1 tsp' },
+      { name: 'Peychaud\'s Bitters', amt: '2 dashes' },
+      { name: 'Angostura Bitters', amt: '2 dashes' },
+      { name: 'Lemon or orange peel', amt: 'garnish' },
+    ],
+    steps: [
+      'Combine all ingredients in a mixing glass with ice.',
+      'Stir for 20–25 seconds until well-chilled.',
+      'Strain over a large single ice cube in a rocks glass.',
+      'Express a lemon or orange peel and garnish.',
+    ],
+    notes: [
+      '<strong>Bénédictine:</strong> Only a teaspoon — it\'s strong. The herbal, honey-spice quality should weave through, not dominate.',
+      '<strong>Vermouth:</strong> Carpano Antica is excellent here for the sweet. Dolin Blanc works as an alternative.',
+      '<strong>Cognac:</strong> VS or VSOP — no need to go expensive. The rye does the heavy lifting.',
+    ]
+  },
+
+  'penicillin': {
+    name: 'Penicillin',
+    spec: 'Shaken · Rocks · Scotch Sour',
+    desc: 'Blended Scotch, lemon, honey-ginger syrup, with a peated Islay Scotch float. Smoke and bite are the stars; the honey tames just enough. The Laphroaig float means peat is the first thing that hits you.',
+    glass: 'Rocks glass · Ice',
+    ingredients: [
+      { name: 'Blended Scotch (Famous Grouse)', amt: '2 oz' },
+      { name: 'Honey-Ginger Syrup', amt: '¾ oz' },
+      { name: 'Fresh Lemon Juice', amt: '¾ oz' },
+      { name: 'Laphroaig 10yr (float)', amt: '¼ oz' },
+      { name: 'Candied ginger', amt: 'garnish' },
+    ],
+    steps: [
+      '<strong>Make honey-ginger syrup:</strong> Combine 1 cup honey + 1 cup water + 2 oz fresh ginger (sliced) in a saucepan. Heat until honey dissolves, simmer 5 min. Cool and strain. Keeps 2 weeks refrigerated.',
+      'Combine blended Scotch, honey-ginger syrup, and lemon juice in a shaker with ice.',
+      'Shake vigorously for 10–12 seconds.',
+      'Strain over a large ice cube in a rocks glass.',
+      'Float the Laphroaig: pour gently over the back of a bar spoon so it sits on top.',
+      'Garnish with a piece of candied ginger on a pick.',
+    ],
+    notes: [
+      '<strong>The float matters:</strong> Don\'t stir it in. The Laphroaig sitting on top means every sip starts with peat and smoke — exactly why this drink works for you.',
+      '<strong>Blended Scotch:</strong> Famous Grouse is the classic choice. Monkey Shoulder also works well and is easy to find.',
+      '<strong>Lemon juice:</strong> Must be fresh. Bottled juice will ruin this drink.',
+    ]
+  },
+
+  'oaxacan-of': {
+    name: 'Oaxacan Old Fashioned',
+    spec: 'Stirred · Rocks · Split Base',
+    desc: 'Phil Ward\'s classic from Death & Co. Structurally an Old Fashioned, so it\'s right in your comfort zone — but the smoky mezcal and mole bitters make it feel like something new.',
+    glass: 'Rocks glass · Single large ice cube',
+    ingredients: [
+      { name: 'Reposado Tequila', amt: '1½ oz' },
+      { name: 'Mezcal (Del Maguey Vida)', amt: '½ oz' },
+      { name: 'Agave Nectar (diluted 2:1)', amt: '1 tsp' },
+      { name: 'Bittermens Xocolatl Mole Bitters', amt: '2 dashes' },
+      { name: 'Orange peel', amt: 'garnish' },
+    ],
+    steps: [
+      'Combine all ingredients in a mixing glass with ice.',
+      'Stir for 20–25 seconds.',
+      'Strain over a single large ice cube.',
+      'Express orange peel over the glass and drop in.',
+    ],
+    notes: [
+      '<strong>Mole bitters:</strong> Bittermens Xocolatl Mole Bitters are essential here — chocolate and spice. Worth having in the home bar.',
+      '<strong>Mezcal:</strong> Del Maguey Vida is the standard. If exploring, Wahaka or Banhez work differently but well.',
+      '<strong>Agave nectar:</strong> Dilute 2:1 (agave:water) to make it pourable. Straight agave is too thick and sweet.',
+    ]
+  },
+
+  'naked-famous': {
+    name: 'Naked and Famous',
+    spec: 'Shaken · Coupe · Equal Parts',
+    desc: 'Equal parts mezcal, Aperol, yellow Chartreuse, fresh lime. The mezcal smokiness and Chartreuse herbal weight keep it from going fruit-forward the way Aperol-heavy drinks can.',
+    glass: 'Coupe · No ice',
+    ingredients: [
+      { name: 'Mezcal', amt: '¾ oz' },
+      { name: 'Aperol', amt: '¾ oz' },
+      { name: 'Yellow Chartreuse', amt: '¾ oz' },
+      { name: 'Fresh Lime Juice', amt: '¾ oz' },
+    ],
+    steps: [
+      'Combine all four equal-parts ingredients in a shaker with ice.',
+      'Shake vigorously for 10–12 seconds.',
+      'Double-strain into a chilled coupe.',
+      'No garnish needed.',
+    ],
+    notes: [
+      '<strong>Yellow vs Green Chartreuse:</strong> Yellow is softer and more honey-forward; green is more herbal and intense. Yellow is correct here. Green makes a harder, more challenging drink.',
+      '<strong>Mezcal choice matters:</strong> A smokier mezcal (Alipús, Montelobos) will push this toward your wheelhouse. A lighter one (Del Maguey Vida) keeps it more balanced.',
+      '<strong>For you:</strong> This sits outside pure whiskey territory but the mezcal does here what Laphroaig does in the Penicillin — it anchors everything.',
+    ]
+  },
+
+  'de-la-louisiane': {
+    name: 'De La Louisiane',
+    spec: 'Stirred · Coupe · Spirit-Forward',
+    desc: 'A Vieux Carré cousin. Rye, Bénédictine, sweet vermouth, Peychaud\'s, with an absinthe rinse that weaves anise through every sip without announcing itself.',
+    glass: 'Coupe · Absinthe-rinsed · No ice',
+    ingredients: [
+      { name: 'Rye Whiskey', amt: '1½ oz' },
+      { name: 'Sweet Vermouth', amt: '¾ oz' },
+      { name: 'Bénédictine', amt: '¾ oz' },
+      { name: 'Peychaud\'s Bitters', amt: '3 dashes' },
+      { name: 'Absinthe (rinse)', amt: 'rinse' },
+      { name: 'Maraschino Cherry', amt: 'garnish' },
+    ],
+    steps: [
+      '<strong>Rinse the coupe:</strong> Add a small pour of absinthe (about ¼ tsp) to a chilled coupe, swirl to coat, and discard the excess.',
+      'Combine rye, sweet vermouth, Bénédictine, and Peychaud\'s in a mixing glass with ice.',
+      'Stir for 20–25 seconds until well-chilled.',
+      'Strain into the absinthe-rinsed coupe.',
+      'Garnish with a Luxardo maraschino cherry.',
+    ],
+    notes: [
+      '<strong>Absinthe rinse:</strong> The key technique. You get the anise aroma and a ghost of flavor without the drink being anise-forward. Don\'t add the absinthe directly to the build.',
+      '<strong>Peychaud\'s:</strong> This is the right bitters for this drink — not Angostura. The anise quality in Peychaud\'s plays with the absinthe rinse.',
+      '<strong>Through-line:</strong> This drink hits your smoke/anise/assertive-modifier profile directly. The Bénédictine is the same bridge it is in the Vieux Carré.',
+    ]
+  },
+
+  'scotch-boulevardier': {
+    name: 'Scotch Boulevardier',
+    spec: 'Stirred · Rocks · Spirit-Forward',
+    desc: 'A Boulevardier is a Negroni with bourbon in place of gin. Swap the bourbon for blended Scotch and the whole drink gets smokier and more complex — same Negroni bones, different soul.',
+    glass: 'Rocks glass · Large ice cube',
+    ingredients: [
+      { name: 'Blended Scotch', amt: '1½ oz' },
+      { name: 'Campari', amt: '1 oz' },
+      { name: 'Sweet Vermouth', amt: '1 oz' },
+      { name: 'Orange peel', amt: 'garnish' },
+    ],
+    steps: [
+      'Combine Scotch, Campari, and sweet vermouth in a mixing glass with ice.',
+      'Stir for 20–25 seconds.',
+      'Strain over a large single ice cube in a rocks glass.',
+      'Express orange peel over the glass, run it around the rim, drop in or discard.',
+    ],
+    notes: [
+      '<strong>Scotch choice:</strong> Famous Grouse or Monkey Shoulder work well. A peated blended (Compass Box Peat Monster) pushes it toward the Penicillin territory if you want more smoke.',
+      '<strong>Vermouth ratio:</strong> Standard is 1:1:1 (equal parts). Bumping the Scotch to 1½ oz gives it more spirit weight — right for your palate.',
+      '<strong>Campari:</strong> Bitter and orange-forward. This is a legitimately bitter drink — which is exactly why it works for you.',
+    ]
+  },
+
+  'winnequah': {
+    name: 'The Winnequah',
+    spec: 'Stirred · Rocks · Original Creation',
+    desc: 'A custom original built on a rye–Islay Scotch split base. Smoke and spice as co-equals, bridged by Bénédictine, deepened by Barolo Chinato, with Peychaud\'s and a whisper of absinthe weaving anise through without announcing it.',
+    glass: 'Black Manhattan glass (coupe or Nick & Nora) · Large rock',
+    ingredients: [
+      { name: 'Rye Whiskey', amt: '1 oz' },
+      { name: 'Islay Scotch (Laphroaig 10yr)', amt: '1 oz' },
+      { name: 'Barolo Chinato', amt: '½ oz' },
+      { name: 'Bénédictine', amt: '¼ oz' },
+      { name: 'Peychaud\'s Bitters', amt: '2 dashes' },
+      { name: 'Absinthe', amt: '1 drop (eyedropper)' },
+      { name: 'Lemon peel', amt: 'express & discard' },
+    ],
+    steps: [
+      'Add one drop of absinthe directly to the mixing glass before ice — it becomes part of the base, not a rinse.',
+      'Add rye, Laphroaig, Barolo Chinato, Bénédictine, and Peychaud\'s.',
+      'Add ice and stir for 25–30 seconds — slightly longer than usual to let the Laphroaig integrate.',
+      'Strain over a single large rock in a coupe or Nick & Nora.',
+      'Express a lemon peel over the glass to release the oils, then discard — do not drop it in. You want the citrus aroma only.',
+    ],
+    notes: [
+      '<strong>Barolo Chinato:</strong> A bittersweet Italian wine digestif — like a sophisticated sweet vermouth with more complexity and wine depth. Essential to this drink. Cocchi Barolo Chinato is the go-to.',
+      '<strong>Absinthe treatment:</strong> One drop in the build (not a rinse) fully integrates the anise. It\'s a whisper, not a statement — but you\'ll notice its absence.',
+      '<strong>Rye choice:</strong> Rittenhouse 100 (bottled in bond, big and spicy) is the ideal backbone. The Laphroaig needs something assertive to hold its own.',
+      '<strong>The express-and-discard:</strong> The lemon oils lift the whole drink without adding citrus flavor. Don\'t skip it.',
+    ]
+  },
+
+};
+
+// ─── NAVIGATION ───
+let currentTab = 'recipes';
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+
+  if (tab === 'recipes') {
+    document.getElementById('view-list').classList.add('active');
+  } else if (tab === 'palate') {
+    document.getElementById('view-palate').classList.add('active');
+  }
+}
+
+function openRecipe(id) {
+  const r = recipes[id];
+  if (!r) return;
+
+  const detail = document.getElementById('view-detail');
+
+  let ingredientHTML = r.ingredients.map(i =>
+    `<div class="ingredient-row">
+      <span class="ing-name">${i.name}</span>
+      <span class="ing-amt">${i.amt}</span>
+    </div>`
+  ).join('');
+
+  let stepHTML = r.steps.map((s, i) =>
+    `<div class="step">
+      <div class="step-num">${i + 1}</div>
+      <div class="step-text">${s}</div>
+    </div>`
+  ).join('');
+
+  let notesHTML = r.notes.map(n => `<p>${n}</p>`).join('');
+
+  detail.innerHTML = `
+    <div class="detail-hero">
+      <button class="back-btn" onclick="closeRecipe()">Recipes</button>
+      <div class="detail-name">${r.name}</div>
+      <div class="detail-spec">${r.spec}</div>
+      <div class="detail-desc">${r.desc}</div>
+    </div>
+    <div class="detail-body">
+      <div class="glass-badge">🥃 ${r.glass}</div>
+
+      <div class="section-head" style="margin-top: 22px;">Ingredients</div>
+      ${ingredientHTML}
+
+      <div class="section-head">Method</div>
+      ${stepHTML}
+
+      <div class="section-head">Notes & Variations</div>
+      <div class="note-box">${notesHTML}</div>
+
+    </div>
+  `;
+
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  detail.classList.add('active');
+  detail.scrollTop = 0;
+}
+
+function closeRecipe() {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-list').classList.add('active');
+}
+
+// Handle back gesture / button
+window.addEventListener('popstate', () => {
+  if (document.getElementById('view-detail').classList.contains('active')) {
+    closeRecipe();
+  }
+});
+
+document.getElementById('view-detail').addEventListener('scroll', () => {}, { passive: true });
+</script>
+</body>
+</html>
