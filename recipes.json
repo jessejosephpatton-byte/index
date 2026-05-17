@@ -1085,5 +1085,109 @@
       "<strong>Going deeper — 50/50 Martini:</strong> Equal parts vodka and dry vermouth (1½ oz each), less brine. More aromatic, lower ABV. The drink your great-grandfather actually drank."
     ],
     "history": "The Martini is the most argued-over cocktail in history. The dirty Martini dates to at least 1901, credited to New York bartender John O'Connor. The key upgrade that changes everything: quality brine from quality olives. The rest of the arguments are mostly noise."
-  }
-]
+  },{
+  "id": "greenpoint",
+  "section": "core",
+  "name": "Greenpoint",
+  "spec": "Stirred · Coupe or Rocks · Spirit-Forward",
+  "desc": "A Manhattan riff from the Brooklyn cocktail family. Rye and sweet vermouth as the base, with yellow Chartreuse stepping in where Bénédictine sits in the Vieux Carré — adding herbal, honeyed complexity without taking over. Both bitters, lemon twist.",
+  "glass": "Chilled coupe · or rocks over large cube",
+  "ingredients": [
+    {"name": "Rye Whiskey", "amt": "2 oz", "tiers": [
+      {"label": "standard", "bottle": "Rittenhouse 100", "note": "The spice and proof are essential here — the Chartreuse is assertive and a low-proof rye gets absorbed rather than balanced."},
+      {"label": "upgrade", "bottle": "WhistlePig 10 Year", "note": "More rounded and honeyed, which echoes the Chartreuse's honey notes rather than contrasting them. A richer, more integrated drink."},
+      {"label": "splurge", "bottle": "Sazerac Rye 18 Year", "note": "More floral and complex than younger ryes. The Chartreuse becomes a complement rather than a modifier — the two herbaceous elements weave together."}
+    ]},
+    {"name": "Yellow Chartreuse", "amt": "½ oz", "tiers": [
+      {"label": "standard", "bottle": "Yellow Chartreuse", "note": "Honey, saffron, and 130 alpine herbs. Softer and sweeter than green — the correct choice here. Green Chartreuse is too aggressive and high-proof for this balance."}
+    ]},
+    {"name": "Sweet Vermouth", "amt": "½ oz", "tiers": [
+      {"label": "standard", "bottle": "Cocchi di Torino", "note": "Rich and chocolatey — holds its own alongside the Chartreuse without competing with it."},
+      {"label": "upgrade", "bottle": "Punt e Mes", "note": "More bitter than standard sweet vermouth — adds a bitter-orange backbone that tightens the whole drink. Several bartenders consider this the better choice for the Greenpoint specifically. Changes the character toward more assertive bitterness."}
+    ]},
+    {"name": "Angostura Bitters", "amt": "1 dash"},
+    {"name": "Orange Bitters", "amt": "1 dash", "tiers": [
+      {"label": "standard", "bottle": "Regans' Orange Bitters No. 6", "note": "The dry, spicy orange note lifts the Chartreuse's herbal character. Both bitters are needed — Angostura alone makes this too heavy."}
+    ]},
+    {"name": "Lemon Twist", "amt": "garnish"}
+  ],
+  "steps": [
+    "Chill your coupe or rocks glass while you build the drink.",
+    "Combine rye, Chartreuse, sweet vermouth, and both bitters in a mixing glass with ice.",
+    "Stir for 20–25 seconds until well-chilled.",
+    "Strain into your chilled glass — coupe up, or over a large single cube on the rocks.",
+    "Express lemon twist over the surface to release the oils, then drop it in."
+  ],
+  "notes": [
+    "<strong>Lemon over orange:</strong> The original calls for lemon twist, and it's correct — the Chartreuse's herbal and honey notes are lifted by citrus in a way orange doesn't quite achieve. Don't swap it.",
+    "<strong>Punt e Mes variation:</strong> Worth trying on the second round. Punt e Mes is a bitter-sweet vermouth (Campari and vermouth in one bottle, essentially) — it shifts the Greenpoint toward more bitter, less sweet. Closer to your usual preference.",
+    "<strong>Why this fits your wheelhouse:</strong> The structure is pure Manhattan family. The Chartreuse is doing the same job Bénédictine does in the Vieux Carré — herbal complexity woven through a rye-and-vermouth base. If you love the Vieux Carré, this should land similarly.",
+    "<strong>Variation — Smoky Greenpoint:</strong> Swap the rye for a peated blended Scotch. The Chartreuse reads completely differently against smoke — more alpine forest than honey-herb. An interesting direction worth exploring."
+  ],
+  "history": "Created by Michael McIlroy at Milk & Honey in New York City in 2006, the Greenpoint is part of an unofficial series of Brooklyn neighborhood cocktails — alongside the Red Hook, the Slope, and the Carroll Gardens — each a Manhattan riff with a different modifier. McIlroy named it for the northernmost neighborhood of Brooklyn, known at the time as a gritty, overlooked corner of the city that was quietly excellent. The drink has the same character: understated, complex, better than it looks on paper."
+  }{
+  "id": "mezcal-negroni",
+  "section": "extended",
+  "name": "Mezcal Negroni",
+  "spec": "Stirred · Rocks · Equal Parts",
+  "desc": "The Negroni template with mezcal replacing gin. Equal parts mezcal, Campari, sweet vermouth. The smoke reframes Campari's bitterness entirely — less candy-orange, more charred and complex. Built entirely from bottles you already own.",
+  "glass": "Rocks glass · Large ice cube",
+  "ingredients": [
+    {"name": "Mezcal", "amt": "1 oz", "tiers": [
+      {"label": "standard", "bottle": "Del Maguey Vida", "note": "The benchmark — earthy, fruity, subtle smoke. Integrates with Campari without dominating it. The classic choice for this build."},
+      {"label": "upgrade", "bottle": "Alipús San Andres", "note": "Smokier and more mineral than Vida. The Campari's bitterness becomes a counterbalance to the smoke rather than a co-equal. Pushes the drink closer to your palate profile."},
+      {"label": "splurge", "bottle": "Del Maguey San Luis del Rio", "note": "Single-village, complex and intensely smoky. The Campari is almost a seasoning at this point — mezcal is fully in charge. A very different and more challenging drink."}
+    ]},
+    {"name": "Campari", "amt": "1 oz"},
+    {"name": "Sweet Vermouth", "amt": "1 oz", "tiers": [
+      {"label": "standard", "bottle": "Cocchi di Torino", "note": "Rich and chocolatey — the chocolate note plays beautifully against mezcal's smoke."},
+      {"label": "upgrade", "bottle": "Carpano Antica Formula", "note": "More vanilla and dried fruit. The drink becomes richer and slightly heavier — a more opulent version of the same structure."}
+    ]},
+    {"name": "Orange Peel", "amt": "garnish"}
+  ],
+  "steps": [
+    "Combine mezcal, Campari, and sweet vermouth in a mixing glass with ice.",
+    "Stir for 20–25 seconds.",
+    "Strain over a large single ice cube in a rocks glass.",
+    "Express orange peel over the glass, run it around the rim, and drop it in."
+  ],
+  "notes": [
+    "<strong>Why mezcal over gin:</strong> Gin brings botanical complexity that can fight with Campari. Mezcal brings smoke that reframes Campari's bitterness — the orange-bitter note becomes earthier and more complex rather than candy-forward.",
+    "<strong>Equal parts is the discipline:</strong> The Negroni template only works in balance. Don't adjust ratios until you've made it at spec and know which direction you want to push.",
+    "<strong>Variation — bump the mezcal:</strong> Go 1½ oz mezcal, ¾ oz Campari, ¾ oz vermouth for a more spirit-forward, less bitter version. This is how the Scotch Boulevardier is built — more base spirit, less modifier.",
+    "<strong>Variation — Oaxacan Negroni:</strong> Use ½ oz mezcal and ½ oz reposado tequila as the base. The agave complexity doubles — smoke plus oak — and Campari has more to work against."
+  ],
+  "history": "The Mezcal Negroni has no single credited inventor — it emerged naturally as mezcal became a serious cocktail spirit in the early 2010s and bartenders began substituting it into classic templates. The Negroni itself dates to 1919, when Count Camillo Negroni asked a Florence bartender to strengthen his Americano by replacing the soda water with gin. The mezcal substitution took a century to arrive but has become one of the most popular modern riffs — it turns out that smoke and Campari's bitterness are a better match than gin's botanicals and Campari's bitterness."
+}
+{
+  "id": "frisco-sour",
+  "section": "afield",
+  "name": "Frisco Sour",
+  "spec": "Shaken · Coupe · Bénédictine-Forward",
+  "desc": "Three ingredients: rye, Bénédictine, fresh lemon. Bénédictine does the work of both modifier and sweetener simultaneously. The result is herbal, honeyed, and surprisingly complex for how simple the build is — the closest thing to a pure Bénédictine showcase in cocktail form.",
+  "glass": "Chilled coupe · No ice",
+  "ingredients": [
+    {"name": "Rye Whiskey", "amt": "1½ oz", "tiers": [
+      {"label": "standard", "bottle": "Rittenhouse 100", "note": "The spice and proof are essential — Bénédictine is sweet and herbal, and a big rye prevents this from reading as dessert."},
+      {"label": "upgrade", "bottle": "Sazerac Rye", "note": "More floral and delicate than Rittenhouse. The Bénédictine becomes more prominent — a slightly more Bénédictine-forward expression of the same drink."}
+    ]},
+    {"name": "Bénédictine", "amt": "¾ oz", "tiers": [
+      {"label": "standard", "bottle": "Bénédictine D.O.M.", "note": "27 plants and spices — angelica, hyssop, saffron, honey, and a dozen other things the monks have kept secret since 1510. This is the drink that makes you understand what Bénédictine actually is."}
+    ]},
+    {"name": "Fresh Lemon Juice", "amt": "¾ oz"},
+    {"name": "Lemon Twist or Cherry", "amt": "garnish"}
+  ],
+  "steps": [
+    "Combine rye, Bénédictine, and fresh lemon juice in a shaker with ice.",
+    "Shake vigorously for 10–12 seconds.",
+    "Double-strain into a chilled coupe.",
+    "Garnish with a lemon twist or Luxardo cherry."
+  ],
+  "notes": [
+    "<strong>Why it's in Further Afield:</strong> The sour format is outside your usual preference — but this one earns its place because the lemon is doing structural work, not flavoring work. The Bénédictine's sweetness and herbal complexity are big enough that the lemon just provides the tension to make them readable.",
+    "<strong>Bénédictine as the star:</strong> You've been using Bénédictine as a supporting modifier in the Vieux Carré, De La Louisiane, and The Winnequah. This is the drink where you find out what it tastes like when it's in charge. Worth making once for that reason alone.",
+    "<strong>Fresh lemon only:</strong> Three ingredients means nowhere to hide. Bottled lemon juice kills this drink.",
+    "<strong>Variation — B&B Sour:</strong> Replace half the Bénédictine with brandy (¼ oz Bénédictine, ¼ oz cognac, keep the rest). B&B is a classic pre-made blend of the two — this essentially recreates it in sour format. Slightly less sweet, more complex."
+  ],
+  "history": "The Frisco Sour dates to at least the 1930s, named for San Francisco and built on the simplest possible premise: Bénédictine is sweet and herbal, rye is spicy and spirit-forward, lemon cuts both. It predates the craft cocktail era by decades and was largely forgotten until bartenders rediscovered it as a showcase for Bénédictine specifically. The D.O.M. on the bottle stands for Deo Optimo Maximo — To God, Most Good, Most Great — which the Benedictine monks of Fécamp have been putting on the label since 1510, when a monk named Dom Bernardo Vincelli allegedly created the original formula."
+}]
