@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cocktail Book">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a0f05">
+<title>The Cocktail Book</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1a0f05; --surface: #231508; --card: #2c1a09; --card-hover: #341f0b;
+  --amber: #c87941; --amber-light: #e09458; --amber-dim: #8a5228; --gold: #d4a853;
+  --paper: #f0e4cc; --text: #e8d8bc; --text-muted: #9a8468;
+  --rule: #3d2410; --rule-light: #5a3518; --radius: 2px;
+  --safe-top: env(safe-area-inset-top,0px); --safe-bottom: env(safe-area-inset-bottom,0px);
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html,body { height:100%; overscroll-behavior:none; }
+body { background:var(--bg); color:var(--text); font-family:'Crimson Text',Georgia,serif; font-size:16px; line-height:1.5; overflow:hidden; height:100dvh; }
+.app { display:flex; flex-direction:column; height:100dvh; padding-top:var(--safe-top); padding-bottom:var(--safe-bottom); }
+
+/* HEADER */
+.header { background:linear-gradient(180deg,#0e0802 0%,var(--surface) 100%); border-bottom:1px solid var(--rule-light); padding:14px 20px 12px; flex-shrink:0; position:relative; }
+.header::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--amber-dim),transparent); }
+.header-eyebrow { font-family:'Inconsolata',monospace; font-size:9px; letter-spacing:0.22em; text-transform:uppercase; color:var(--amber-dim); margin-bottom:2px; }
+.header-title { font-family:'Playfair Display',serif; font-size:22px; font-weight:600; color:var(--paper); }
+.header-title em { color:var(--amber-light); font-style:italic; }
+.header-sub { font-family:'Inconsolata',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); margin-top:3px; }
+
+/* MAIN & VIEWS */
+.main { flex:1; overflow:hidden; position:relative; }
+.view { position:absolute; inset:0; overflow-y:auto; -webkit-overflow-scrolling:touch; display:none; padding:16px; }
+.view.active { display:block; }
+.detail-view { padding:0; }
+
+/* LIST */
+.list-section-label { font-family:'Inconsolata',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--amber-dim); padding:16px 4px 8px; border-bottom:1px solid var(--rule); margin-bottom:10px; }
+.list-section-label:first-child { padding-top:4px; }
+.recipe-card { background:var(--card); border:1px solid var(--rule-light); border-radius:var(--radius); padding:14px 40px 14px 16px; margin-bottom:8px; cursor:pointer; position:relative; overflow:hidden; }
+.recipe-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--amber-dim); }
+.recipe-card.extended::before { background:var(--text-muted); }
+.recipe-card.original::before { background:var(--gold); }
+.recipe-card.afield::before { background:#4a7a5a; }
+.recipe-card:active { background:var(--card-hover); }
+.card-name { font-family:'Playfair Display',serif; font-size:17px; font-weight:600; color:var(--paper); margin-bottom:3px; }
+.card-spec { font-family:'Inconsolata',monospace; font-size:10px; color:var(--amber); letter-spacing:0.08em; margin-bottom:5px; }
+.card-desc { font-size:13px; color:var(--text-muted); line-height:1.5; }
+.card-arrow { position:absolute; right:16px; top:50%; transform:translateY(-50%); color:var(--rule-light); font-size:18px; }
+
+/* DETAIL HERO */
+.detail-hero { background:linear-gradient(180deg,#0e0802 0%,var(--surface) 100%); padding:20px 20px 24px; border-bottom:1px solid var(--rule-light); }
+.back-btn { font-family:'Inconsolata',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); background:none; border:none; cursor:pointer; padding:0; margin-bottom:14px; display:flex; align-items:center; gap:6px; }
+.back-btn::before { content:'←'; font-size:14px; }
+.detail-name { font-family:'Playfair Display',serif; font-size:28px; font-weight:600; color:var(--paper); line-height:1.15; margin-bottom:6px; }
+.detail-spec { font-family:'Inconsolata',monospace; font-size:10px; color:var(--amber-dim); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:12px; }
+.detail-desc { font-size:15px; color:var(--text-muted); line-height:1.65; font-style:italic; }
+
+/* DETAIL BODY */
+.detail-body { padding:20px; }
+.section-head { font-family:'Inconsolata',monospace; font-size:9px; letter-spacing:0.22em; text-transform:uppercase; color:var(--amber-dim); border-bottom:1px solid var(--rule); padding-bottom:6px; margin-bottom:14px; margin-top:24px; }
+.section-head:first-child { margin-top:0; }
+.glass-badge { display:inline-flex; align-items:center; gap:6px; background:var(--card); border:1px solid var(--rule-light); padding:5px 12px; border-radius:var(--radius); font-family:'Inconsolata',monospace; font-size:11px; color:var(--text-muted); letter-spacing:0.08em; margin-top:4px; }
+
+/* INGREDIENTS */
+.ingredient-row { display:flex; justify-content:space-between; align-items:flex-start; padding:8px 0; border-bottom:1px solid var(--rule); gap:12px; }
+.ingredient-row:last-child { border-bottom:none; }
+.ing-left { flex:1; }
+.ing-name { font-size:15px; color:var(--text); }
+.ing-amt { font-family:'Inconsolata',monospace; font-size:12px; color:var(--amber); white-space:nowrap; flex-shrink:0; padding-top:2px; }
+
+/* TIER DROPDOWN */
+.tier-toggle { font-family:'Inconsolata',monospace; font-size:10px; letter-spacing:0.08em; color:var(--amber-dim); cursor:pointer; background:none; border:none; padding:3px 0 0; display:flex; align-items:center; gap:4px; }
+.tier-toggle::before { content:'▸'; font-size:9px; transition:transform 0.2s; display:inline-block; }
+.tier-toggle.open::before { transform:rotate(90deg); }
+.tier-panel { display:none; background:rgba(0,0,0,0.25); border:1px solid var(--rule-light); border-radius:2px; margin-top:6px; overflow:hidden; }
+.tier-panel.open { display:block; }
+.tier-item { padding:8px 12px; border-bottom:1px solid var(--rule); }
+.tier-item:last-child { border-bottom:none; }
+.tier-label { font-family:'Inconsolata',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:2px; }
+.tier-label.standard { color:var(--amber-dim); }
+.tier-label.upgrade { color:var(--amber); }
+.tier-label.splurge { color:var(--gold); }
+.tier-bottle { font-size:14px; color:var(--text); font-weight:600; }
+.tier-note { font-size:12px; color:var(--text-muted); line-height:1.55; margin-top:3px; font-style:italic; }
+
+/* STEPS */
+.step { display:flex; gap:14px; margin-bottom:16px; }
+.step-num { font-family:'Playfair Display',serif; font-size:22px; color:var(--rule-light); line-height:1.2; flex-shrink:0; width:20px; text-align:right; }
+.step-text { font-size:15px; color:var(--text); line-height:1.65; padding-top:2px; }
+
+/* NOTES & HISTORY */
+.note-box { background:rgba(200,121,65,0.07); border:1px solid var(--rule-light); border-left:3px solid var(--amber-dim); padding:14px 16px; border-radius:var(--radius); margin-top:8px; }
+.note-box p { font-size:14px; color:var(--text-muted); line-height:1.7; margin-bottom:10px; }
+.note-box p:last-child { margin-bottom:0; }
+.note-box strong { color:var(--amber); font-weight:600; }
+.history-box { background:rgba(0,0,0,0.2); border:1px solid var(--rule-light); border-left:3px solid var(--text-muted); padding:14px 16px; border-radius:var(--radius); margin-top:8px; }
+.history-box p { font-size:14px; color:var(--text-muted); line-height:1.7; }
+
+/* TAB BAR */
+.tab-bar { background:var(--surface); border-top:1px solid var(--rule-light); display:flex; flex-shrink:0; position:relative; }
+.tab-bar::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--amber-dim),transparent); }
+.tab-btn { flex:1; background:none; border:none; color:var(--text-muted); padding:10px 8px calc(10px + var(--safe-bottom)); cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:3px; transition:color 0.15s; min-height:56px; }
+.tab-btn.active { color:var(--amber-light); }
+.tab-icon { font-size:18px; line-height:1; }
+.tab-label { font-family:'Inconsolata',monospace; font-size:8px; letter-spacing:0.12em; text-transform:uppercase; }
+
+/* PALATE */
+.palate-card { background:var(--card); border:1px solid var(--rule-light); padding:18px; margin-bottom:12px; border-radius:var(--radius); }
+.palate-title { font-family:'Playfair Display',serif; font-size:15px; font-style:italic; color:var(--amber-light); margin-bottom:10px; }
+.palate-body { font-size:14px; color:var(--text-muted); line-height:1.75; }
+.tag-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.tag { font-family:'Inconsolata',monospace; font-size:10px; letter-spacing:0.08em; padding:3px 10px; border-radius:20px; border:1px solid; }
+.tag.seek { color:var(--amber); border-color:var(--amber-dim); background:rgba(200,121,65,0.08); }
+.tag.avoid { color:#b05050; border-color:#6b3030; background:rgba(139,32,32,0.08); }
+
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--rule-light); border-radius:2px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="header">
+  <div class="header-eyebrow">Personal Reference</div>
+  <div class="header-title">The <em>Cocktail</em> Book</div>
+  <div class="header-sub" id="recipe-count">12 recipes · spirit-forward · smoke-led</div>
+</div>
+
+<div class="main">
+  <div class="view active" id="view-list"></div>
+  <div class="view detail-view" id="view-detail"></div>
+  <div class="view" id="view-palate">
+    <div class="palate-card" style="margin-top:4px">
+      <div class="palate-title">The Profile</div>
+      <div class="palate-body">Whiskey-forward and unapologetically spirit-led. Drawn to bold, assertive modifiers — amaro, Campari, Fernet, Bénédictine — that announce themselves rather than whisper. Bitters are essential, not optional. Sweetness is welcome only as counterbalance, never as the point. Smoke is consistently compelling: Laphroaig, mezcal, peated Scotch. The Penicillin insight: even sour-format drinks work when smoke and bitterness lead, and citrus/honey play structural rather than starring roles.</div>
+    </div>
+    <div class="palate-card">
+      <div class="palate-title">Seek Out</div>
+      <div class="tag-row">
+        <span class="tag seek">Rye</span><span class="tag seek">Bourbon</span><span class="tag seek">Scotch</span><span class="tag seek">Mezcal</span><span class="tag seek">Averna</span><span class="tag seek">Fernet</span><span class="tag seek">Campari</span><span class="tag seek">Bénédictine</span><span class="tag seek">Barolo Chinato</span><span class="tag seek">Angostura</span><span class="tag seek">Peychaud's</span><span class="tag seek">Mole Bitters</span><span class="tag seek">Absinthe Rinse</span><span class="tag seek">Cocchi di Torino</span><span class="tag seek">Carpano Antica</span><span class="tag seek">Rocks Format</span><span class="tag seek">Stirred</span><span class="tag seek">Split Base</span>
+      </div>
+    </div>
+    <div class="palate-card">
+      <div class="palate-title">Avoid</div>
+      <div class="tag-row">
+        <span class="tag avoid">Overly Sweet</span><span class="tag avoid">Fruit-Forward</span><span class="tag avoid">Tropical</span><span class="tag avoid">Cream / Egg Foam</span><span class="tag avoid">Blended / Frozen</span><span class="tag avoid">Low-Proof Base</span>
+      </div>
+    </div>
+    <div class="palate-card">
+      <div class="palate-title">Home Bar Priority Order</div>
+      <div class="palate-body">Rittenhouse 100 Rye → Cocchi di Torino → Averna → Peychaud's → Fernet-Branca → Bénédictine → Barolo Chinato Cocchi → Laphroaig 10yr → Del Maguey Vida Mezcal → Carpano Antica → Yellow Chartreuse → Bittermens Mole Bitters → Regans' Orange Bitters</div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" id="tab-recipes" onclick="switchTab('recipes')"><div class="tab-icon">🥃</div><div class="tab-label">Recipes</div></button>
+  <button class="tab-btn" id="tab-palate" onclick="switchTab('palate')"><div class="tab-icon">◈</div><div class="tab-label">Palate</div></button>
+</div>
+
+</div>
+<script>
+const R = [
+  {id:'black-manhattan',section:'core',name:'Black Manhattan',
+   spec:'Stirred · Rocks or Up · Spirit-Forward',
+   desc:'A richer, more bitter Manhattan built with Averna amaro in place of sweet vermouth — or Barolo Chinato for the premium expression. Deeper, earthier, more complex. The Barolo Chinato version is the special-occasion build and what confirmed this as a personal favorite.',
+   glass:'Rocks glass over large single cube · or coupe up',
+   ingredients:[
+     {name:'Rye Whiskey',amt:'2 oz',tiers:[
+       {label:'standard',bottle:'Rittenhouse 100',note:'Bottled-in-bond, 100 proof — the spice cuts right through the amaro. The canonical choice and exceptional value. This is the one to own.'},
+       {label:'upgrade',bottle:'WhistlePig 10 Year',note:'Vermont rye, 100 proof, aged 10 years. More rounded and honeyed than Rittenhouse. The amaro plays differently — slightly richer, less punchy.'},
+       {label:'splurge',bottle:'WhistlePig 12 Year Old World',note:'Finished in Madeira, Sauternes, and Cognac casks. Adds wine and dried-fruit complexity that mirrors and amplifies the Barolo Chinato version specifically.'}
+     ]},
+     {name:'Averna Amaro · or · Cocchi Barolo Chinato (premium)',amt:'1 oz',tiers:[
+       {label:'standard',bottle:'Averna Amaro',note:'Caramel-forward, herbal, slightly sweet. The most approachable and versatile amaro you can own — also works in dozens of other drinks. Your everyday build.'},
+       {label:'upgrade',bottle:'Cocchi Barolo Chinato',note:'Wine-based, bitter, complex — more like a sophisticated vermouth than a standard amaro. What you had the night this became a favorite. The premium build. Worth every penny of the ~$55 price.'},
+       {label:'splurge',bottle:'Ramazzotti or Cynar (variation)',note:'Not an upgrade in price but a flavor shift: Ramazzotti is drier and more bitter than Averna; Cynar (artichoke-based) is darker and earthier. Both move the drink away from sweetness toward deep bitterness.'}
+     ]},
+     {name:'Angostura Bitters',amt:'2 dashes'},
+     {name:"Orange Bitters",amt:'1 dash',tiers:[
+       {label:'standard',bottle:"Regans' Orange Bitters No. 6",note:"Dry, spicy, and complex — the bartender's standard. Bridges the rye and amaro beautifully. Don't skip this; it completes the drink in a way Angostura alone doesn't."},
+       {label:'upgrade',bottle:'Angostura Orange Bitters',note:'Slightly fruitier and softer than Regans\'. A valid alternative; some prefer it in this specific build for its rounder orange note.'}
+     ]},
+     {name:'Luxardo Maraschino Cherry',amt:'garnish'},
+     {name:'Orange Twist (optional)',amt:'garnish'},
+   ],
+   steps:[
+     'Chill your glass — rocks glass in the freezer, or fill it with ice water while you build the drink.',
+     'Combine rye, Averna (or Barolo Chinato), Angostura, and orange bitters in a mixing glass with ice.',
+     'Stir for 25–30 seconds — full dilution and integration. The amaro needs time to marry with the rye.',
+     'Strain over a large single ice cube in a rocks glass, or into a chilled coupe up. Express orange twist over the surface if using, then drop it in alongside the Luxardo cherry.',
+   ],
+   notes:[
+     '<strong>Two builds:</strong> The Averna version is your everyday drink — approachable, herbal, slightly sweet. The Barolo Chinato version is special occasion — more bitter, more complex, wine-forward. Know which you\'re making before you pour.',
+     '<strong>The orange bitters matter:</strong> Angostura alone doesn\'t bridge the herbal gap between amaro and rye. A single dash of Regans\' does that job. Don\'t skip it.',
+     '<strong>Garnish:</strong> Luxardo cherries only. The neon-red grocery store maraschino is a completely different product. Orange twist is optional but adds aromatic lift, especially in the Barolo Chinato version.',
+     '<strong>Variation — Smoked Black Manhattan:</strong> Split the rye 50/50 with a peated blended Scotch (Compass Box Smokey). The Averna reads differently against smoke — more herbal, less sweet.',
+   ],
+   history:'The Black Manhattan was created by Todd Smith at Bourbon & Branch in San Francisco around 2005, substituting Averna amaro for sweet vermouth. It spread rapidly through the craft cocktail world because it solved a real problem: sweet vermouth can overwhelm a well-made rye. The amaro brings bitterness and herbal complexity that amplifies the whiskey rather than competing with it. The Barolo Chinato variation uses a wine-based digestif from Piedmont — a grape-and-quinine aperitif that adds tannin and bitter wine depth that standard amaro doesn\'t provide.'},
+
+  {id:'toronto',section:'core',name:'Toronto',
+   spec:'Stirred · Coupe · Spirit-Forward',
+   desc:'Rye whiskey with Fernet-Branca as the modifier. Bold, medicinal, assertive — Fernet announces itself, but the high-proof rye holds its ground. One of the most aggressively spirit-forward cocktails in the Manhattan family.',
+   glass:'Chilled coupe · No ice',
+   ingredients:[
+     {name:'Rye Whiskey',amt:'2 oz',tiers:[
+       {label:'standard',bottle:'Rittenhouse 100',note:'Essential here — Fernet is aggressive and medicinal, and a low-proof whiskey simply disappears behind it. The 100-proof Rittenhouse holds its ground.'},
+       {label:'upgrade',bottle:'Sazerac Rye 6 Year',note:'Lighter and more floral than Rittenhouse, which lets Fernet\'s menthol and licorice come forward more. A different but equally valid expression of this drink.'},
+       {label:'splurge',bottle:'WhistlePig 10 Year',note:'More rounded and oak-forward. The Fernet reads differently — less of a clash, more of a conversation. For when you want the Toronto in a suit rather than a bar fight.'}
+     ]},
+     {name:'Fernet-Branca',amt:'¼ oz',tiers:[
+       {label:'standard',bottle:'Fernet-Branca',note:'27 herbs, menthol-forward, medicinal, intensely bitter. A quarter ounce is intentional — this is one of the most assertive liqueurs made. Start here.'},
+       {label:'upgrade',bottle:'Fernet-Branca Menta',note:'Shifts menthol from background to foreground. The mint becomes the aromatic anchor. Changes the drink\'s character entirely — more polarizing but interesting if you enjoy that direction.'}
+     ]},
+     {name:'Simple Syrup',amt:'¼ oz'},
+     {name:'Angostura Bitters',amt:'2 dashes'},
+     {name:'Orange Peel',amt:'garnish'},
+   ],
+   steps:[
+     'Combine rye, Fernet, simple syrup, and Angostura bitters in a mixing glass with ice.',
+     'Stir for 20–25 seconds until well-chilled.',
+     'Strain into a chilled coupe.',
+     'Express orange peel over the glass and drop it in, or discard.',
+   ],
+   notes:[
+     '<strong>On the Fernet:</strong> ¼ oz is precise. Fernet contains saffron, myrrh, chamomile, and 23 other botanicals plus significant menthol. A quarter ounce is plenty — dial up only after you\'ve made it once and know you want more.',
+     '<strong>Simple syrup:</strong> Just enough to round Fernet\'s edges. It\'s structural, not a flavor component — the drink should not taste sweet.',
+     '<strong>Variation — Toronto Sour:</strong> Add ¾ oz fresh lemon juice and shake instead of stir. The Fernet reads completely differently against citrus — more medicinal herb than aggressive bitter. A bridge between your stirred preference and the sour format.',
+   ],
+   history:'The Toronto is a classic Prohibition-era cocktail, likely developed in Canada where rye was legal and Fernet was available as "medicine." It fell out of fashion for decades and was revived by the craft cocktail movement in the early 2000s — Death & Co in New York was instrumental in putting it back on menus. It\'s one of the best examples of the template drink: structurally a Manhattan with the vermouth replaced by a modifier, but the Fernet substitution changes the experience so dramatically it reads as its own distinct drink entirely.'},
+
+  {id:'vieux-carre',section:'core',name:'Vieux Carré',
+   spec:'Stirred · Rocks · Split Base',
+   desc:'A New Orleans classic — rye and cognac as co-equal bases, bridged by Bénédictine, with both sweet vermouth and both bitters. Essentially two Manhattan variants sharing a glass. Rich, layered, and complex.',
+   glass:'Rocks glass · Single large ice cube',
+   ingredients:[
+     {name:'Rye Whiskey',amt:'¾ oz',tiers:[
+       {label:'standard',bottle:'Rittenhouse 100',note:'Provides spice and backbone against the rounder cognac.'},
+       {label:'upgrade',bottle:'Sazerac Rye',note:'The New Orleans native choice — more delicate and floral, which complements the cognac rather than competing with it. The historically authentic pick.'}
+     ]},
+     {name:'Cognac',amt:'¾ oz',tiers:[
+       {label:'standard',bottle:'Rémy Martin VSOP',note:'The right price point for cocktail use. The rye does the heavy lifting; you don\'t need a premium cognac here.'},
+       {label:'upgrade',bottle:'Pierre Ferrand 1840',note:'Made specifically for cocktails — higher proof, more robust, designed to hold its own against assertive modifiers. Preferred by most bartenders for this drink.'},
+       {label:'splurge',bottle:'Hine VSOP',note:'Lighter and more floral than Rémy, with elegant rather than rich character. Changes the whole balance toward finesse.'}
+     ]},
+     {name:'Sweet Vermouth',amt:'¾ oz',tiers:[
+       {label:'standard',bottle:'Cocchi di Torino',note:'Rich, chocolatey, and complex — far superior to generic sweet vermouth in this build.'},
+       {label:'upgrade',bottle:'Carpano Antica Formula',note:'The richer, more vanilla-forward option. The classic choice for this drink — Carpano Antica was invented in Turin in 1786 and the Vieux Carré was built around this style of vermouth.'}
+     ]},
+     {name:'Bénédictine',amt:'1 tsp'},
+     {name:"Peychaud's Bitters",amt:'2 dashes',tiers:[
+       {label:'standard',bottle:"Peychaud's Aromatic Bitters",note:'The New Orleans standard. Lighter and more floral than Angostura, with an anise quality that ties this drink to its Crescent City roots. Both bitters are needed — they serve different roles.'}
+     ]},
+     {name:'Angostura Bitters',amt:'2 dashes'},
+     {name:'Lemon or Orange Peel',amt:'garnish'},
+   ],
+   steps:[
+     'Combine all ingredients in a mixing glass with ice.',
+     'Stir for 20–25 seconds until well-chilled.',
+     'Strain over a large single ice cube in a rocks glass.',
+     'Express a lemon or orange peel and drop it in.',
+   ],
+   notes:[
+     '<strong>Bénédictine:</strong> One teaspoon only — it\'s made from 27 plants and spices including angelica, hyssop, and saffron. Strong. The herbal honey-spice quality should weave through the drink, not lead it.',
+     '<strong>Both bitters:</strong> Peychaud\'s is lighter and anise-forward (New Orleans); Angostura is spicier and deeper (Caribbean). Together they create a bitters complexity neither achieves alone.',
+     '<strong>Variation — The Maximilian Affair:</strong> Replace the cognac with mezcal. Structurally similar but the smoke dramatically changes the character — a worthwhile exploration of the split-base concept.',
+   ],
+   history:'Created at the Hotel Monteleone in New Orleans around 1938 by head bartender Walter Bergeron. Named for the French Quarter (vieux carré = old square), it was designed as a celebration of New Orleans\' cosmopolitan influences — rye for American tradition, cognac for French heritage, Bénédictine for European monastery culture. It fell into obscurity and was rediscovered by the craft cocktail movement, and is now considered one of the defining drinks of New Orleans alongside the Sazerac.'},
+
+  {id:'penicillin',section:'core',name:'Penicillin',
+   spec:'Shaken · Rocks · Scotch Sour',
+   desc:'Blended Scotch, honey-ginger syrup, lemon, with a peated Islay Scotch float. Smoke leads every sip — the lemon and honey are structural, not the headline. The drink that proved the sour format can work when smoke and bitterness are out front.',
+   glass:'Rocks glass · Ice',
+   ingredients:[
+     {name:'Blended Scotch',amt:'2 oz',tiers:[
+       {label:'standard',bottle:'The Famous Grouse',note:'The canonical Penicillin base — light enough not to compete with the Laphroaig float, complex enough to provide backbone. The original recipe calls for this or similar.'},
+       {label:'upgrade',bottle:'Monkey Shoulder',note:'Richer and maltier than Famous Grouse. The honey-ginger reads differently — slightly more dessert-adjacent. Worth trying if you want a rounder version.'},
+       {label:'splurge',bottle:'Compass Box Peat Monster (blended malt)',note:'Already heavily peated — combining with the Laphroaig float creates an intensely smoky drink. For when you want smoke fully in charge of the experience.'}
+     ]},
+     {name:'Honey-Ginger Syrup (house-made)',amt:'¾ oz',tiers:[
+       {label:'standard',bottle:'House-made — see Step 1',note:'1 cup honey + 1 cup water + 2 oz fresh sliced ginger. Simmer 5 min, cool, strain. Keeps 2 weeks refrigerated. Fresh ginger is irreplaceable here — bottled ginger syrup is not the same product.'}
+     ]},
+     {name:'Fresh Lemon Juice',amt:'¾ oz'},
+     {name:'Islay Scotch (float)',amt:'¼ oz',tiers:[
+       {label:'standard',bottle:'Laphroaig 10 Year',note:'The most aggressively peated mainstream Scotch — iodine, seaweed, phenolic smoke. The float means it hits your nose and palate first on every sip. This is what you know you like.'},
+       {label:'upgrade',bottle:'Ardbeg 10 Year',note:'More campfire and charcoal, less medicinal iodine than Laphroaig. Some find it more elegant; others prefer Laphroaig\'s aggression. Both excellent here.'},
+       {label:'splurge',bottle:'Laphroaig 18 Year',note:'Same phenolic smoke, mellowed and deepened by 18 years of aging. The float becomes a meditation rather than a statement.'}
+     ]},
+     {name:'Candied Ginger',amt:'garnish'},
+   ],
+   steps:[
+     'Make honey-ginger syrup: combine 1 cup honey, 1 cup water, and 2 oz fresh sliced ginger in a saucepan. Warm until honey dissolves, simmer 5 minutes, cool completely, strain. Keeps 2 weeks refrigerated.',
+     'Combine blended Scotch, honey-ginger syrup, and fresh lemon juice in a shaker with ice.',
+     'Shake vigorously for 10–12 seconds.',
+     'Strain over a large ice cube in a rocks glass.',
+     'Float the Laphroaig: pour gently over the back of a bar spoon held just above the surface so it sits on top.',
+     'Garnish with a piece of candied ginger on a pick.',
+   ],
+   notes:[
+     '<strong>The float is non-negotiable:</strong> Don\'t stir it in. The Laphroaig on top means the first thing hitting you is peat and smoke — the lemon and honey are the backbone, not the headline. Stirred, it becomes a pleasant but much less interesting smoky sour.',
+     '<strong>Fresh lemon only:</strong> Bottled lemon juice is a different product. The Penicillin is more sensitive to ingredient quality than most cocktails because the lemon is structurally load-bearing.',
+     '<strong>Variation — The Prescription:</strong> Replace the blended Scotch with bourbon. The Laphroaig float becomes contrast rather than continuation — a very different but compelling drink. More accessible for Scotch-skeptical guests.',
+   ],
+   history:'Created by Sam Ross at Milk & Honey in New York around 2005, the Penicillin is widely regarded as one of the most important cocktails of the modern craft era. It solved what seemed unsolvable: how to make a Scotch sour that honored the spirit\'s complexity rather than masking it. The float technique was the key insight — by keeping the Islay Scotch separate, every sip delivers a different experience from nose to finish. Ross named it after the antibiotic because it was "good medicine" — both the best bar joke and the most accurate description of what it does.'},
+
+  {id:'oaxacan-of',section:'extended',name:'Oaxacan Old Fashioned',
+   spec:'Stirred · Rocks · Split Base',
+   desc:'Phil Ward\'s Death & Co classic. Structurally an Old Fashioned, but the tequila-mezcal split and mole bitters make it a completely different experience. The smoke anchors everything the way bourbon\'s vanilla usually does.',
+   glass:'Rocks glass · Single large ice cube',
+   ingredients:[
+     {name:'Reposado Tequila',amt:'1½ oz',tiers:[
+       {label:'standard',bottle:'La Gritona Reposado',note:'Women-owned Jalisco distillery, clean and slightly oaky. Excellent cocktail tequila at a fair price — also the right bottle for the margarita.'},
+       {label:'upgrade',bottle:'El Tesoro Reposado',note:'Tahona-milled, more earthy and agave-forward. The mezcal split reads differently — less contrast, more continuum of agave flavor.'},
+       {label:'splurge',bottle:'Fortaleza Reposado',note:'One of the most respected small-production reposados. Rich, complex, deeply agave-forward. This becomes a slower, more contemplative drink.'}
+     ]},
+     {name:'Mezcal',amt:'½ oz',tiers:[
+       {label:'standard',bottle:'Del Maguey Vida',note:'The benchmark lightly smoky mezcal — earthy, fruity, subtle smoke. The original and correct choice for this recipe.'},
+       {label:'upgrade',bottle:'El Buho Espadin',note:'More mineral and savory than Vida. The smoke is drier — pushes the drink toward the savory end.'},
+       {label:'splurge',bottle:'Del Maguey San Luis del Rio',note:'Single-village, significantly more complex and smoky than Vida. The ½ oz suddenly becomes a much larger presence. Reserve for when you want mezcal to be the conversation.'}
+     ]},
+     {name:'Agave Nectar (2:1 diluted)',amt:'1 tsp'},
+     {name:'Bittermens Xocolatl Mole Bitters',amt:'2 dashes',tiers:[
+       {label:'standard',bottle:'Bittermens Xocolatl Mole Bitters',note:'Chocolate, cinnamon, dried chili — designed for this cocktail. Not substitutable; buy them.'},
+       {label:'upgrade',bottle:'Add 1 dash Angostura alongside',note:'The Angostura\'s allspice and clove adds depth beneath the mole bitters\' chocolate-chili character. Phil Ward\'s original sometimes included both.'}
+     ]},
+     {name:'Orange Peel',amt:'garnish'},
+   ],
+   steps:[
+     'Combine all ingredients in a mixing glass with ice.',
+     'Stir for 20–25 seconds.',
+     'Strain over a large single ice cube.',
+     'Express orange peel and drop it in.',
+   ],
+   notes:[
+     '<strong>Agave nectar:</strong> Dilute 2:1 (agave:water) before using — straight agave is too viscous. One teaspoon is precise; this drink doesn\'t want much sweetener.',
+     '<strong>Mole bitters:</strong> Not optional. Without them this is just a mezcal old fashioned. The chocolate-chili-cinnamon complexity is what makes the drink coherent.',
+     '<strong>Variation — Full Mezcal:</strong> Drop the tequila and use 2 oz mezcal. Dramatically smokier and more aggressive. A different drink, but worth trying once.',
+   ],
+   history:'Created by Phil Ward at Death & Co in New York around 2007, the Oaxacan Old Fashioned is one of the most influential cocktails of the craft movement — it single-handedly validated mezcal as a serious cocktail spirit in the American market. Before this drink, mezcal was mostly "the one with the worm." Ward\'s insight was treating it as a modifier rather than a base, letting tequila carry the structure while mezcal provided smoke and complexity. The mole bitters were developed specifically for this cocktail.'},
+
+  {id:'naked-famous',section:'extended',name:'Naked and Famous',
+   spec:'Shaken · Coupe · Equal Parts',
+   desc:'Equal parts mezcal, Aperol, yellow Chartreuse, fresh lime. The mezcal anchors the smoke the way bourbon\'s vanilla does in the Paper Plane original — keeping sweetness from taking over. Your palate profile\'s most surprising comfort zone.',
+   glass:'Chilled coupe · No ice',
+   ingredients:[
+     {name:'Mezcal',amt:'¾ oz',tiers:[
+       {label:'standard',bottle:'Del Maguey Vida',note:'Enough smoke to anchor the Aperol, not so much it overwhelms the Chartreuse. The balance point.'},
+       {label:'upgrade',bottle:'Alipús San Andres',note:'Smokier than Vida — shifts the center of gravity toward the mezcal. The Aperol becomes a sweet counterbalance rather than a co-equal. Pushes closer to your wheelhouse.'}
+     ]},
+     {name:'Aperol',amt:'¾ oz',tiers:[
+       {label:'standard',bottle:'Aperol',note:'The orange-bitter anchor. In the original Paper Plane this dominates; the mezcal here keeps it honest.'},
+       {label:'upgrade',bottle:'Half Aperol / Half Campari',note:'Replace ⅜ oz Aperol with ⅜ oz Campari. More bitter, less sweet orange — pushes toward a mezcal Negroni riff. Worth exploring.'}
+     ]},
+     {name:'Yellow Chartreuse',amt:'¾ oz',tiers:[
+       {label:'standard',bottle:'Yellow Chartreuse',note:'Softer and more honey-forward than green. The correct choice — green overwhelms the balance and makes a harder, less integrated drink.'}
+     ]},
+     {name:'Fresh Lime Juice',amt:'¾ oz'},
+   ],
+   steps:[
+     'Combine all four ingredients in a shaker with ice.',
+     'Shake vigorously for 10–12 seconds.',
+     'Double-strain into a chilled coupe.',
+     'No garnish needed.',
+   ],
+   notes:[
+     '<strong>Equal parts discipline:</strong> This drink only works in balance. Don\'t eyeball — measure all four ingredients.',
+     '<strong>Yellow vs Green Chartreuse:</strong> Yellow is softer, more honey and gentian. Green is higher proof and more aggressively herbal. Green makes a harder, less integrated drink here. Yellow only.',
+     '<strong>Variation — Naked and Smoked:</strong> Replace ¼ oz of the mezcal with Laphroaig. The peat adds a dimension that mezcal alone doesn\'t provide, pushing the drink firmly into your wheelhouse.',
+   ],
+   history:'Created by Joaquín Simó at Death & Co in New York, the Naked and Famous is a direct riff on the Paper Plane (itself a riff on the Last Word). It replaced bourbon with mezcal and Amaro Nonino with Aperol, creating a version that\'s simultaneously more approachable and more interesting. It\'s one of the best examples of the "equal parts template" — a discipline where all modifiers must earn equal footing with the base spirit rather than serving it.'},
+
+  {id:'de-la-louisiane',section:'extended',name:'De La Louisiane',
+   spec:'Stirred · Coupe · Spirit-Forward',
+   desc:'A Vieux Carré cousin — rye, Bénédictine, sweet vermouth, Peychaud\'s, with an absinthe rinse. The anise thread from Peychaud\'s and the rinse weaves through every sip without announcing itself. Your palate profile\'s through-lines in a single glass.',
+   glass:"Coupe · Absinthe-rinsed · No ice",
+   ingredients:[
+     {name:'Rye Whiskey',amt:'1½ oz',tiers:[
+       {label:'standard',bottle:'Rittenhouse 100',note:'High proof is essential — both the absinthe rinse and Peychaud\'s want a bold rye to stand against.'},
+       {label:'upgrade',bottle:'Sazerac Rye',note:'The New Orleans native choice — lighter and more floral. The absinthe rinse reads as more prominent, which is authentic to the Sazerac tradition this drink descends from.'}
+     ]},
+     {name:'Sweet Vermouth',amt:'¾ oz',tiers:[
+       {label:'standard',bottle:'Cocchi di Torino',note:'Rich and chocolatey — good foundation for the Bénédictine.'},
+       {label:'upgrade',bottle:'Carpano Antica Formula',note:'The richer, more complex choice. Vanilla and herb complexity is the traditional pairing for this build — Bénédictine plays off Carpano beautifully.'}
+     ]},
+     {name:'Bénédictine',amt:'¾ oz'},
+     {name:"Peychaud's Bitters",amt:'3 dashes',tiers:[
+       {label:'standard',bottle:"Peychaud's Aromatic Bitters",note:'The anise and floral qualities connect the absinthe rinse to the body of the drink. No substitutes — Angostura doesn\'t have this note and the drink becomes incoherent.'}
+     ]},
+     {name:'Absinthe (rinse)',amt:'rinse',tiers:[
+       {label:'standard',bottle:'Pernod Absinthe',note:'Clean, traditional, anise-forward. A small pour to coat the glass — that\'s all you need.'},
+       {label:'upgrade',bottle:'Vieux Pontarlier',note:'Higher quality traditional absinthe with more botanical complexity. The rinse is still minimal but slightly more present in aroma.'}
+     ]},
+     {name:'Luxardo Maraschino Cherry',amt:'garnish'},
+   ],
+   steps:[
+     'Rinse the coupe: add a small pour of absinthe (about ¼ tsp), swirl to coat the glass, and discard the excess.',
+     'Combine rye, sweet vermouth, Bénédictine, and Peychaud\'s in a mixing glass with ice.',
+     'Stir for 20–25 seconds until well-chilled.',
+     'Strain into the absinthe-rinsed coupe.',
+     'Garnish with a Luxardo cherry.',
+   ],
+   notes:[
+     '<strong>The absinthe rinse is a technique:</strong> You get the anise aroma and a ghost of flavor without absinthe dominating. Don\'t add it directly to the build — it overwhelms everything.',
+     '<strong>Peychaud\'s is specific:</strong> The anise in Peychaud\'s is what makes the rinse feel integrated rather than random. Angostura doesn\'t carry that note.',
+     '<strong>Variation — Improved Whiskey Cocktail:</strong> The ancestor of this style — rye, maraschino instead of Bénédictine, absinthe rinse, bitters. Drier and more austere. Worth exploring to understand where this family of drinks comes from.',
+   ],
+   history:'The De La Louisiane dates to at least 1937, named for the Restaurant de la Louisiane in New Orleans — a French Creole institution that was a cultural center of the city for generations. Like the Vieux Carré, it\'s built on the intersection of American rye, European liqueurs, and the New Orleans tradition of absinthe as aromatic seasoning. Peychaud\'s bitters were invented in New Orleans by Antoine Amédée Peychaud in the 1830s, and remain essential to the city\'s cocktail identity.'},
+
+  {id:'scotch-boulevardier',section:'extended',name:'Scotch Boulevardier',
+   spec:'Stirred · Rocks · Spirit-Forward',
+   desc:'A Negroni with bourbon replaced by blended Scotch. The drink gets smokier, drier, and more complex — same structural logic as the Negroni, different soul entirely.',
+   glass:'Rocks glass · Large ice cube',
+   ingredients:[
+     {name:'Blended Scotch',amt:'1½ oz',tiers:[
+       {label:'standard',bottle:'Famous Grouse',note:'Light smoke, malty backbone. Lets Campari and vermouth participate as equal partners.'},
+       {label:'upgrade',bottle:'Monkey Shoulder',note:'Richer and slightly sweeter. Campari reads as more assertive as a result — more Negroni-adjacent.'},
+       {label:'splurge',bottle:'Compass Box Peat Monster',note:'Heavily peated blended malt. Smoke becomes the dominant character; Campari becomes the bitter counterbalance. A fundamentally different and more polarizing drink — closer to your palate.'}
+     ]},
+     {name:'Campari',amt:'1 oz'},
+     {name:'Sweet Vermouth',amt:'1 oz',tiers:[
+       {label:'standard',bottle:'Cocchi di Torino',note:'Rich and chocolatey — holds up beautifully against Campari.'},
+       {label:'upgrade',bottle:'Carpano Antica',note:'The classic Negroni/Boulevardier pairing — vanilla and herb complexity is the traditional match for Campari.'}
+     ]},
+     {name:'Orange Peel',amt:'garnish'},
+   ],
+   steps:[
+     'Combine Scotch, Campari, and sweet vermouth in a mixing glass with ice.',
+     'Stir for 20–25 seconds.',
+     'Strain over a large single ice cube.',
+     'Express orange peel, run around the rim, and drop in.',
+   ],
+   notes:[
+     '<strong>Ratio flexibility:</strong> This build uses 1½ oz Scotch for a more spirit-forward drink. The classic ratio is 1:1:1 — try both to find your preference.',
+     '<strong>Campari is genuinely bitter:</strong> This is not a sweet drink. Scotch provides smoke and malt, Campari provides intense orange bitterness, vermouth provides just enough sweetness to hold the structure together.',
+     '<strong>Variation — Smoked Negroni:</strong> Replace half the Scotch with mezcal (¾ oz each). Smoke comes from two directions — peat and agave. Bridges your Scotch and mezcal interests.',
+   ],
+   history:'The Boulevardier was created by American expat Erskine Gwynne in Paris and published in 1927 — predating some accounts of the Negroni. Both emerged from the same moment of whiskey finding its way into the Italian aperitivo tradition. The Scotch substitution has no single originator; it evolved as bartenders explored the Negroni template with different spirits. Scotch\'s smoke against Campari\'s bitterness is one of the most satisfying combinations in this family of drinks.'},
+
+  {id:'smoked-margarita',section:'extended',name:'Smoked Reposado Margarita',
+   spec:'Shaken · Rocks · Dry & Citrus-Forward',
+   desc:'A dry, spirit-forward margarita on a tequila-mezcal split. No sweet mix, no sugar rim — clean agave, citrus, and smoke in proper proportion. The mezcal does what Laphroaig does in the Penicillin: anchors with smoke without overwhelming.',
+   glass:'Rocks glass · Ice · Half salt rim',
+   ingredients:[
+     {name:'Reposado Tequila',amt:'1½ oz',tiers:[
+       {label:'standard',bottle:'La Gritona Reposado',note:'Women-owned Jalisco distillery, clean and slightly oaky. Excellent cocktail tequila — also the Oaxacan Old Fashioned bottle.'},
+       {label:'upgrade',bottle:'El Tesoro Reposado',note:'More earthy and agave-forward. The mezcal split has less contrast work to do — the agave character is already prominent.'},
+       {label:'splurge',bottle:'Fortaleza Reposado',note:'One of the most respected small-production reposados. Rich, complex, deeply agave-forward. The margarita becomes something close to a contemplative drink.'}
+     ]},
+     {name:'Mezcal Espadin',amt:'½ oz',tiers:[
+       {label:'standard',bottle:'El Buho Espadin',note:'Artesanal production, 100% agave — solid and smoky without aggression. Well-priced.'},
+       {label:'upgrade',bottle:'Del Maguey Vida',note:'The benchmark. Earthy, fruity, subtly smoky — integrates seamlessly without dominating.'},
+       {label:'splurge',bottle:'Equal 1 oz / 1 oz split',note:'Push mezcal to 1 oz and drop tequila to 1 oz. Smoke becomes the primary character. Not a variation — a different drink.'}
+     ]},
+     {name:'Fresh Lime Juice',amt:'¾ oz'},
+     {name:'Cointreau',amt:'½ oz',tiers:[
+       {label:'standard',bottle:'Cointreau',note:'Cognac-based, drier and more complex than generic triple sec. The cognac backbone adds depth the margarita benefits from.'},
+       {label:'upgrade',bottle:'Grand Marnier',note:'Darker and more brandy-forward. The drink becomes richer and slightly heavier. Worth trying to find your preference.'}
+     ]},
+     {name:'Agave Syrup (2:1 diluted)',amt:'¼ oz'},
+     {name:'Kosher Salt (half rim)',amt:'rim'},
+     {name:'Lime Wheel',amt:'garnish'},
+   ],
+   steps:[
+     'Half-rim the glass: run a lime wedge around one side only, then press into kosher salt on a plate. Fill the glass with ice.',
+     'Combine tequila, mezcal, fresh lime juice, Cointreau, agave syrup, and a pinch of kosher salt directly in the shaker with ice.',
+     'Shake vigorously for 10–12 seconds.',
+     'Strain into the prepared rocks glass over fresh ice.',
+     'Garnish with a lime wheel.',
+   ],
+   notes:[
+     '<strong>Half-rim the salt:</strong> Salting the full rim forces every sip through salt. The half-rim lets you choose your ratio sip by sip.',
+     '<strong>Mezcal ratio:</strong> ½ oz keeps smoke as a presence. Push to ¾ oz to make it a co-star. Equal parts (1:1) is a full mezcal margarita — a different and valid drink.',
+     '<strong>The agave syrup:</strong> ¼ oz is structural — the lime is bright and acidic. More than this and you\'ve crossed into sweet mix territory.',
+     '<strong>Variation — Tommy\'s Margarita:</strong> Drop the Cointreau entirely, use ½ oz agave syrup instead. Simpler, more agave-forward, lower ABV — the spirit-forward purist\'s version.',
+   ],
+   history:'The margarita\'s origins are genuinely contested — at least a dozen bartenders claimed credit between the 1930s and 1950s. The mezcal margarita is a product of the craft cocktail revival of the 2000s and 2010s, as bartenders recognized mezcal\'s smoke and complexity brought something to the template that blanco tequila didn\'t. The split-base version was popularized at bars like Mayahuel in New York, which dedicated itself to agave spirits and helped create the serious mezcal market that exists today.'},
+
+  {id:'winnequah',section:'original',name:'The Winnequah',
+   spec:'Stirred · Rocks · Original Creation',
+   desc:'A custom original built on a rye–Islay Scotch split. Smoke and spice as co-equals, bridged by Bénédictine, deepened by Barolo Chinato, with Peychaud\'s and a whisper of absinthe weaving anise through without announcing it. Built specifically for your palate.',
+   glass:'Coupe or Nick & Nora · Large rock',
+   ingredients:[
+     {name:'Rye Whiskey',amt:'1 oz',tiers:[
+       {label:'standard',bottle:'Rittenhouse 100',note:'Big, spicy, assertive — holds its own against Laphroaig as a true co-equal rather than a supporting note.'},
+       {label:'splurge',bottle:'WhistlePig 12 Year Old World',note:'Madeira, Sauternes, and Cognac cask finishes create a wine-and-dried-fruit layer that amplifies the Barolo Chinato specifically. This version of The Winnequah is a special occasion drink.'}
+     ]},
+     {name:'Islay Scotch',amt:'1 oz',tiers:[
+       {label:'standard',bottle:'Laphroaig 10 Year',note:'Phenolic, iodine, seaweed smoke — what this drink was built around. The most assertive mainstream Islay available.'},
+       {label:'upgrade',bottle:'Ardbeg 10 Year',note:'Campfire and charcoal rather than Laphroaig\'s medicinal iodine. The Bénédictine and Barolo Chinato read differently — slightly more elegant.'},
+       {label:'splurge',bottle:'Lagavulin 16 Year',note:'Deep, complex, dried fruit and massive smoke. The Winnequah becomes a slower, more contemplative drink. For when you have time to pay full attention.'}
+     ]},
+     {name:'Cocchi Barolo Chinato',amt:'½ oz',tiers:[
+       {label:'standard',bottle:'Cocchi Barolo Chinato',note:'The essential ingredient that makes this drink unique — bitter wine, quinine, spice. No substitute exists. This is the bottle the drink was conceived around.'}
+     ]},
+     {name:'Bénédictine',amt:'¼ oz'},
+     {name:"Peychaud's Bitters",amt:'2 dashes',tiers:[
+       {label:'standard',bottle:"Peychaud's Aromatic Bitters",note:'The anise quality connects to the absinthe drop and creates the drink\'s through-line. Angostura doesn\'t do this job.'}
+     ]},
+     {name:'Absinthe',amt:'1 drop (eyedropper)',tiers:[
+       {label:'standard',bottle:'Pernod or Vieux Pontarlier',note:'One drop in the build — not a rinse. Fully integrated. Provides an anise whisper woven through every sip. Noticeable by its absence.'}
+     ]},
+     {name:'Lemon Peel (express & discard)',amt:'garnish'},
+   ],
+   steps:[
+     'Add one drop of absinthe directly to the mixing glass before ice — it integrates into the base rather than sitting as a surface note.',
+     'Add rye, Laphroaig, Barolo Chinato, Bénédictine, and Peychaud\'s bitters. Fill with ice.',
+     'Stir for 25–30 seconds — slightly longer than usual to let the Laphroaig fully integrate.',
+     'Strain over a large rock in a coupe or Nick & Nora.',
+     'Express a lemon peel over the glass to release the citrus oils, then discard. Do not drop it in.',
+   ],
+   notes:[
+     '<strong>Express and discard:</strong> The lemon oils lift the smoke and spice aromatics beautifully — but the peel\'s continued presence in the glass is not wanted. Express, then set it aside.',
+     '<strong>Absinthe in the build:</strong> One drop integrates fully. A rinse would put anise on the surface; in the build it\'s woven through every sip. The difference is significant.',
+     '<strong>Barolo Chinato is irreplaceable:</strong> Sweet vermouth doesn\'t work here. Averna gets close but lacks the wine depth and quinine bitterness. This drink was designed around that specific bottle.',
+     '<strong>Variation — The Winnequah Lighter:</strong> Reduce Laphroaig to ½ oz and add ½ oz additional rye (1½ oz rye / ½ oz Scotch). More accessible, less smoke-dominant. A good introduction version for guests.',
+   ],
+   history:'An original creation built from your palate profile — the through-lines of smoke (Laphroaig), anise (Peychaud\'s, absinthe), herbal depth (Bénédictine), and bitter wine complexity (Barolo Chinato) that emerged from an evening of cocktail exploration at The Aviary in Chicago. Named for a place that carries personal meaning. There is no other copy of this drink.'},
+
+  {id:'black-irish',section:'afield',name:'The Black Irish',
+   spec:'Stirred · Rocks · Whiskey-Adjacent',
+   desc:'An Irish whiskey Old Fashioned built around coffee liqueur and mole bitters. Single pot still Irish is your wheelhouse\'s near neighbor — lighter than rye but the bitter coffee modifier and mole bitters push it into familiar complex territory.',
+   glass:'Rocks glass · Large ice cube',
+   ingredients:[
+     {name:'Single Pot Still Irish Whiskey',amt:'2 oz',tiers:[
+       {label:'standard',bottle:'Redbreast 12 Year',note:'The defining single pot still expression. Rich, oily, and complex with dried fruit and spice — nothing like blended Irish. This is the bottle that converts rye drinkers to the Irish category.'},
+       {label:'upgrade',bottle:'Green Spot',note:'More grain-forward and lighter than Redbreast. Lets the coffee liqueur become more prominent. A different balance point worth exploring.'},
+       {label:'splurge',bottle:'Redbreast 15 Year',note:'More Sherry cask influence — dried fruit and walnut notes that amplify the coffee modifier beautifully.'}
+     ]},
+     {name:'Coffee Liqueur',amt:'½ oz',tiers:[
+       {label:'standard',bottle:'Mr Black Cold Brew Coffee Liqueur',note:'Australian, lower sugar than Kahlúa, genuinely coffee-forward. The right choice — you want coffee complexity, not sweetness.'},
+       {label:'upgrade',bottle:'Borghetti Espresso Liqueur',note:'Italian espresso-based, drier and more intense than Mr Black. The drink becomes more austere and bitter. Closer to your palate profile.'}
+     ]},
+     {name:'Demerara Syrup (2:1)',amt:'¼ oz'},
+     {name:'Bittermens Xocolatl Mole Bitters',amt:'2 dashes',tiers:[
+       {label:'standard',bottle:'Bittermens Xocolatl Mole Bitters',note:'The chocolate-chili combination bridges the coffee and Irish whiskey in a way no other bitters do.'}
+     ]},
+     {name:'Orange Peel',amt:'garnish'},
+   ],
+   steps:[
+     'Combine Irish whiskey, coffee liqueur, demerara syrup, and bitters in a mixing glass with ice.',
+     'Stir for 20–25 seconds.',
+     'Strain over a large ice cube.',
+     'Express orange peel and drop it in.',
+   ],
+   notes:[
+     '<strong>Why single pot still Irish:</strong> Blended Irish (Jameson) is light and simple. Single pot still — Redbreast, Green Spot — is oily, rich, and spice-forward. More in common with rye than its reputation suggests. This category deserves the same respect as Scotch.',
+     '<strong>Coffee as modifier:</strong> This is not a dessert drink. ½ oz coffee liqueur is working like Averna in a Black Manhattan — adding bitter complexity. Not a flavoring dose.',
+     '<strong>Variation — Espresso Old Fashioned:</strong> Replace the coffee liqueur with 1 oz cold brew concentrate and ¼ oz simple syrup. More bitter, less sweet, a very different drink worth trying once.',
+   ],
+   history:'Irish coffee cocktails have a long and often unfortunate history — mostly cream-topped dessert drinks. This build ignores that lineage and treats single pot still Irish the way a Manhattan treats rye. The category was nearly extinct by the 1990s but was revived by Redbreast and a handful of distilleries who recognized it as one of the world\'s truly distinctive whiskey styles. It deserves to be treated as seriously as Scotch.'},
+
+  {id:'white-negroni',section:'afield',name:'White Negroni',
+   spec:'Stirred · Coupe or Rocks · Spirit-Forward',
+   desc:'A gin Negroni variant that replaces Campari with Suze (French gentian bitter) and sweet vermouth with Lillet Blanc. The Suze\'s gentian root bitterness is intensely herbal and assertive — more complex and less sweet than Campari, and likely to interest a palate that responds to Fernet and Averna.',
+   glass:'Chilled coupe or rocks with large ice',
+   ingredients:[
+     {name:'London Dry Gin',amt:'1½ oz',tiers:[
+       {label:'standard',bottle:'Tanqueray London Dry',note:'Juniper-forward and dry — the classic choice. High proof, holds its own against Suze\'s intensity. Start here.'},
+       {label:'upgrade',bottle:"Hendrick's",note:'Cucumber and rose alongside juniper. The floral quality softens the Suze. A more approachable version of this drink.'},
+       {label:'splurge',bottle:'The Botanist Islay Dry Gin',note:'Made at Bruichladdich on Islay — 22 foraged island botanicals. There is a ghost of maritime and herbal character that creates an unexpected connection to your Scotch preferences.'}
+     ]},
+     {name:'Suze Gentian Aperitif',amt:'¾ oz',tiers:[
+       {label:'standard',bottle:'Suze',note:'French, gentian root-based, intensely bitter and earthy with floral notes. Not Campari — the bitterness is more herbal and less sweet-orange. More challenging, more interesting. Try it on ice alone first.'}
+     ]},
+     {name:'Lillet Blanc or Cocchi Americano',amt:'¾ oz',tiers:[
+       {label:'standard',bottle:'Lillet Blanc',note:'French wine-based aperitif — lighter and more floral than sweet vermouth. Provides sweetness and structure without heaviness.'},
+       {label:'upgrade',bottle:'Cocchi Americano',note:'More bitter and quinine-forward than Lillet. The whole drink gets more austere. This version is significantly more aggressive and much closer to your palate profile.'}
+     ]},
+     {name:'Lemon Peel',amt:'garnish'},
+   ],
+   steps:[
+     'Combine gin, Suze, and Lillet Blanc (or Cocchi Americano) in a mixing glass with ice.',
+     'Stir for 20–25 seconds.',
+     'Strain into a chilled coupe, or over a large rock.',
+     'Express lemon peel and drop in or discard.',
+   ],
+   notes:[
+     '<strong>Why gin might work for you:</strong> London Dry gin is not sweet — it\'s a botanical spirit, heavy on juniper, coriander, and angelica root. A gin Negroni variant built around Suze\'s gentian bitterness is about as far from a fruity gin drink as possible.',
+     '<strong>Try Suze first:</strong> Before making this drink, try a small pour of Suze on ice. The gentian root bitterness — earthy, herbal, intensely bitter — is the missing link between your amaro preferences and the gin world.',
+     '<strong>The Botanist connection:</strong> Made at Bruichladdich on Islay. It does not taste like Scotch, but the maritime botanicals create a thread that makes the gin feel less foreign for someone whose references are all peated whisky.',
+   ],
+   history:'Created by Wayne Collins in France around 2001 when he couldn\'t find Campari and substituted Suze and Lillet Blanc. It remained largely unknown until Nick Strangeway popularized it in the craft cocktail world. It\'s now considered one of the most important Negroni variations because it demonstrated that the Campari/sweet vermouth/gin structure is a template, not a formula — any bitter liqueur and aromatized wine can fill those roles with completely different but equally valid results.'},
+
+  {id:'dirty-martini',section:'afield',name:'The Dirty Martini (Done Right)',
+   spec:'Stirred · Coupe · Spirit-Forward',
+   desc:'The vodka cocktail your palate can actually get behind — not because vodka is interesting, but because olive brine and dry vermouth are. When built properly, salinity and bitterness carry the drink. The vodka is structural; the modifiers do the work.',
+   glass:'Chilled coupe · No ice · Very cold',
+   ingredients:[
+     {name:'Vodka',amt:'2½ oz',tiers:[
+       {label:'standard',bottle:'Ketel One',note:'Clean, slightly creamy, neutral. The correct cocktail vodka — not flavorless but not distracting. The modifiers need a clean canvas.'},
+       {label:'upgrade',bottle:'Belvedere',note:'Polish rye vodka — subtle grain character gives more presence. Slightly less neutral than Ketel One, which is a feature here.'},
+       {label:'splurge',bottle:'Grey Goose',note:'French wheat vodka, extraordinarily smooth. The brine and vermouth carry even more of the weight. Some find this ideal; others find it too neutral.'}
+     ]},
+     {name:'Dry Vermouth',amt:'½ oz',tiers:[
+       {label:'standard',bottle:'Dolin Dry',note:'Clean, crisp, food-friendly. Don\'t skip this — a Martini without vermouth is cold vodka, not a cocktail.'},
+       {label:'upgrade',bottle:'Noilly Prat Original Dry',note:'More oxidized and complex than Dolin — hints of almond and herbs. The dirty martini becomes noticeably more interesting.'}
+     ]},
+     {name:'Quality Olive Brine',amt:'½ oz',tiers:[
+       {label:'standard',bottle:'Castelvetrano olive brine',note:'Buttery, mild, slightly sweet brine from Sicilian green olives. Less aggressively briny than Kalamata — the dirty martini made with this is a fundamentally different and better drink than the bar standard.'},
+       {label:'upgrade',bottle:'Dirty Sue Premium Olive Juice',note:'Made specifically for cocktails — filtered, balanced, and consistent. If you make these regularly, this is the right product.'}
+     ]},
+     {name:'Castelvetrano Olives',amt:'garnish (2–3)'},
+   ],
+   steps:[
+     'Chill your coupe in the freezer for at least 5 minutes — temperature is critical in a Martini.',
+     'Combine vodka, dry vermouth, and olive brine in a mixing glass with ice.',
+     'Stir for 30 seconds — longer than most cocktails. Dilution and temperature are everything here.',
+     'Strain into the chilled coupe.',
+     'Garnish with 2–3 Castelvetrano olives on a pick.',
+   ],
+   notes:[
+     '<strong>Why this might work:</strong> The dirty martini is primarily a salt-and-bitter drink when made with quality brine and real vermouth. It hits the same notes you like in stirred spirit-forward cocktails — salinity as the bitter counterbalance instead of amaro.',
+     '<strong>Temperature is everything:</strong> A Martini served warm is a fundamentally inferior drink. The glass must be cold, the stir must be long, and it should be consumed before it warms. If you\'re distracted, drink faster.',
+     '<strong>Castelvetrano specifically:</strong> The standard pimento-stuffed green olive produces adequate brine. Castelvetrano are buttery, meaty, and produce more complex brine. The eating experience at the bottom of the glass is part of the drink.',
+     '<strong>Going deeper — 50/50 Martini:</strong> Equal parts vodka and dry vermouth (1½ oz each), less brine. More aromatic, more vermouth-forward, lower ABV. The drink your great-grandfather actually drank before "dry" meant "no vermouth."',
+   ],
+   history:'The Martini is the most argued-over cocktail in history — debates about gin vs vodka, wet vs dry, stirred vs shaken, olive vs twist go back to the 1890s. The dirty Martini dates to at least 1901, credited to New York bartender John O\'Connor. It was considered a corruption of the classic for most of the 20th century and was rehabilitated by the craft cocktail movement\'s insistence that if something tastes good and is made intentionally, it\'s legitimate. The key upgrade that changes everything: quality brine from quality olives. The rest of the arguments are mostly noise.'},
+];
+
+// ─── BUILD LIST ───────────────────────────────────────────────────────────────
+function buildList() {
+  const sections = [
+    {key:'core',label:'Core Wheelhouse'},
+    {key:'extended',label:'Extended Repertoire'},
+    {key:'original',label:'Original'},
+    {key:'afield',label:'Further Afield'},
+  ];
+  const list = document.getElementById('view-list');
+  let html = '';
+  sections.forEach(sec => {
+    const items = R.filter(r => r.section === sec.key);
+    if (!items.length) return;
+    html += `<div class="list-section-label">${sec.label}</div>`;
+    items.forEach(r => {
+      const cls = r.section === 'original' ? 'original' : r.section === 'extended' ? 'extended' : r.section === 'afield' ? 'afield' : '';
+      const preview = r.desc.length > 95 ? r.desc.substring(0,95) + '…' : r.desc;
+      html += `<div class="recipe-card ${cls}" onclick="openRecipe('${r.id}')">
+        <div class="card-name">${r.name}</div>
+        <div class="card-spec">${r.spec}</div>
+        <div class="card-desc">${preview}</div>
+        <div class="card-arrow">›</div>
+      </div>`;
+    });
+  });
+  list.innerHTML = html;
+}
+
+// ─── OPEN RECIPE ──────────────────────────────────────────────────────────────
+function openRecipe(id) {
+  const r = R.find(x => x.id === id);
+  if (!r) return;
+
+  const ingHTML = r.ingredients.map((ing, idx) => {
+    let tierHTML = '';
+    if (ing.tiers && ing.tiers.length) {
+      const pid = `tp-${id}-${idx}`;
+      tierHTML = `<button class="tier-toggle" onclick="toggleTier('${pid}',this)">Bottle guide</button>
+        <div class="tier-panel" id="${pid}">
+          ${ing.tiers.map(t => `<div class="tier-item">
+            <div class="tier-label ${t.label}">${t.label}</div>
+            <div class="tier-bottle">${t.bottle}</div>
+            ${t.note ? `<div class="tier-note">${t.note}</div>` : ''}
+          </div>`).join('')}
+        </div>`;
+    }
+    return `<div class="ingredient-row">
+      <div class="ing-left"><div class="ing-name">${ing.name}</div>${tierHTML}</div>
+      <div class="ing-amt">${ing.amt}</div>
+    </div>`;
+  }).join('');
+
+  const stepsHTML = r.steps.map((s,i) => `<div class="step"><div class="step-num">${i+1}</div><div class="step-text">${s}</div></div>`).join('');
+  const notesHTML = r.notes.map(n => `<p>${n}</p>`).join('');
+  const histHTML = r.history ? `<div class="section-head">History & Context</div><div class="history-box"><p>${r.history}</p></div>` : '';
+
+  const det = document.getElementById('view-detail');
+  det.innerHTML = `<div class="detail-hero">
+    <button class="back-btn" onclick="closeRecipe()">Recipes</button>
+    <div class="detail-name">${r.name}</div>
+    <div class="detail-spec">${r.spec}</div>
+    <div class="detail-desc">${r.desc}</div>
+  </div>
+  <div class="detail-body">
+    <div class="glass-badge">🥃 ${r.glass}</div>
+    <div class="section-head" style="margin-top:22px">Ingredients</div>
+    ${ingHTML}
+    <div class="section-head">Method</div>
+    ${stepsHTML}
+    <div class="section-head">Notes & Variations</div>
+    <div class="note-box">${notesHTML}</div>
+    ${histHTML}
+  </div>`;
+
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  det.classList.add('active');
+  det.scrollTop = 0;
+}
+
+function closeRecipe() {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-list').classList.add('active');
+}
+
+function toggleTier(pid, btn) {
+  document.getElementById(pid).classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  if (tab==='recipes') document.getElementById('view-list').classList.add('active');
+  else document.getElementById('view-palate').classList.add('active');
+}
+
+buildList();
+</script>
+</body>
+</html>
