@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>The Cocktail Book</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1208;
+  --paper: #f5ede0;
+  --amber: #b5651d;
+  --amber-light: #d4884a;
+  --amber-dark: #8b4513;
+  --rule: #c4a882;
+  --muted: #7a6248;
+  --dark: #1a0f05;
+  --darker: #120a02;
+  --accent: #8b1a1a;
+  --friends: #1a4a2e;
+  --friends-light: #2d7a4f;
+  --card-bg: rgba(245,237,224,0.06);
+  --card-border: rgba(196,168,130,0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--darker);
+  font-family: 'Libre Baskerville', Georgia, serif;
+  color: var(--paper);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(181,101,29,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,26,26,0.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── LAYOUT ── */
+.app { position: relative; z-index: 1; max-width: 480px; margin: 0 auto; padding-bottom: 100px; }
+
+/* ── HEADER ── */
+.header {
+  padding: 2.5rem 1.5rem 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.header-eyebrow {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--paper);
+  line-height: 1.1;
+}
+
+.header h1 em {
+  color: var(--amber);
+  font-style: italic;
+}
+
+.header-sub {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+
+/* ── TAB BAR ── */
+.tab-bar {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  gap: 0;
+  border-bottom: 1px solid var(--card-border);
+  background: rgba(0,0,0,0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.tab-bar::-webkit-scrollbar { display: none; }
+
+.tab {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.85rem 1.1rem;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  flex-shrink: 0;
+}
+
+.tab:hover { color: var(--amber-light); }
+.tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+.tab.friends-tab.active { color: var(--friends-light); border-bottom-color: var(--friends-light); }
+
+/* ── PANELS ── */
+.panel { display: none; padding: 1.25rem 1rem; }
+.panel.active { display: block; }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 1rem 0.25rem 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--card-border);
+}
+
+/* ── RECIPE CARD ── */
+.recipe-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 2px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.recipe-card:hover { border-color: rgba(196,168,130,0.4); }
+
+.recipe-card.friends-card { border-left: 2px solid rgba(45,122,79,0.4); }
+
+.card-header {
+  padding: 1rem 1.1rem 0.9rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.card-title-block { flex: 1; }
+
+.card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--paper);
+  line-height: 1.2;
+}
+
+.card-spec {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.65rem;
+  color: var(--amber);
+  letter-spacing: 0.04em;
+  margin-top: 0.25rem;
+  line-height: 1.5;
+}
+
+.friends-card .card-spec { color: var(--friends-light); }
+
+.card-badge {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--card-border);
+  padding: 0.15rem 0.45rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.card-chevron {
+  font-size: 0.7rem;
+  color: var(--muted);
+  transition: transform 0.25s;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.card-header.open .card-chevron { transform: rotate(180deg); }
+
+/* ── RECIPE BODY ── */
+.recipe-body {
+  display: none;
+  padding: 0 1.1rem 1.1rem;
+  border-top: 1px solid var(--card-border);
+}
+
+.recipe-body.open { display: block; }
+
+/* Ingredients */
+.ingredients { margin-top: 0.9rem; }
+
+.ing-row {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px dotted rgba(196,168,130,0.15);
+  align-items: baseline;
+}
+
+.ing-row:last-child { border-bottom: none; }
+
+.ing-amt {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.7rem;
+  color: var(--amber);
+  min-width: 3rem;
+  flex-shrink: 0;
+}
+
+.friends-card .ing-amt { color: var(--friends-light); }
+
+.ing-name {
+  font-size: 0.78rem;
+  color: var(--paper);
+  line-height: 1.4;
+}
+
+/* Steps */
+.steps { margin-top: 1rem; }
+
+.step {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.65rem;
+  align-items: flex-start;
+}
+
+.step-num {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.6rem;
+  color: var(--amber);
+  min-width: 1.25rem;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.friends-card .step-num { color: var(--friends-light); }
+
+.step-title {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.63rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.2rem;
+}
+
+.step-text {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: rgba(245,237,224,0.85);
+}
+
+/* Timer button */
+.timer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--amber);
+  background: rgba(181,101,29,0.1);
+  border: 1px solid rgba(181,101,29,0.3);
+  padding: 0.2rem 0.5rem;
+  margin-top: 0.35rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+
+.timer-btn:hover { background: rgba(181,101,29,0.2); }
+.timer-btn.running { color: var(--paper); background: rgba(181,101,29,0.25); }
+
+/* Notes */
+.recipe-notes {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(0,0,0,0.2);
+  border-left: 2px solid var(--card-border);
+}
+
+.notes-label {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.notes-text {
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: rgba(245,237,224,0.7);
+  font-style: italic;
+}
+
+.notes-text strong {
+  font-style: normal;
+  color: var(--amber-light);
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.friends-card .notes-text strong { color: var(--friends-light); }
+
+/* ── PALATE TAB ── */
+.palate-section { margin-bottom: 1.5rem; }
+
+.palate-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--amber);
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.palate-prose {
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: rgba(245,237,224,0.8);
+}
+
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.tag {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.65rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+  letter-spacing: 0.04em;
+}
+
+.tag.seek {
+  background: rgba(181,101,29,0.12);
+  border: 1px solid rgba(181,101,29,0.3);
+  color: var(--amber-light);
+}
+
+.tag.avoid {
+  background: rgba(139,26,26,0.1);
+  border: 1px solid rgba(139,26,26,0.3);
+  color: #d47070;
+}
+
+/* ── TIMER OVERLAY ── */
+.timer-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,5,0,0.92);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.timer-overlay.active { display: flex; }
+
+.timer-display {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  color: var(--amber);
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.timer-label {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.timer-close {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--card-border);
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+}
+
+/* ── NAV BAR ── */
+.nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  background: rgba(18,10,2,0.97);
+  border-top: 1px solid var(--card-border);
+  display: flex;
+  z-index: 200;
+  backdrop-filter: blur(10px);
+}
+
+.nav-btn {
+  flex: 1;
+  padding: 0.9rem 0.5rem 0.7rem;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 0.2s;
+}
+
+.nav-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+.nav-btn:hover { color: var(--amber-light); }
+.nav-btn.active { color: var(--amber); }
+.nav-btn.friends-nav.active { color: var(--friends-light); }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="header">
+    <div class="header-eyebrow">Personal Reference</div>
+    <h1>The <em>Cocktail</em> Book</h1>
+    <div class="header-sub">Moody Tongue · The Aviary · Home Bar</div>
+  </div>
+
+  <div class="tab-bar" id="tabBar">
+    <button class="tab active" data-panel="wheelhouse">Wheelhouse</button>
+    <button class="tab" data-panel="extended">Extended</button>
+    <button class="tab friends-tab" data-panel="friends">Friends</button>
+    <button class="tab" data-panel="palate">Palate</button>
+  </div>
+
+  <!-- WHEELHOUSE -->
+  <div class="panel active" id="panel-wheelhouse">
+    <div class="section-label">Core — Immediate Favorites</div>
+
+    <!-- Black Manhattan -->
+    <div class="recipe-card" data-recipe="black-manhattan">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Black Manhattan</div>
+          <div class="card-spec">Rye · Averna or Barolo Chinato · Angostura · Orange Bitters</div>
+        </div>
+        <div class="card-badge">Stirred</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">2 oz</span><span class="ing-name">Rittenhouse 100 Rye</span></div>
+          <div class="ing-row"><span class="ing-amt">1 oz</span><span class="ing-name">Averna amaro <em>or</em> Cocchi Barolo Chinato (premium)</span></div>
+          <div class="ing-row"><span class="ing-amt">2 dash</span><span class="ing-name">Angostura bitters</span></div>
+          <div class="ing-row"><span class="ing-amt">1 dash</span><span class="ing-name">Orange bitters</span></div>
+          <div class="ing-row"><span class="ing-amt">3 drops</span><span class="ing-name">Saline solution</span></div>
+          <div class="ing-row"><span class="ing-amt">garnish</span><span class="ing-name">Luxardo cherry + optional orange twist</span></div>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <span class="step-num">01</span>
+            <div><div class="step-title">Combine</div><div class="step-text">Add all ingredients to a mixing glass with ice.</div></div>
+          </div>
+          <div class="step">
+            <span class="step-num">02</span>
+            <div>
+              <div class="step-title">Stir</div>
+              <div class="step-text">Stir 25–30 seconds until well chilled and diluted.</div>
+              <button class="timer-btn" data-seconds="30" data-label="Stir">⏱ 30s</button>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-num">03</span>
+            <div><div class="step-title">Strain & Garnish</div><div class="step-text">Strain into chilled coupe or over large cube. Express orange twist. Drop in cherry.</div></div>
+          </div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text"><strong>Averna build</strong> — everyday version, herbal and approachable. <strong>Barolo Chinato build</strong> — premium version, more bitter, more complex (proven excellent at Moody Tongue). Use high-proof rye — low-proof bourbon gets lost against amaro. Luxardo cherries only. Saline suppresses bitterness and amplifies other flavors — don't skip it.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vieux Carré -->
+    <div class="recipe-card" data-recipe="vieux-carre">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Vieux Carré</div>
+          <div class="card-spec">Rye · Cognac · Chinato · Bénédictine · Peychaud's · Angostura</div>
+        </div>
+        <div class="card-badge">Stirred</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Rittenhouse 100 Rye</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Cognac (Rémy Martin VSOP)</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Cocchi Barolo Chinato <em>or</em> Cocchi di Torino</span></div>
+          <div class="ing-row"><span class="ing-amt">¼ oz</span><span class="ing-name">Bénédictine</span></div>
+          <div class="ing-row"><span class="ing-amt">2 dash</span><span class="ing-name">Peychaud's bitters</span></div>
+          <div class="ing-row"><span class="ing-amt">1 dash</span><span class="ing-name">Angostura bitters</span></div>
+          <div class="ing-row"><span class="ing-amt">garnish</span><span class="ing-name">Lemon twist</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Combine</div><div class="step-text">Add all ingredients to a mixing glass with ice.</div></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Stir — Long</div><div class="step-text">Stir 30–35 seconds. Longer than a standard Manhattan — this one needs it.</div><button class="timer-btn" data-seconds="35" data-label="Stir">⏱ 35s</button></div></div>
+          <div class="step"><span class="step-num">03</span><div><div class="step-title">Strain & Garnish</div><div class="step-text">Strain over large cube (traditional) or into chilled coupe. Express lemon twist over top, run around rim.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text"><strong>Born at Moody Tongue</strong> with Barolo Chinato — the bartender's call that made the drink. Don't skip Peychaud's — its anise-tinged floral quality is the soul of this drink. Angostura alone is not a substitute. The rye + cognac split achieves complexity neither spirit manages alone.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Winnequah -->
+    <div class="recipe-card" data-recipe="winnequah">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">The Winnequah</div>
+          <div class="card-spec">Rye · Laphroaig · Barolo Chinato · Bénédictine · Peychaud's · Absinthe</div>
+        </div>
+        <div class="card-badge">Original · Rocks</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">1½ oz</span><span class="ing-name">Rittenhouse 100 Rye</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Laphroaig 10 (or cask strength for more smoke)</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Cocchi Barolo Chinato</span></div>
+          <div class="ing-row"><span class="ing-amt">¼ oz</span><span class="ing-name">Bénédictine</span></div>
+          <div class="ing-row"><span class="ing-amt">2 dash</span><span class="ing-name">Peychaud's bitters</span></div>
+          <div class="ing-row"><span class="ing-amt">3 drops</span><span class="ing-name">Absinthe (drops — not dashes)</span></div>
+          <div class="ing-row"><span class="ing-amt">3 drops</span><span class="ing-name">Saline solution</span></div>
+          <div class="ing-row"><span class="ing-amt">garnish</span><span class="ing-name">Orange twist (essential)</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Chill Glass</div><div class="step-text">Chill your rocks glass in the freezer or with ice water while you build the drink.</div><button class="timer-btn" data-seconds="120" data-label="Chill glass">⏱ 2 min</button></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Combine</div><div class="step-text">Add all ingredients to a mixing glass with ice. The absinthe is drops — 3 maximum. If you can taste it, you used too much.</div></div></div>
+          <div class="step"><span class="step-num">03</span><div><div class="step-title">Stir — Full 40s</div><div class="step-text">Stir for a full 35–40 seconds. This is a big drink and needs real integration and dilution.</div><button class="timer-btn" data-seconds="40" data-label="Stir">⏱ 40s</button></div></div>
+          <div class="step"><span class="step-num">04</span><div><div class="step-title">Strain & Serve</div><div class="step-text">Drop large clear cube in chilled glass. Strain over the cube.</div></div></div>
+          <div class="step"><span class="step-num">05</span><div><div class="step-title">Garnish</div><div class="step-text">Express orange twist close to the surface — oils hit the drink, not the air. Run around rim. Drop in. The orange oil is structural, not decorative.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text"><strong>Named for Winnequah Road, Monona.</strong> Rye + Laphroaig split base — smoke and spice as co-equals, not float and base. Barolo Chinato is the binding agent; don't substitute standard sweet vermouth. Peychaud's anise thread connects the smoke to the absinthe whisper. Cask strength Laphroaig = wilder. Standard = more integrated. Both correct.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toronto -->
+    <div class="recipe-card" data-recipe="toronto">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Toronto</div>
+          <div class="card-spec">Rye · Fernet-Branca · Simple Syrup · Angostura</div>
+        </div>
+        <div class="card-badge">Stirred · Up</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">2 oz</span><span class="ing-name">Rye whiskey</span></div>
+          <div class="ing-row"><span class="ing-amt">¼ oz</span><span class="ing-name">Fernet-Branca</span></div>
+          <div class="ing-row"><span class="ing-amt">¼ oz</span><span class="ing-name">Simple syrup (1:1)</span></div>
+          <div class="ing-row"><span class="ing-amt">2 dash</span><span class="ing-name">Angostura bitters</span></div>
+          <div class="ing-row"><span class="ing-amt">garnish</span><span class="ing-name">Orange twist (essential)</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Combine</div><div class="step-text">Add all ingredients to a mixing glass with ice.</div></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Stir</div><div class="step-text">Stir 20–25 seconds until well chilled.</div><button class="timer-btn" data-seconds="25" data-label="Stir">⏱ 25s</button></div></div>
+          <div class="step"><span class="step-num">03</span><div><div class="step-title">Strain & Garnish</div><div class="step-text">Strain into chilled coupe or Nick & Nora. Express orange twist over top and place on rim.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text">The Fernet is intentionally small — it punches far above its volume. Don't increase it unless you already enjoy Fernet neat. Orange twist is essential, not optional — it lifts the whole drink. <strong>Best off-menu ask</strong> at any serious bar — bartenders enjoy making it.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Penicillin -->
+    <div class="recipe-card" data-recipe="penicillin">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Penicillin</div>
+          <div class="card-spec">Blended Scotch · Lemon · Honey-Ginger · Laphroaig Float</div>
+        </div>
+        <div class="card-badge">Shaken · Rocks</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">2 oz</span><span class="ing-name">Blended Scotch (Famous Grouse)</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Fresh lemon juice</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Honey-ginger syrup*</span></div>
+          <div class="ing-row"><span class="ing-amt">¼ oz</span><span class="ing-name">Laphroaig 10 (float)</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Combine Base</div><div class="step-text">Add Scotch, lemon, and honey-ginger syrup to shaker with ice.</div></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Shake Hard</div><div class="step-text">Shake 12–15 seconds.</div><button class="timer-btn" data-seconds="15" data-label="Shake">⏱ 15s</button></div></div>
+          <div class="step"><span class="step-num">03</span><div><div class="step-title">Strain</div><div class="step-text">Strain over large cube in rocks glass.</div></div></div>
+          <div class="step"><span class="step-num">04</span><div><div class="step-title">Float the Islay</div><div class="step-text">Pour Laphroaig gently over the back of a bar spoon. It should sit on top — the smoke hits your nose first.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text"><strong>*Honey-ginger syrup:</strong> simmer 1 cup honey + 1 cup water + 6–8 slices fresh ginger 10 min, strain. Refrigerate up to 2 weeks. Works in tea, dark & stormy riffs too. The Laphroaig float is structural — it makes the first sip essentially an Old Fashioned. The sour elements are backbone, not headline.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /wheelhouse -->
+
+  <!-- EXTENDED -->
+  <div class="panel" id="panel-extended">
+    <div class="section-label">Extended Repertoire</div>
+
+    <!-- Oaxacan Old Fashioned -->
+    <div class="recipe-card">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Oaxacan Old Fashioned</div>
+          <div class="card-spec">Reposado Tequila · Mezcal · Agave Syrup · Mole Bitters</div>
+        </div>
+        <div class="card-badge">Stirred · Rocks</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">1½ oz</span><span class="ing-name">Reposado tequila (La Gritona)</span></div>
+          <div class="ing-row"><span class="ing-amt">½ oz</span><span class="ing-name">Mezcal (El Buho or Del Maguey Vida)</span></div>
+          <div class="ing-row"><span class="ing-amt">2 dash</span><span class="ing-name">Bittermens Xocolatl Mole Bitters</span></div>
+          <div class="ing-row"><span class="ing-amt">1 tsp</span><span class="ing-name">Agave syrup (2:1 diluted with water)</span></div>
+          <div class="ing-row"><span class="ing-amt">garnish</span><span class="ing-name">Orange twist</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Combine</div><div class="step-text">Add all ingredients to a mixing glass with ice.</div></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Stir</div><div class="step-text">Stir 20–25 seconds.</div><button class="timer-btn" data-seconds="25" data-label="Stir">⏱ 25s</button></div></div>
+          <div class="step"><span class="step-num">03</span><div><div class="step-title">Strain & Garnish</div><div class="step-text">Strain over large cube. Express orange twist, run rim, drop in.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text">Phil Ward's classic. Bittermens Mole Bitters are essential — chocolate, cinnamon, spice that nothing else replicates. Try ordering out before buying both bottles at home.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Naked and Famous -->
+    <div class="recipe-card">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Naked and Famous</div>
+          <div class="card-spec">Mezcal · Aperol · Yellow Chartreuse · Lime</div>
+        </div>
+        <div class="card-badge">Shaken · Up</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Mezcal (Del Maguey Vida)</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Aperol</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Yellow Chartreuse</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Fresh lime juice</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Combine</div><div class="step-text">Add all ingredients to shaker with ice.</div></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Shake Hard</div><div class="step-text">Shake 12–15 seconds.</div><button class="timer-btn" data-seconds="15" data-label="Shake">⏱ 15s</button></div></div>
+          <div class="step"><span class="step-num">03</span><div><div class="step-title">Double Strain</div><div class="step-text">Double strain into chilled coupe. No garnish needed.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text">Yellow Chartreuse only — green is too dominant and throws the balance. Mezcal smoke keeps Aperol from going fruit-forward. Best stretch outside the whiskey wheelhouse.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Smoked Reposado Margarita -->
+    <div class="recipe-card">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Smoked Reposado Margarita</div>
+          <div class="card-spec">Reposado · Mezcal · Lime · Cointreau · Agave</div>
+        </div>
+        <div class="card-badge">Shaken · Rocks</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">1½ oz</span><span class="ing-name">Reposado tequila (La Gritona)</span></div>
+          <div class="ing-row"><span class="ing-amt">½ oz</span><span class="ing-name">Mezcal espadin (El Buho or Del Maguey)</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Fresh lime juice (never bottled)</span></div>
+          <div class="ing-row"><span class="ing-amt">½ oz</span><span class="ing-name">Cointreau (not triple sec)</span></div>
+          <div class="ing-row"><span class="ing-amt">¼ oz</span><span class="ing-name">Agave syrup (2:1)</span></div>
+          <div class="ing-row"><span class="ing-amt">3 drops</span><span class="ing-name">Saline solution</span></div>
+          <div class="ing-row"><span class="ing-amt">rim</span><span class="ing-name">Kosher salt — half rim only</span></div>
+          <div class="ing-row"><span class="ing-amt">garnish</span><span class="ing-name">Lime wheel or expressed lime twist</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Salt Rim</div><div class="step-text">Run lime wedge around half the rim only. Dip in kosher salt. Half rim lets you control each sip.</div></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Combine</div><div class="step-text">Add all ingredients to shaker with ice.</div></div></div>
+          <div class="step"><span class="step-num">03</span><div><div class="step-title">Shake Hard</div><div class="step-text">Shake 12–15 seconds. Don't under-shake.</div><button class="timer-btn" data-seconds="15" data-label="Shake">⏱ 15s</button></div></div>
+          <div class="step"><span class="step-num">04</span><div><div class="step-title">Strain & Garnish</div><div class="step-text">Strain over fresh ice in rocks glass. Express lime twist over top.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text"><strong>Smoky split:</strong> ¼ oz mezcal = subtle smoke. Equal parts (1 oz / 1 oz) = bold statement. Your mood decides. Cointreau is cognac-based — drier and more complex than triple sec. Saline both in the shaker and on the half rim — they serve different roles. Sweetness floor is ¼ oz agave; taste your lime first before adding more.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scotch Boulevardier -->
+    <div class="recipe-card">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Scotch Boulevardier</div>
+          <div class="card-spec">Scotch · Campari · Cocchi di Torino</div>
+        </div>
+        <div class="card-badge">Stirred · Rocks or Up</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">1½ oz</span><span class="ing-name">Blended Scotch or Speyside (Glenrothes 12)</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Campari</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Cocchi di Torino</span></div>
+          <div class="ing-row"><span class="ing-amt">garnish</span><span class="ing-name">Orange twist</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Combine & Stir</div><div class="step-text">Stir with ice 20–25 seconds.</div><button class="timer-btn" data-seconds="25" data-label="Stir">⏱ 25s</button></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Strain & Garnish</div><div class="step-text">Strain over large cube or into coupe. Express orange twist.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text">The Aviary's barrel-aged version with Glenrothes 12 and Cocchi was a highlight — 6 months in new American oak mellows the Campari and integrates everything. Boulevardier format is already in the wheelhouse; Scotch adds earthiness and smoke.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- De La Louisiane -->
+    <div class="recipe-card">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">De La Louisiane</div>
+          <div class="card-spec">Rye · Sweet Vermouth · Bénédictine · Absinthe Rinse · Peychaud's</div>
+        </div>
+        <div class="card-badge">Stirred · Up</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">1½ oz</span><span class="ing-name">Rye whiskey (Rittenhouse 100)</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Sweet vermouth (Cocchi di Torino)</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Bénédictine</span></div>
+          <div class="ing-row"><span class="ing-amt">3 dash</span><span class="ing-name">Peychaud's bitters</span></div>
+          <div class="ing-row"><span class="ing-amt">rinse</span><span class="ing-name">Absinthe (coat coupe and discard)</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Absinthe Rinse</div><div class="step-text">Add a small pour of absinthe to a chilled coupe, swirl to coat the inside, discard the excess.</div></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Stir</div><div class="step-text">Combine remaining ingredients in mixing glass with ice. Stir 25 seconds.</div><button class="timer-btn" data-seconds="25" data-label="Stir">⏱ 25s</button></div></div>
+          <div class="step"><span class="step-num">03</span><div><div class="step-title">Strain</div><div class="step-text">Strain into the absinthe-rinsed coupe.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text">Vieux Carré cousin with an absinthe presence. The absinthe does what Laphroaig does in the Penicillin — announces itself first without dominating. Natural next step if Vieux Carré is in the wheelhouse.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Greenpoint -->
+    <div class="recipe-card">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Greenpoint</div>
+          <div class="card-spec">Rye · Yellow Chartreuse · Sweet Vermouth · Bitters</div>
+        </div>
+        <div class="card-badge">Stirred · Up</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">2 oz</span><span class="ing-name">Rye whiskey (Rittenhouse 100)</span></div>
+          <div class="ing-row"><span class="ing-amt">½ oz</span><span class="ing-name">Yellow Chartreuse</span></div>
+          <div class="ing-row"><span class="ing-amt">½ oz</span><span class="ing-name">Sweet vermouth (Cocchi di Torino)</span></div>
+          <div class="ing-row"><span class="ing-amt">1 dash</span><span class="ing-name">Angostura bitters</span></div>
+          <div class="ing-row"><span class="ing-amt">1 dash</span><span class="ing-name">Mole bitters</span></div>
+          <div class="ing-row"><span class="ing-amt">garnish</span><span class="ing-name">Lemon twist</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Combine & Stir</div><div class="step-text">Add all to mixing glass with ice. Stir 25–30 seconds.</div><button class="timer-btn" data-seconds="30" data-label="Stir">⏱ 30s</button></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Strain & Garnish</div><div class="step-text">Strain into chilled coupe. Express lemon twist.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text">A Brooklyn riff — rye-forward Manhattan with Chartreuse adding herbal complexity. Yellow only; green overwhelms.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mezcal Negroni -->
+    <div class="recipe-card">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Mezcal Negroni</div>
+          <div class="card-spec">Mezcal · Campari · Sweet Vermouth</div>
+        </div>
+        <div class="card-badge">Stirred · Rocks</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">1 oz</span><span class="ing-name">Mezcal (Del Maguey Vida)</span></div>
+          <div class="ing-row"><span class="ing-amt">1 oz</span><span class="ing-name">Campari</span></div>
+          <div class="ing-row"><span class="ing-amt">1 oz</span><span class="ing-name">Sweet vermouth (Cocchi di Torino)</span></div>
+          <div class="ing-row"><span class="ing-amt">garnish</span><span class="ing-name">Orange twist or expressed orange peel</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Combine & Stir</div><div class="step-text">Stir with ice 20–25 seconds.</div><button class="timer-btn" data-seconds="25" data-label="Stir">⏱ 25s</button></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Strain & Garnish</div><div class="step-text">Strain over large cube. Express orange peel and drop in.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text">Mezcal smoke and Campari bitterness are a better match than gin botanicals and Campari. The substitution took a century to arrive but has become one of the best modern Negroni riffs.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frisco Sour -->
+    <div class="recipe-card">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Frisco Sour</div>
+          <div class="card-spec">Rye · Bénédictine · Lemon · Orange</div>
+        </div>
+        <div class="card-badge">Shaken · Up</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">2 oz</span><span class="ing-name">Rye whiskey (Rittenhouse 100)</span></div>
+          <div class="ing-row"><span class="ing-amt">½ oz</span><span class="ing-name">Bénédictine</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Fresh lemon juice</span></div>
+          <div class="ing-row"><span class="ing-amt">¼ oz</span><span class="ing-name">Fresh orange juice</span></div>
+          <div class="ing-row"><span class="ing-amt">garnish</span><span class="ing-name">Lemon and orange wheel</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Combine & Shake</div><div class="step-text">Shake all ingredients with ice 12–15 seconds.</div><button class="timer-btn" data-seconds="15" data-label="Shake">⏱ 15s</button></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Strain & Garnish</div><div class="step-text">Double strain into chilled coupe. Garnish with citrus wheel.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text">A pre-Prohibition rye sour. Bénédictine adds herbal sweetness in place of simple syrup — the herbal complexity is what distinguishes it from a standard whiskey sour. The orange juice rounds the acidity without adding sweetness.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /extended -->
+
+  <!-- FRIENDS -->
+  <div class="panel" id="panel-friends">
+    <div class="section-label">For Friends — Plus Your Twist</div>
+
+    <!-- Espresso Martini -->
+    <div class="recipe-card friends-card">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Espresso Martini</div>
+          <div class="card-spec">Vodka · Coffee Liqueur · Espresso</div>
+        </div>
+        <div class="card-badge">Shaken · Up</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">1½ oz</span><span class="ing-name">Vodka (standard) <em>or</em> 1 oz vodka + ½ oz rye (your version)</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Kahlúa (standard) <em>or</em> Mr. Black Cold Brew (upgraded / your version)</span></div>
+          <div class="ing-row"><span class="ing-amt">1 oz</span><span class="ing-name">Fresh espresso shot (room temp or chilled)</span></div>
+          <div class="ing-row"><span class="ing-amt">¼ oz</span><span class="ing-name">Simple syrup — omit if using Mr. Black</span></div>
+          <div class="ing-row"><span class="ing-amt">1 dash</span><span class="ing-name">Angostura — your version only, optional</span></div>
+          <div class="ing-row"><span class="ing-amt">garnish</span><span class="ing-name">3 coffee beans, clustered on foam</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Pull & Cool Espresso</div><div class="step-text">Pull one shot and let cool 2–3 minutes. Hot liquid kills the foam.</div><button class="timer-btn" data-seconds="180" data-label="Cool espresso">⏱ 3 min</button></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Combine</div><div class="step-text">Add all ingredients to shaker with ice.</div></div></div>
+          <div class="step"><span class="step-num">03</span><div><div class="step-title">Shake Very Hard</div><div class="step-text">15–18 seconds, more vigorous than any other drink. The foam is structural, not decorative.</div><button class="timer-btn" data-seconds="18" data-label="Shake hard">⏱ 18s</button></div></div>
+          <div class="step"><span class="step-num">04</span><div><div class="step-title">Double Strain</div><div class="step-text">Pour deliberately through strainer — let the foam build on top, don't trap it in the strainer.</div></div></div>
+          <div class="step"><span class="step-num">05</span><div><div class="step-title">Garnish Fast</div><div class="step-text">Place 3 coffee beans in a tight cluster on the foam. Serve immediately.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Three Versions</div>
+          <div class="notes-text"><strong>Standard (friends):</strong> Vodka + Kahlúa + espresso + simple syrup. Classic, reliable, crowd-pleasing.<br><br><strong>Upgraded (friends, noticeably better):</strong> Swap Kahlúa for Mr. Black, drop simple syrup — Mr. Black has enough sweetness without it. Mr. Black is genuinely coffee-forward; Kahlúa is coffee-flavored sugar syrup.<br><br><strong>Your version:</strong> 1 oz rye + ½ oz vodka, Mr. Black, espresso, no syrup, optional dash Angostura. Bold, bitter, barely sweet — a genuinely different drink.<br><br><strong>No espresso machine?</strong> Best: Moka pot (~$30, Bialetti) — produces real crema, foams well. Good: store-bought cold brew concentrate (Chameleon, Trader Joe's) — 1 oz in place of shot, no foam, still tastes great. Functional: double-strength drip coffee, cooled — minimal foam. A Moka pot solves this permanently for $30 and is worth owning.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gold Rush -->
+    <div class="recipe-card friends-card">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Gold Rush</div>
+          <div class="card-spec">Bourbon · Lemon · Honey Syrup</div>
+        </div>
+        <div class="card-badge">Shaken · Rocks</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">2 oz</span><span class="ing-name">Bourbon (Buffalo Trace standard; Rittenhouse or Whistlepig rye for your version)</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Fresh lemon juice</span></div>
+          <div class="ing-row"><span class="ing-amt">¾ oz</span><span class="ing-name">Honey syrup (3:1 honey to warm water)*</span></div>
+          <div class="ing-row"><span class="ing-amt">¼ oz</span><span class="ing-name">Bénédictine float — your version only</span></div>
+          <div class="ing-row"><span class="ing-amt">3 drops</span><span class="ing-name">Saline solution — your version only</span></div>
+          <div class="ing-row"><span class="ing-amt">garnish</span><span class="ing-name">Lemon twist or wheel</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Combine</div><div class="step-text">Add bourbon, lemon, honey syrup, and saline (if your version) to shaker with ice.</div></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Shake</div><div class="step-text">Shake hard 12–15 seconds.</div><button class="timer-btn" data-seconds="15" data-label="Shake">⏱ 15s</button></div></div>
+          <div class="step"><span class="step-num">03</span><div><div class="step-title">Strain</div><div class="step-text">Strain over fresh ice in rocks glass.</div></div></div>
+          <div class="step"><span class="step-num">04</span><div><div class="step-title">Float (Your Version)</div><div class="step-text">Pour Bénédictine over back of bar spoon so it rests on top. Garnish with lemon.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text"><strong>*Honey syrup:</strong> 3:1 ratio (3 parts honey, 1 part warm water) — richer and more honey-forward than standard simple syrup. Refrigerate up to 3 weeks. Worth making a batch.<br><br><strong>Your version:</strong> High-proof rye instead of bourbon, saline in the shaker, Bénédictine float. The Bénédictine echoes the honey but adds herbal depth — same float technique as the Laphroaig in the Penicillin. Barely more effort, noticeably more interesting.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gin & Tonic -->
+    <div class="recipe-card friends-card">
+      <div class="card-header">
+        <div class="card-title-block">
+          <div class="card-name">Gin & Tonic</div>
+          <div class="card-spec">Dry Gin · Tonic · Lime</div>
+        </div>
+        <div class="card-badge">Built · Highball</div>
+        <div class="card-chevron">▼</div>
+      </div>
+      <div class="recipe-body">
+        <div class="ingredients">
+          <div class="ing-row"><span class="ing-amt">2 oz</span><span class="ing-name">Dry gin (Tanqueray standard; Sølveig for local twist) <em>or</em> 1½ oz gin for your version</span></div>
+          <div class="ing-row"><span class="ing-amt">½ oz</span><span class="ing-name">Mezcal espadin — your version only (El Buho or Del Maguey)</span></div>
+          <div class="ing-row"><span class="ing-amt">4 oz</span><span class="ing-name">Fever-Tree Indian Tonic (standard) <em>or</em> Fever-Tree Aromatic (your version)</span></div>
+          <div class="ing-row"><span class="ing-amt">2 dash</span><span class="ing-name">Orange bitters — your version only</span></div>
+          <div class="ing-row"><span class="ing-amt">garnish</span><span class="ing-name">Lime wedge (standard) <em>or</em> grapefruit twist (your version)</span></div>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">01</span><div><div class="step-title">Fill Glass</div><div class="step-text">Fill tall highball with ice. For your version, one large cube — less surface area, slower dilution, longer carbonation life.</div></div></div>
+          <div class="step"><span class="step-num">02</span><div><div class="step-title">Add Spirit(s)</div><div class="step-text">Add gin (and mezcal if your version) over ice.</div></div></div>
+          <div class="step"><span class="step-num">03</span><div><div class="step-title">Add Tonic</div><div class="step-text">Pour tonic slowly down the side of the glass to preserve carbonation. One gentle stir only.</div></div></div>
+          <div class="step"><span class="step-num">04</span><div><div class="step-title">Bitters & Garnish</div><div class="step-text">For your version: add orange bitters on top, they drift down naturally. Express grapefruit twist close to the surface, place on rim.</div></div></div>
+        </div>
+        <div class="recipe-notes">
+          <div class="notes-label">Notes</div>
+          <div class="notes-text"><strong>Standard (friends):</strong> 2 oz gin, 4 oz Fever-Tree Indian Tonic, lime wedge. Build in the glass — never shake.<br><br><strong>Your version (Mezcal Tonic):</strong> 1½ oz gin + ½ oz mezcal, Fever-Tree Aromatic Tonic (more bitter, more herbal, less sweet than Indian), orange bitters, grapefruit twist. Smoke and quinine bitterness amplify each other in exactly the direction your palate responds to.<br><br><strong>Sølveig note:</strong> The Fár North Spirits gin from your butcher shop shelf is 107 proof — reduce tonic slightly to compensate for the extra spirit weight.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /friends -->
+
+  <!-- PALATE -->
+  <div class="panel" id="panel-palate">
+
+    <div class="palate-section">
+      <div class="palate-heading">Profile</div>
+      <div class="palate-prose">Whiskey-forward and unapologetically spirit-led. Drawn to bold, assertive modifiers — amaro, Campari, Fernet, Bénédictine — that announce themselves rather than whisper. Bitters are essential, not optional. Sweetness is welcome only as counterbalance, never as the point. Smoke is consistently compelling: Laphroaig, mezcal, peated Scotch. Even sour-format drinks work when the smoke and bitterness lead and citrus/honey play a structural rather than starring role. Barrel-aged formats are a natural fit.</div>
+    </div>
+
+    <div class="palate-section">
+      <div class="palate-heading">Seek Out</div>
+      <div class="tag-cloud">
+        <span class="tag seek">Rye whiskey (high-proof)</span>
+        <span class="tag seek">Bourbon</span>
+        <span class="tag seek">Blended / Speyside Scotch</span>
+        <span class="tag seek">Cognac / Armagnac</span>
+        <span class="tag seek">Mezcal (lightly smoky)</span>
+        <span class="tag seek">Cocchi di Torino</span>
+        <span class="tag seek">Carpano Antica</span>
+        <span class="tag seek">Barolo Chinato</span>
+        <span class="tag seek">Averna</span>
+        <span class="tag seek">Fernet-Branca</span>
+        <span class="tag seek">Bénédictine</span>
+        <span class="tag seek">Yellow Chartreuse</span>
+        <span class="tag seek">Campari / Aperol (balanced)</span>
+        <span class="tag seek">Nocino / walnut liqueur</span>
+        <span class="tag seek">Angostura</span>
+        <span class="tag seek">Peychaud's</span>
+        <span class="tag seek">Mole bitters</span>
+        <span class="tag seek">Orange bitters</span>
+        <span class="tag seek">Barrel-aged cocktails</span>
+        <span class="tag seek">Old Fashioned family</span>
+        <span class="tag seek">Manhattan family</span>
+        <span class="tag seek">Negroni / Boulevardier</span>
+        <span class="tag seek">"Stirred & spirit-forward"</span>
+      </div>
+    </div>
+
+    <div class="palate-section">
+      <div class="palate-heading">Avoid</div>
+      <div class="tag-cloud">
+        <span class="tag avoid">Maraschino as primary modifier</span>
+        <span class="tag avoid">Tropical / citrus-forward base</span>
+        <span class="tag avoid">Described as "refreshing"</span>
+        <span class="tag avoid">Fruit-forward or dessert profiles</span>
+        <span class="tag avoid">Cream or egg white as feature</span>
+        <span class="tag avoid">Orange liqueur-led builds</span>
+        <span class="tag avoid">Over-sweetened sours</span>
+        <span class="tag avoid">Sweet vermouth without bitter counterbalance</span>
+      </div>
+    </div>
+
+    <div class="palate-section">
+      <div class="palate-heading">Home Bar — Priority Order</div>
+      <div class="palate-prose" style="font-size:0.75rem; line-height:2;">
+        1. Rittenhouse 100 Rye (~$30)<br>
+        2. Cocchi di Torino (~$20)<br>
+        3. Averna Amaro (~$30)<br>
+        4. Peychaud's Bitters (~$10)<br>
+        5. Fernet-Branca (~$28)<br>
+        6. Bénédictine (~$35)<br>
+        7. Cocchi Barolo Chinato (~$55)<br>
+        8. Laphroaig 10 (~$45)<br>
+        9. Del Maguey Vida Mezcal (~$50)<br>
+        10. Bittermens Xocolatl Mole Bitters (~$20)
+      </div>
+    </div>
+
+    <div class="palate-section">
+      <div class="palate-heading">Splurge Tier</div>
+      <div class="palate-prose" style="font-size:0.75rem; line-height:2;">
+        Whistlepig 10-Year Rye (~$60) — immediate upgrade to every stirred whiskey drink<br>
+        Laphroaig 10 Cask Strength (~$65)<br>
+        Nikka From The Barrel (~$70)<br>
+        Braulio Amaro (~$45)<br>
+        Rémy Martin XO Cognac (~$200)
+      </div>
+    </div>
+
+    <div class="palate-section">
+      <div class="palate-heading">Origin Story</div>
+      <div class="palate-prose">The Winnequah was born at Moody Tongue, Chicago — where a bartender introduced Cocchi Barolo Chinato, built a Vieux Carré, and made a Black Manhattan that became an instant favorite. The Aviary provided the barrel-aged context. Both are worth returning to; Moody Tongue is the place you go back to.</div>
+    </div>
+
+  </div><!-- /palate -->
+
+</div><!-- /app -->
+
+<!-- TIMER OVERLAY -->
+<div class="timer-overlay" id="timerOverlay">
+  <div class="timer-display" id="timerDisplay">0:30</div>
+  <div class="timer-label" id="timerLabel">Stir</div>
+  <button class="timer-close" onclick="closeTimer()">Dismiss</button>
+</div>
+
+<script>
+// ── TAB NAVIGATION ──
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+    window.scrollTo(0, 0);
+  });
+});
+
+// ── CARD EXPAND/COLLAPSE ──
+document.querySelectorAll('.card-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const body = header.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.recipe-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.card-header').forEach(h => h.classList.remove('open'));
+    // Open clicked if it was closed
+    if (!isOpen) {
+      body.classList.add('open');
+      header.classList.add('open');
+    }
+  });
+});
+
+// ── TIMER ──
+let timerInterval = null;
+let timerSeconds = 0;
+
+function startTimer(seconds, label) {
+  clearInterval(timerInterval);
+  timerSeconds = seconds;
+  const overlay = document.getElementById('timerOverlay');
+  const display = document.getElementById('timerDisplay');
+  const lbl = document.getElementById('timerLabel');
+  lbl.textContent = label;
+  overlay.classList.add('active');
+  updateDisplay();
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    if (timerSeconds <= 0) {
+      timerSeconds = 0;
+      clearInterval(timerInterval);
+      display.textContent = 'Done';
+    } else {
+      updateDisplay();
+    }
+  }, 1000);
+}
+
+function updateDisplay() {
+  const m = Math.floor(timerSeconds / 60);
+  const s = timerSeconds % 60;
+  document.getElementById('timerDisplay').textContent =
+    m > 0 ? `${m}:${s.toString().padStart(2,'0')}` : `0:${s.toString().padStart(2,'0')}`;
+}
+
+function closeTimer() {
+  clearInterval(timerInterval);
+  document.getElementById('timerOverlay').classList.remove('active');
+}
+
+document.querySelectorAll('.timer-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    startTimer(parseInt(btn.dataset.seconds), btn.dataset.label);
+  });
+});
+</script>
+
+</body>
+</html>
