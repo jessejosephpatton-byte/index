@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cocktail Book">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a0f05">
+<title>The Cocktail Book</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#1a0f05;--surface:#231508;--card:#2c1a09;--card-hover:#341f0b;
+  --amber:#c87941;--amber-light:#e09458;--amber-dim:#8a5228;--gold:#d4a853;
+  --paper:#f0e4cc;--text:#e8d8bc;--text-muted:#9a8468;
+  --rule:#3d2410;--rule-light:#5a3518;--radius:2px;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overscroll-behavior:none;}
+body{background:var(--bg);color:var(--text);font-family:'Crimson Text',Georgia,serif;font-size:16px;line-height:1.5;overflow:hidden;height:100dvh;}
+.app{display:flex;flex-direction:column;height:100dvh;padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);}
+
+.header{background:linear-gradient(180deg,#0e0802 0%,var(--surface) 100%);border-bottom:1px solid var(--rule-light);padding:14px 20px 12px;flex-shrink:0;position:relative;}
+.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--amber-dim),transparent);}
+.header-eyebrow{font-family:'Inconsolata',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber-dim);margin-bottom:2px;}
+.header-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--paper);}
+.header-title em{color:var(--amber-light);font-style:italic;}
+.header-sub{font-family:'Inconsolata',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-top:3px;}
+
+.main{flex:1;overflow:hidden;position:relative;}
+.view{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;display:none;padding:16px;}
+.view.active{display:block;}
+.detail-view{padding:0;}
+
+.list-section-label{font-family:'Inconsolata',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber-dim);padding:16px 4px 8px;border-bottom:1px solid var(--rule);margin-bottom:10px;}
+.list-section-label:first-child{padding-top:4px;}
+.recipe-card{background:var(--card);border:1px solid var(--rule-light);border-radius:var(--radius);padding:14px 40px 14px 16px;margin-bottom:8px;cursor:pointer;position:relative;overflow:hidden;}
+.recipe-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--amber-dim);}
+.recipe-card.extended::before{background:var(--text-muted);}
+.recipe-card.original::before{background:var(--gold);}
+.recipe-card.afield::before{background:#4a7a5a;}
+.recipe-card.friends::before{background:#5a6a8a;}
+.recipe-card:active{background:var(--card-hover);}
+.card-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--paper);margin-bottom:3px;}
+.card-spec{font-family:'Inconsolata',monospace;font-size:10px;color:var(--amber);letter-spacing:0.08em;margin-bottom:5px;}
+.card-desc{font-size:13px;color:var(--text-muted);line-height:1.5;}
+.card-arrow{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--rule-light);font-size:18px;}
+
+.detail-hero{background:linear-gradient(180deg,#0e0802 0%,var(--surface) 100%);padding:20px 20px 24px;border-bottom:1px solid var(--rule-light);}
+.back-btn{font-family:'Inconsolata',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);background:none;border:none;cursor:pointer;padding:0;margin-bottom:14px;display:flex;align-items:center;gap:6px;}
+.back-btn::before{content:'←';font-size:14px;}
+.detail-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:600;color:var(--paper);line-height:1.15;margin-bottom:6px;}
+.detail-spec{font-family:'Inconsolata',monospace;font-size:10px;color:var(--amber-dim);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:12px;}
+.detail-desc{font-size:15px;color:var(--text-muted);line-height:1.65;font-style:italic;}
+
+.detail-body{padding:20px;}
+.section-head{font-family:'Inconsolata',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber-dim);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:14px;margin-top:24px;}
+.section-head:first-child{margin-top:0;}
+.glass-badge{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--rule-light);padding:5px 12px;border-radius:var(--radius);font-family:'Inconsolata',monospace;font-size:11px;color:var(--text-muted);letter-spacing:0.08em;margin-top:4px;}
+
+.ingredient-row{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--rule);gap:12px;}
+.ingredient-row:last-child{border-bottom:none;}
+.ing-left{flex:1;}
+.ing-name{font-size:15px;color:var(--text);}
+.ing-amt{font-family:'Inconsolata',monospace;font-size:12px;color:var(--amber);white-space:nowrap;flex-shrink:0;padding-top:2px;}
+
+.tier-toggle{font-family:'Inconsolata',monospace;font-size:10px;letter-spacing:0.08em;color:var(--amber-dim);cursor:pointer;background:none;border:none;padding:3px 0 0;display:flex;align-items:center;gap:4px;}
+.tier-toggle::before{content:'▸';font-size:9px;transition:transform 0.2s;display:inline-block;}
+.tier-toggle.open::before{transform:rotate(90deg);}
+.tier-panel{display:none;background:rgba(0,0,0,0.25);border:1px solid var(--rule-light);border-radius:2px;margin-top:6px;overflow:hidden;}
+.tier-panel.open{display:block;}
+.tier-item{padding:8px 12px;border-bottom:1px solid var(--rule);}
+.tier-item:last-child{border-bottom:none;}
+.tier-label{font-family:'Inconsolata',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2px;}
+.tier-label.standard{color:var(--amber-dim);}
+.tier-label.upgrade{color:var(--amber);}
+.tier-label.splurge{color:var(--gold);}
+.tier-bottle{font-size:14px;color:var(--text);font-weight:600;}
+.tier-note{font-size:12px;color:var(--text-muted);line-height:1.55;margin-top:3px;font-style:italic;}
+
+.step{display:flex;gap:14px;margin-bottom:16px;}
+.step-num{font-family:'Playfair Display',serif;font-size:22px;color:var(--rule-light);line-height:1.2;flex-shrink:0;width:20px;text-align:right;}
+.step-text{font-size:15px;color:var(--text);line-height:1.65;padding-top:2px;}
+
+.note-box{background:rgba(200,121,65,0.07);border:1px solid var(--rule-light);border-left:3px solid var(--amber-dim);padding:14px 16px;border-radius:var(--radius);margin-top:8px;}
+.note-box p{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:10px;}
+.note-box p:last-child{margin-bottom:0;}
+.note-box strong{color:var(--amber);font-weight:600;}
+.history-box{background:rgba(0,0,0,0.2);border:1px solid var(--rule-light);border-left:3px solid var(--text-muted);padding:14px 16px;border-radius:var(--radius);margin-top:8px;}
+.history-box p{font-size:14px;color:var(--text-muted);line-height:1.7;}
+
+.tab-bar{background:var(--surface);border-top:1px solid var(--rule-light);display:flex;flex-shrink:0;position:relative;}
+.tab-bar::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--amber-dim),transparent);}
+.tab-btn{flex:1;background:none;border:none;color:var(--text-muted);padding:10px 8px calc(10px + var(--safe-bottom));cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color 0.15s;min-height:56px;}
+.tab-btn.active{color:var(--amber-light);}
+.tab-icon{font-size:18px;line-height:1;}
+.tab-label{font-family:'Inconsolata',monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;}
+
+.palate-card{background:var(--card);border:1px solid var(--rule-light);padding:18px;margin-bottom:12px;border-radius:var(--radius);}
+.palate-title{font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:var(--amber-light);margin-bottom:10px;}
+.palate-body{font-size:14px;color:var(--text-muted);line-height:1.75;}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.tag{font-family:'Inconsolata',monospace;font-size:10px;letter-spacing:0.08em;padding:3px 10px;border-radius:20px;border:1px solid;}
+.tag.seek{color:var(--amber);border-color:var(--amber-dim);background:rgba(200,121,65,0.08);}
+.tag.avoid{color:#b05050;border-color:#6b3030;background:rgba(139,32,32,0.08);}
+
+.loading{display:flex;align-items:center;justify-content:center;height:100%;font-family:'Inconsolata',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);}
+
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--rule-light);border-radius:2px;}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="header">
+  <div class="header-eyebrow">Personal Reference</div>
+  <div class="header-title">The <em>Cocktail</em> Book</div>
+  <div class="header-sub" id="recipe-count">Loading…</div>
+</div>
+
+<div class="main">
+  <div class="view active" id="view-list"><div class="loading">Loading recipes…</div></div>
+  <div class="view detail-view" id="view-detail"></div>
+  <div class="view" id="view-palate">
+    <div class="palate-card" style="margin-top:4px">
+      <div class="palate-title">The Profile</div>
+      <div class="palate-body">Whiskey-forward and unapologetically spirit-led. Drawn to bold, assertive modifiers — amaro, Campari, Fernet, Bénédictine — that announce themselves rather than whisper. Bitters are essential, not optional. Sweetness is welcome only as counterbalance, never as the point. Smoke is consistently compelling: Laphroaig, mezcal, peated Scotch. The Penicillin insight: even sour-format drinks work when smoke and bitterness lead, and citrus/honey play structural rather than starring roles.</div>
+    </div>
+    <div class="palate-card">
+      <div class="palate-title">Seek Out</div>
+      <div class="tag-row">
+        <span class="tag seek">Rye</span><span class="tag seek">Bourbon</span><span class="tag seek">Scotch</span><span class="tag seek">Mezcal</span><span class="tag seek">Averna</span><span class="tag seek">Fernet</span><span class="tag seek">Campari</span><span class="tag seek">Bénédictine</span><span class="tag seek">Barolo Chinato</span><span class="tag seek">Angostura</span><span class="tag seek">Peychaud's</span><span class="tag seek">Mole Bitters</span><span class="tag seek">Absinthe Rinse</span><span class="tag seek">Cocchi di Torino</span><span class="tag seek">Carpano Antica</span><span class="tag seek">Rocks Format</span><span class="tag seek">Stirred</span><span class="tag seek">Split Base</span>
+      </div>
+    </div>
+    <div class="palate-card">
+      <div class="palate-title">Avoid</div>
+      <div class="tag-row">
+        <span class="tag avoid">Overly Sweet</span><span class="tag avoid">Fruit-Forward</span><span class="tag avoid">Tropical</span><span class="tag avoid">Cream / Egg Foam</span><span class="tag avoid">Blended / Frozen</span><span class="tag avoid">Low-Proof Base</span>
+      </div>
+    </div>
+    <div class="palate-card">
+      <div class="palate-title">Home Bar Priority Order</div>
+      <div class="palate-body">Rittenhouse 100 Rye → Cocchi di Torino → Averna → Peychaud's → Fernet-Branca → Bénédictine → Barolo Chinato Cocchi → Laphroaig 10yr → Del Maguey Vida Mezcal → Carpano Antica → Yellow Chartreuse → Bittermens Mole Bitters → Regans' Orange Bitters</div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" id="tab-recipes" onclick="switchTab('recipes')"><div class="tab-icon">🥃</div><div class="tab-label">Recipes</div></button>
+  <button class="tab-btn" id="tab-palate" onclick="switchTab('palate')"><div class="tab-icon">◈</div><div class="tab-label">Palate</div></button>
+</div>
+
+</div>
+<script>
+let R = [];
+
+// ── Load recipes from JSON ────────────────────────────────────────────────────
+fetch('recipes.json')
+  .then(r => r.json())
+  .then(data => { R = data; buildList(); })
+  .catch(() => {
+    document.getElementById('view-list').innerHTML =
+      '<div class="loading" style="color:#b05050">Could not load recipes.json</div>';
+  });
+
+// ── Build list view ───────────────────────────────────────────────────────────
+function buildList() {
+  const sections = [
+    {key:'core',label:'Core Wheelhouse'},
+    {key:'extended',label:'Extended Repertoire'},
+    {key:'original',label:'Original'},
+    {key:'afield',label:'Further Afield'},
+    {key:'friends',label:'Friends'},
+  ];
+  const list = document.getElementById('view-list');
+  let html = '';
+  sections.forEach(sec => {
+    const items = R.filter(r => r.section === sec.key);
+    if (!items.length) return;
+    html += `<div class="list-section-label">${sec.label}</div>`;
+    items.forEach(r => {
+      const cls = r.section === 'original' ? 'original' : r.section === 'extended' ? 'extended' : r.section === 'afield' ? 'afield' : r.section === 'friends' ? 'friends' : '';
+      const preview = r.desc.length > 95 ? r.desc.substring(0,95)+'…' : r.desc;
+      html += `<div class="recipe-card ${cls}" onclick="openRecipe('${r.id}')">
+        <div class="card-name">${r.name}</div>
+        <div class="card-spec">${r.spec}</div>
+        <div class="card-desc">${preview}</div>
+        <div class="card-arrow">›</div>
+      </div>`;
+    });
+  });
+  list.innerHTML = html;
+  document.getElementById('recipe-count').textContent =
+    `${R.length} recipes · spirit-forward · smoke-led`;
+}
+
+// ── Android back button support ───────────────────────────────────────────────
+window.addEventListener('popstate', () => {
+  const det = document.getElementById('view-detail');
+  if (det.classList.contains('active')) closeRecipe();
+});
+
+// ── Open recipe detail ────────────────────────────────────────────────────────
+function openRecipe(id) {
+  const r = R.find(x => x.id === id);
+  if (!r) return;
+  history.pushState({recipe: id}, '', '');
+
+  const ingHTML = r.ingredients.map((ing, idx) => {
+    let tierHTML = '';
+    if (ing.tiers && ing.tiers.length) {
+      const pid = `tp-${id}-${idx}`;
+      tierHTML = `<button class="tier-toggle" onclick="toggleTier('${pid}',this)">Bottle guide</button>
+        <div class="tier-panel" id="${pid}">
+          ${ing.tiers.map(t => `<div class="tier-item">
+            <div class="tier-label ${t.label}">${t.label}</div>
+            <div class="tier-bottle">${t.bottle}</div>
+            ${t.note ? `<div class="tier-note">${t.note}</div>` : ''}
+          </div>`).join('')}
+        </div>`;
+    }
+    return `<div class="ingredient-row">
+      <div class="ing-left"><div class="ing-name">${ing.name}</div>${tierHTML}</div>
+      <div class="ing-amt">${ing.amt}</div>
+    </div>`;
+  }).join('');
+
+  const stepsHTML = r.steps.map((s,i) =>
+    `<div class="step"><div class="step-num">${i+1}</div><div class="step-text">${s}</div></div>`
+  ).join('');
+
+  const notesHTML = r.notes.map(n => `<p>${n}</p>`).join('');
+
+  const histHTML = r.history
+    ? `<div class="section-head">History &amp; Context</div><div class="history-box"><p>${r.history}</p></div>`
+    : '';
+
+  const det = document.getElementById('view-detail');
+  det.innerHTML = `<div class="detail-hero">
+    <button class="back-btn" onclick="closeRecipe()">Recipes</button>
+    <div class="detail-name">${r.name}</div>
+    <div class="detail-spec">${r.spec}</div>
+    <div class="detail-desc">${r.desc}</div>
+  </div>
+  <div class="detail-body">
+    <div class="glass-badge">🥃 ${r.glass}</div>
+    <div class="section-head" style="margin-top:22px">Ingredients</div>
+    ${ingHTML}
+    <div class="section-head">Method</div>
+    ${stepsHTML}
+    <div class="section-head">Notes &amp; Variations</div>
+    <div class="note-box">${notesHTML}</div>
+    ${histHTML}
+  </div>`;
+
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  det.classList.add('active');
+  det.scrollTop = 0;
+}
+
+function closeRecipe() {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-list').classList.add('active');
+}
+
+function toggleTier(pid, btn) {
+  document.getElementById(pid).classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  if (tab==='recipes') document.getElementById('view-list').classList.add('active');
+  else document.getElementById('view-palate').classList.add('active');
+}
+</script>
+</body>
+</html>
