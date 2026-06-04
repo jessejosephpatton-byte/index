@@ -1653,5 +1653,366 @@
       "<strong>Garnish variation:</strong> Cucumber and fresh mint work beautifully with Hendrick's specifically. Orange peel with Tanqueray. The garnish should complement the gin's botanical profile."
     ],
     "history": "The Gin & Tonic was born from the British Empire's need to get quinine into its soldiers in India to prevent malaria. Quinine — the active ingredient in tonic water — is intensely bitter on its own, so officers began mixing it with gin, sugar, and lime to make it palatable. The 'Indian tonic water' name is a direct reference to this origin. By the mid-1800s it was a colonial staple; by the 20th century it was a global default; by the 21st century the craft tonic movement — led by Fever-Tree's founding in 2004 — transformed it from a basic drink into a serious one. The Spanish gin-tonic movement, which uses large wine glasses, premium gin, craft tonic, and botanical garnishes, did the most to elevate the format to its current status."
+  },{
+    "id": "mezcal-paloma",
+    "section": "extended",
+    "name": "Mezcal Paloma",
+    "spec": "Shaken · Highball · Agave",
+    "desc": "A smoke-forward Paloma built on mezcal instead of tequila, finished with Cynar's earthy bitterness. From the Nopalito cookbook — one of the most interesting agave drinks in the repertoire.",
+    "glass": "Highball over ice",
+    "ingredients": [
+      {
+        "name": "Mezcal",
+        "amt": "2 oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Del Maguey Vida Clasico",
+            "note": "The benchmark lightly smoky espadin — clean and versatile."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Divino Maguey Artesanal",
+            "note": "More rustic and earthy. Adds additional depth against the grapefruit."
+          }
+        ]
+      },
+      {
+        "name": "Fresh Grapefruit Juice",
+        "amt": "2 oz"
+      },
+      {
+        "name": "Fresh Lime Juice",
+        "amt": "½ oz"
+      },
+      {
+        "name": "Cynar",
+        "amt": "½ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Cynar",
+            "note": "Earthy artichoke bitterness — the key modifier. Very similar profile to Sfumato, confirmed by personal tasting."
+          },
+          {
+            "label": "substitute",
+            "bottle": "Campari",
+            "note": "Until Cynar is acquired. More citrus-forward, pulls toward Negroni territory. Different but excellent."
+          }
+        ]
+      },
+      {
+        "name": "Soda Water",
+        "amt": "splash"
+      },
+      {
+        "name": "Tajín or Salt",
+        "amt": "rim (optional)"
+      },
+      {
+        "name": "Grapefruit Wedge",
+        "amt": "garnish"
+      }
+    ],
+    "steps": [
+      "Fill a highball glass with ice.",
+      "Add mezcal, grapefruit juice, lime juice, and Cynar directly over ice.",
+      "Top with a splash of soda water and stir gently once.",
+      "Garnish with a grapefruit wedge. Tajín rim optional but recommended."
+    ],
+    "notes": [
+      "<strong>Cynar is the point:</strong> The earthy artichoke bitterness against mezcal smoke and fresh grapefruit is what makes this drink distinctive. Don't skip it in favor of simple syrup — this isn't a standard Paloma.",
+      "<strong>Campari sub:</strong> Works well until Cynar is acquired. Makes a slightly more citrus-forward, Negroni-adjacent version.",
+      "<strong>Spicy variation:</strong> Add a few drops of jalapeño-infused agave syrup for heat. The agave category is where spice works for this palate.",
+      "<strong>From Nopalito:</strong> Gonzalo Guzmán's cookbook. One of the most interesting agave drinks in the current repertoire."
+    ],
+    "history": "From the Nopalito cookbook by Gonzalo Guzmán. Identified as a high-priority make given the mezcal cabinet build and Cynar evaluation."
+  },
+  {
+    "id": "killer-bee",
+    "section": "extended",
+    "name": "Killer Bee",
+    "spec": "Shaken · Rocks · Agave",
+    "desc": "A mezcal sour built on honey and lemon — structurally a Penicillin cousin without the Laphroaig float. Smoke plus citrus plus honey in a clean, hot-weather format. From the Nopalito cookbook.",
+    "glass": "Rocks glass over large single cube",
+    "ingredients": [
+      {
+        "name": "Mezcal",
+        "amt": "2 oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Del Maguey Vida Clasico",
+            "note": "Specifically called out in the Nopalito cookbook. Clean espadin smoke."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Divino Maguey Artesanal",
+            "note": "More rustic character — interesting variation worth trying."
+          }
+        ]
+      },
+      {
+        "name": "Fresh Lemon Juice",
+        "amt": "¾ oz"
+      },
+      {
+        "name": "Honey Syrup",
+        "amt": "¾ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Barr Hill Honey Syrup (diluted 3:1)",
+            "note": "Barr Hill is rich — dilute slightly with water before using."
+          },
+          {
+            "label": "homemade",
+            "bottle": "3:1 honey to warm water",
+            "note": "Stir until dissolved. Refrigerate up to 3 weeks. More control over sweetness."
+          }
+        ]
+      },
+      {
+        "name": "Saline Solution",
+        "amt": "3 drops"
+      },
+      {
+        "name": "Lemon Wheel",
+        "amt": "garnish"
+      }
+    ],
+    "steps": [
+      "Combine mezcal, lemon juice, honey syrup, and saline in a shaker with ice.",
+      "Shake hard for 12–15 seconds.",
+      "Strain over a large cube in a rocks glass.",
+      "Garnish with a lemon wheel."
+    ],
+    "notes": [
+      "<strong>Penicillin cousin:</strong> Same structural logic — smoke plus citrus plus honey — but without the Laphroaig float. More approachable, cleaner finish.",
+      "<strong>Hot weather drink:</strong> One of the best warm-weather options in the agave repertoire. Refreshing without being fruit-forward or sweet.",
+      "<strong>Saline matters:</strong> 3 drops in the shaker suppresses sweetness and amplifies the mezcal smoke. Don't skip."
+    ],
+    "history": "From the Nopalito cookbook by Gonzalo Guzmán. Del Maguey Vida specifically called out in the original recipe."
+  },
+  {
+    "id": "smoked-margarita",
+    "section": "extended",
+    "name": "Smoked Reposado Margarita",
+    "spec": "Shaken · Rocks · Agave",
+    "desc": "A dry, spirit-forward margarita with a mezcal split that adds smoke without overwhelming. Built for the palate that wants complexity and smoke over sweetness and fruit.",
+    "glass": "Rocks glass over fresh ice, half salt rim",
+    "ingredients": [
+      {
+        "name": "Reposado Tequila",
+        "amt": "1½ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "La Gritona Reposado",
+            "note": "Women-owned Jalisco distillery. Clean, slightly oaky. The house reposado."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Fortaleza Reposado",
+            "note": "One of the best reposados available — rich, complex, worth seeking out."
+          }
+        ]
+      },
+      {
+        "name": "Mezcal Espadin",
+        "amt": "½ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Del Maguey Vida Clasico",
+            "note": "¼ oz = subtle smoke. ½ oz = present but not dominant. Equal parts = bold statement."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Divino Maguey Artesanal",
+            "note": "More rustic earthiness alongside the reposado."
+          }
+        ]
+      },
+      {
+        "name": "Fresh Lime Juice",
+        "amt": "¾ oz"
+      },
+      {
+        "name": "Orange Liqueur",
+        "amt": "½ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Cointreau",
+            "note": "Cognac-based, dry, more complex than triple sec. The correct call."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Grand Marnier Cordon Rouge",
+            "note": "Richer and more complex than Cointreau. Cognac base adds depth. Both in cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Agave Nectar (2:1 diluted)",
+        "amt": "¼ oz"
+      },
+      {
+        "name": "Saline Solution",
+        "amt": "3 drops"
+      },
+      {
+        "name": "Kosher Salt or Tajín",
+        "amt": "half rim only"
+      },
+      {
+        "name": "Lime Wheel or Twist",
+        "amt": "garnish"
+      }
+    ],
+    "steps": [
+      "Run a lime wedge around half the rim of a rocks glass only. Dip that half in kosher salt or Tajín. Half rim lets you control salt in each sip.",
+      "Combine tequila, mezcal, lime juice, orange liqueur, agave nectar, and saline in a shaker with ice.",
+      "Shake hard for 12–15 seconds. Don't under-shake.",
+      "Strain over fresh ice in the prepared rocks glass.",
+      "Express lime twist over the top and drop in or garnish with lime wheel."
+    ],
+    "notes": [
+      "<strong>Smoke level:</strong> ½ oz mezcal is the standard split — present but not dominant. Adjust to taste: ¼ oz for subtle, equal parts for bold.",
+      "<strong>Never bottled lime:</strong> Fresh lime juice only. The difference is significant.",
+      "<strong>Cointreau vs Grand Marnier:</strong> Both in cabinet. Grand Marnier is richer and more complex — worth using for the premium version.",
+      "<strong>Tajín rim:</strong> More complex than plain salt — chile-lime character pairs especially well with grapefruit and smoky builds.",
+      "<strong>Spicy variation:</strong> Replace agave nectar with jalapeño-infused agave syrup. Pending Ancho Reyes: replace ¼ oz Cointreau with Ancho Reyes for chile heat and smoke simultaneously."
+    ],
+    "history": "Developed through the Nopalito cookbook exploration and agave category expansion. La Gritona reposado sourced from local butcher shop shelf."
+  },
+  {
+    "id": "mezcal-last-word",
+    "section": "extended",
+    "name": "Mezcal Last Word",
+    "spec": "Shaken · Coupe · Equal Parts",
+    "desc": "A Last Word variation with mezcal replacing gin. The smoke counterbalances the maraschino in a way that makes it work where it otherwise wouldn't. All bottles currently in cabinet.",
+    "glass": "Chilled coupe",
+    "ingredients": [
+      {
+        "name": "Mezcal",
+        "amt": "¾ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Del Maguey Vida Clasico",
+            "note": "Clean espadin smoke — the right level of assertiveness for equal-parts builds."
+          }
+        ]
+      },
+      {
+        "name": "Green Chartreuse",
+        "amt": "¾ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Green Chartreuse",
+            "note": "Green justified here unlike most drinks — the equal-parts balance keeps it from dominating."
+          }
+        ]
+      },
+      {
+        "name": "Maraschino Liqueur",
+        "amt": "¾ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Maraska Maraschino",
+            "note": "Cherry liqueur — not the same as Luxardo cherries. Works here because mezcal smoke provides counterweight."
+          }
+        ]
+      },
+      {
+        "name": "Fresh Lime Juice",
+        "amt": "¾ oz"
+      }
+    ],
+    "steps": [
+      "Combine all four ingredients in a shaker with ice.",
+      "Shake hard for 12–15 seconds.",
+      "Double-strain into a chilled coupe.",
+      "No garnish needed."
+    ],
+    "notes": [
+      "<strong>All bottles in cabinet:</strong> No new purchases needed. High priority to try.",
+      "<strong>Why maraschino works here:</strong> Equal parts discipline keeps any single ingredient from dominating. Mezcal smoke provides counterweight that neutralizes maraschino's sweetness.",
+      "<strong>Green vs Yellow Chartreuse:</strong> Green is correct here — the Last Word is one of the few builds where it's justified. Yellow would make this too soft.",
+      "<strong>Equal parts discipline:</strong> All four components must be exactly equal. The balance is the drink."
+    ],
+    "history": "A variation on the classic Last Word (gin, green Chartreuse, maraschino, lime). Mezcal substitution identified as high-upside given the agave cabinet build."
+  },
+  {
+    "id": "old-pal",
+    "section": "extended",
+    "name": "Old Pal",
+    "spec": "Stirred · Coupe · Spirit-Forward",
+    "desc": "Rye, Campari, dry vermouth in equal parts. Drier and more bitter than a Negroni, closer to the core palate. All bottles in cabinet — zero new purchases needed.",
+    "glass": "Chilled coupe or Nick & Nora",
+    "ingredients": [
+      {
+        "name": "Rye Whiskey",
+        "amt": "1 oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Rittenhouse 100",
+            "note": "High proof holds up against Campari's bitterness."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Røknar Minnesota Straight Rye",
+            "note": "Smoked rye adds a layer that plays interestingly against Campari's orange bitterness."
+          },
+          {
+            "label": "splurge",
+            "bottle": "Whistlepig 12 Old World",
+            "note": "Wine barrel finish adds complexity — worth trying in this format."
+          }
+        ]
+      },
+      {
+        "name": "Campari",
+        "amt": "1 oz"
+      },
+      {
+        "name": "Dry Vermouth",
+        "amt": "1 oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Lo-Fi Dry Vermouth",
+            "note": "Clean and crisp. Replace when current bottle is finished — buy 375ml for freshness."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Dolin Dry",
+            "note": "The benchmark dry vermouth. Worth having when Lo-Fi runs out."
+          }
+        ]
+      },
+      {
+        "name": "Orange Twist",
+        "amt": "garnish"
+      }
+    ],
+    "steps": [
+      "Combine rye, Campari, and dry vermouth in a mixing glass with ice.",
+      "Stir for 20–25 seconds until well chilled.",
+      "Strain into a chilled coupe or Nick & Nora.",
+      "Express orange twist over the top, run around rim, place on edge."
+    ],
+    "notes": [
+      "<strong>Zero new purchases:</strong> Everything in cabinet. Should have been made already.",
+      "<strong>Drier than a Negroni:</strong> Dry vermouth instead of sweet — this is closer to the core palate than a standard Negroni. More bitter, less sweet, more rye-forward.",
+      "<strong>Røknar variation:</strong> The smoked rye against Campari's orange bitterness is an interesting combination worth a direct comparison to the Rittenhouse version.",
+      "<strong>Vermouth freshness:</strong> Dry vermouth oxidizes fastest — buy in 375ml and use within 3 weeks of opening. Refrigerate always."
+    ],
+    "history": "A Prohibition-era classic. Underrated and directly in the core palate — drier and more bitter than a Negroni, spirit-forward, no new purchases needed."
   }
 ]
