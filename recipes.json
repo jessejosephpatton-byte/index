@@ -162,7 +162,8 @@
       "<strong>On the Fernet:</strong> ¼ oz is precise. Dial up only after you've made it once and know you want more.",
       "<strong>Simple syrup:</strong> Just enough to round Fernet's edges. It's structural — the drink should not taste sweet.",
       "<strong>Orange peel is essential:</strong> Not optional. The citrus oil lifts the Fernet's medicinal qualities and makes the drink approachable.",
-      "<strong>Best off-menu ask:</strong> Simple to make, obscure enough to signal knowledge, always appreciated by bartenders who enjoy making it."
+      "<strong>Best off-menu ask:</strong> Simple to make, obscure enough to signal knowledge, always appreciated by bartenders who enjoy making it.",
+      "<strong>Røknar variation (pending trial):</strong> The Fernet is so assertive that Røknar's smoke may get lost behind it rather than adding a layer. Worth one trial but Rittenhouse is the canonical spec for a reason. File as experiment, not standard."
     ],
     "history": "The Toronto is a classic Prohibition-era cocktail, likely developed in Canada where rye was legal and Fernet was available as medicine. It fell out of fashion for decades and was revived by the craft cocktail movement — Death & Co in New York was instrumental in putting it back on menus."
   },
@@ -185,6 +186,11 @@
           },
           {
             "label": "upgrade",
+            "bottle": "Røknar Minnesota Straight Rye",
+            "note": "The cognac split means the rye isn't carrying the full load alone — Røknar's smoke adds a third dimension alongside the cognac's fruit and Barolo Chinato's wine bitterness. More compelling here than in the Toronto. Worth trying."
+          },
+          {
+            "label": "splurge",
             "bottle": "WhistlePig 12 Year Old World",
             "note": "Wine barrel finish (Madeira, Sauternes, Port) creates complex oxidative notes that mirror the Barolo Chinato's wine depth. The most compelling house upgrade for this drink."
           }
@@ -880,7 +886,7 @@
           {
             "label": "standard",
             "bottle": "Green Chartreuse",
-            "note": "Green justified here unlike most drinks — equal-parts balance keeps it from dominating. In cabinet."
+            "note": "Green justified here unlike most drinks — equal-parts balance keeps it from dominating. NOT currently in cabinet — Yellow Chartreuse is not a substitute here. Must purchase Green Chartreuse before making this drink."
           }
         ]
       },
@@ -952,13 +958,13 @@
         "tiers": [
           {
             "label": "standard",
-            "bottle": "Lo-Fi Dry Vermouth",
-            "note": "In cabinet. Replace when finished — buy 375ml for freshness. Refrigerate always."
+            "bottle": "Dolin Dry",
+            "note": "The benchmark dry vermouth — ~$15, widely available in 375ml. The correct purchase. Lo-Fi Dry is being discarded (oxidized); nothing else in cabinet substitutes here. Buy Dolin before making this drink."
           },
           {
-            "label": "upgrade",
-            "bottle": "Dolin Dry",
-            "note": "The benchmark dry vermouth. Worth having when Lo-Fi runs out."
+            "label": "note",
+            "bottle": "Buy in 375ml",
+            "note": "Dry vermouth oxidizes fastest of all vermouths — 375ml format and use within 3 weeks of opening. Refrigerate always. Last-write-wins: Dolin Dry is the house standard going forward."
           }
         ]
       },
@@ -1071,6 +1077,7 @@
       "<strong>Absinthe drops:</strong> 3 maximum. Use an eyedropper for precision. If you can taste the absinthe, you used too much.",
       "<strong>Orange twist is structural:</strong> Not optional or decorative. Express close to the surface so the oils hit the drink, not the air.",
       "<strong>Barolo Chinato is irreplaceable:</strong> Sweet vermouth doesn't work here. This drink was designed around that specific bottle.",
+      "<strong>Røknar split (pending trial):</strong> Try 1 oz Røknar + ½ oz Laphroaig instead of 1.5 oz Rittenhouse + ¾ oz Laphroaig. Triple smoke — smoked rye, Islay peat, and absinthe anise — may be extraordinary or may be too much. Worth one deliberate trial.",
       "<strong>Cocoa bitters variation (pending):</strong> Try 1 dash Angostura Cocoa alongside or replacing regular Angostura. The chocolate depth may connect interestingly with Barolo Chinato's wine character and Laphroaig's smoke."
     ],
     "history": "An original creation built from a palate profile — the through-lines of smoke (Laphroaig), anise (Peychaud's, absinthe), herbal depth (Bénédictine), and bitter wine complexity (Barolo Chinato) that emerged from an evening at Moody Tongue in Chicago. Named for Winnequah Road, Monona. There is no other copy of this drink."
@@ -1254,7 +1261,8 @@
     ],
     "notes": [
       "<strong>Lemon over orange:</strong> The Chartreuse's herbal and honey notes are lifted by lemon in a way orange doesn't achieve.",
-      "<strong>Why it fits the wheelhouse:</strong> Structure is pure Manhattan family. Chartreuse does the same job Bénédictine does in the Vieux Carré. If you love the Vieux Carré, this lands similarly."
+      "<strong>Why it fits the wheelhouse:</strong> Structure is pure Manhattan family. Chartreuse does the same job Bénédictine does in the Vieux Carré. If you love the Vieux Carré, this lands similarly.",
+      "<strong>Røknar — skip it here:</strong> Yellow Chartreuse's honey-herbal character and smoke don't have an obvious affinity — they'd compete rather than complement. Røknar is better deployed in the Black Manhattan or Vieux Carré where the modifiers have more affinity with smoke."
     ],
     "history": "Created by Michael McIlroy at Milk & Honey in New York City in 2006. Part of an unofficial series of Brooklyn neighborhood cocktails — each a Manhattan riff with a different modifier."
   },
