@@ -18,6 +18,7 @@
   --amber:#c87941;--amber-light:#e09458;--amber-dim:#8a5228;--gold:#d4a853;
   --paper:#f0e4cc;--text:#e8d8bc;--text-muted:#9a8468;
   --rule:#3d2410;--rule-light:#5a3518;--radius:2px;
+  --exp:#3a6aaa;--exp-dim:#2a4a7a;--exp-light:#6a9ad0;
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
@@ -80,6 +81,14 @@ body{background:var(--bg);color:var(--text);font-family:'Crimson Text',Georgia,s
 .tier-label.standard{color:var(--amber-dim);}
 .tier-label.upgrade{color:var(--amber);}
 .tier-label.splurge{color:var(--gold);}
+.tier-label.substitute{color:var(--text-muted);}
+.tier-label.variation{color:var(--text-muted);}
+.tier-label.alternate{color:var(--text-muted);}
+.tier-label.premium{color:var(--gold);}
+.tier-label.homemade{color:var(--text-muted);}
+.tier-label.shortcut{color:var(--text-muted);}
+.tier-label.note{color:var(--text-muted);}
+.tier-label.backup{color:var(--text-muted);}
 .tier-bottle{font-size:14px;color:var(--text);font-weight:600;}
 .tier-note{font-size:12px;color:var(--text-muted);line-height:1.55;margin-top:3px;font-style:italic;}
 
@@ -94,10 +103,30 @@ body{background:var(--bg);color:var(--text);font-family:'Crimson Text',Georgia,s
 .history-box{background:rgba(0,0,0,0.2);border:1px solid var(--rule-light);border-left:3px solid var(--text-muted);padding:14px 16px;border-radius:var(--radius);margin-top:8px;}
 .history-box p{font-size:14px;color:var(--text-muted);line-height:1.7;}
 
+/* ── Experiments ─────────────────────────────────────────────────────────── */
+.exp-section-label{font-family:'Inconsolata',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--exp-dim);padding:16px 4px 8px;border-bottom:1px solid rgba(58,106,170,0.2);margin-bottom:10px;}
+.exp-section-label:first-child{padding-top:4px;}
+
+.exp-card{background:var(--card);border:1px solid var(--rule-light);border-left:3px solid var(--exp-dim);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px;}
+.exp-card.keeper{border-left-color:#4a7a5a;}
+.exp-card.tried{border-left-color:var(--amber-dim);}
+
+.exp-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--paper);margin-bottom:4px;}
+.exp-spec{font-family:'Inconsolata',monospace;font-size:10px;color:var(--exp-light);letter-spacing:0.06em;margin-bottom:8px;line-height:1.5;}
+
+.exp-status{display:inline-flex;align-items:center;gap:5px;font-family:'Inconsolata',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;padding:3px 8px;border-radius:20px;border:1px solid;margin-bottom:8px;}
+.exp-status.pending{color:var(--amber);border-color:var(--amber-dim);background:rgba(200,121,65,0.08);}
+.exp-status.tried{color:var(--text-muted);border-color:var(--rule-light);background:rgba(0,0,0,0.2);}
+.exp-status.keeper{color:#7abd8a;border-color:#3a6a4a;background:rgba(74,122,90,0.1);}
+
+.exp-note{font-size:13px;color:var(--text-muted);line-height:1.65;font-style:italic;}
+
+/* ── Tabs ────────────────────────────────────────────────────────────────── */
 .tab-bar{background:var(--surface);border-top:1px solid var(--rule-light);display:flex;flex-shrink:0;position:relative;}
 .tab-bar::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--amber-dim),transparent);}
 .tab-btn{flex:1;background:none;border:none;color:var(--text-muted);padding:10px 8px calc(10px + var(--safe-bottom));cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color 0.15s;min-height:56px;}
 .tab-btn.active{color:var(--amber-light);}
+.tab-btn.active.exp-tab{color:var(--exp-light);}
 .tab-icon{font-size:18px;line-height:1;}
 .tab-label{font-family:'Inconsolata',monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;}
 
@@ -128,32 +157,56 @@ body{background:var(--bg);color:var(--text);font-family:'Crimson Text',Georgia,s
 <div class="main">
   <div class="view active" id="view-list"><div class="loading">Loading recipes…</div></div>
   <div class="view detail-view" id="view-detail"></div>
+  <div class="view" id="view-experiments"><div class="loading">Loading…</div></div>
   <div class="view" id="view-palate">
     <div class="palate-card" style="margin-top:4px">
       <div class="palate-title">The Profile</div>
-      <div class="palate-body">Whiskey-forward and unapologetically spirit-led. Drawn to bold, assertive modifiers — amaro, Campari, Fernet, Bénédictine — that announce themselves rather than whisper. Bitters are essential, not optional. Sweetness is welcome only as counterbalance, never as the point. Smoke is consistently compelling: Laphroaig, mezcal, peated Scotch. The Penicillin insight: even sour-format drinks work when smoke and bitterness lead, and citrus/honey play structural rather than starring roles.</div>
+      <div class="palate-body">Whiskey-forward and unapologetically spirit-led. Drawn to bold, assertive modifiers — amaro, Campari, Fernet, Bénédictine — that announce themselves rather than whisper. Bitters are essential, not optional. Sweetness is welcome only as counterbalance, never as the point. Smoke is consistently compelling: Laphroaig, mezcal, peated Scotch, smoked rye. Even sour-format drinks work when smoke and bitterness lead. Spicy heat is welcome specifically in the agave category.</div>
     </div>
     <div class="palate-card">
       <div class="palate-title">Seek Out</div>
       <div class="tag-row">
-        <span class="tag seek">Rye</span><span class="tag seek">Bourbon</span><span class="tag seek">Scotch</span><span class="tag seek">Mezcal</span><span class="tag seek">Averna</span><span class="tag seek">Fernet</span><span class="tag seek">Campari</span><span class="tag seek">Bénédictine</span><span class="tag seek">Barolo Chinato</span><span class="tag seek">Angostura</span><span class="tag seek">Peychaud's</span><span class="tag seek">Mole Bitters</span><span class="tag seek">Absinthe Rinse</span><span class="tag seek">Cocchi di Torino</span><span class="tag seek">Carpano Antica</span><span class="tag seek">Rocks Format</span><span class="tag seek">Stirred</span><span class="tag seek">Split Base</span>
+        <span class="tag seek">Rye</span><span class="tag seek">Bourbon</span><span class="tag seek">Scotch</span><span class="tag seek">Mezcal</span><span class="tag seek">Averna</span><span class="tag seek">Sfumato</span><span class="tag seek">Fernet</span><span class="tag seek">Campari</span><span class="tag seek">Cynar</span><span class="tag seek">Bénédictine</span><span class="tag seek">Barolo Chinato</span><span class="tag seek">Nocino</span><span class="tag seek">Angostura</span><span class="tag seek">Peychaud's</span><span class="tag seek">Mole Bitters</span><span class="tag seek">Absinthe</span><span class="tag seek">Cocchi di Torino</span><span class="tag seek">Rocks Format</span><span class="tag seek">Stirred</span><span class="tag seek">Split Base</span><span class="tag seek">Barrel-Aged</span><span class="tag seek">Spice in Agave</span>
       </div>
     </div>
     <div class="palate-card">
       <div class="palate-title">Avoid</div>
       <div class="tag-row">
-        <span class="tag avoid">Overly Sweet</span><span class="tag avoid">Fruit-Forward</span><span class="tag avoid">Tropical</span><span class="tag avoid">Cream / Egg Foam</span><span class="tag avoid">Blended / Frozen</span><span class="tag avoid">Low-Proof Base</span>
+        <span class="tag avoid">Overly Sweet</span><span class="tag avoid">Fruit-Forward</span><span class="tag avoid">Tropical</span><span class="tag avoid">Cream / Egg Foam</span><span class="tag avoid">Blended / Frozen</span><span class="tag avoid">Low-Proof Base</span><span class="tag avoid">Orange Liqueur-Led</span><span class="tag avoid">Described as Refreshing</span>
       </div>
     </div>
     <div class="palate-card">
-      <div class="palate-title">Home Bar Priority Order</div>
-      <div class="palate-body">Rittenhouse 100 Rye → Cocchi di Torino → Averna → Peychaud's → Fernet-Branca → Bénédictine → Barolo Chinato Cocchi → Laphroaig 10yr → Del Maguey Vida Mezcal → Carpano Antica → Yellow Chartreuse → Bittermens Mole Bitters → Regans' Orange Bitters</div>
+      <div class="palate-title">Current Cabinet — Key Bottles</div>
+      <div class="palate-body" style="font-size:13px;line-height:1.9">
+        <strong style="color:var(--amber)">Rye:</strong> Røknar MN Straight · Rittenhouse 100 · WhistlePig 12 Old World<br>
+        <strong style="color:var(--amber)">Scotch:</strong> Laphroaig 10 · Monkey Shoulder · Famous Grouse · Macallan 12*<br>
+        <strong style="color:var(--amber)">Agave:</strong> La Gritona Reposado · Del Maguey Vida · Divino Maguey<br>
+        <strong style="color:var(--amber)">Vermouth:</strong> Cocchi di Torino · Barolo Chinato · Lo-Fi Dry (discard)<br>
+        <strong style="color:var(--amber)">Amari:</strong> Averna · Sfumato · Amaro Nonino · Fernet-Branca · Campari · Aperol<br>
+        <strong style="color:var(--amber)">Liqueurs:</strong> Bénédictine · Yellow Chartreuse · Drambuie · Nocino · Grand Marnier · Cointreau<br>
+        <strong style="color:var(--amber)">Bitters:</strong> Angostura · Orange · Cocoa · Mole · Peychaud's<br>
+        <em style="color:var(--text-muted)">*Guest bottle only</em>
+      </div>
+    </div>
+    <div class="palate-card">
+      <div class="palate-title">Next Acquisitions</div>
+      <div class="palate-body" style="font-size:13px;line-height:1.9">
+        <strong style="color:var(--amber)">Immediate:</strong> Cynar ($12) · Dolin Dry Vermouth 375ml ($15)<br>
+        <strong style="color:var(--amber)">Soon:</strong> Ancho Reyes ($30) · Amontillado Sherry ($25) · Buffalo Trace Bourbon · Tanqueray<br>
+        <strong style="color:var(--amber)">When ready:</strong> Pierre Ferrand Ambre Cognac ($40) · Braulio Amaro ($45) · Green Chartreuse<br>
+        <strong style="color:var(--amber)">Pantry:</strong> Fever-Tree Ginger Beer · Fever-Tree Aromatic Tonic · Prosecco
+      </div>
+    </div>
+    <div class="palate-card">
+      <div class="palate-title">Origin Story</div>
+      <div class="palate-body">The Atwood and Winnequah were born at Moody Tongue, Chicago — where a bartender introduced Cocchi Barolo Chinato, built a Vieux Carré, and made a Black Manhattan that became an instant favorite. The Aviary provided the barrel-aged context. First original cocktail made at home: The Atwood with Røknar — an absolute home run. The beginning of a serious practice.</div>
     </div>
   </div>
 </div>
 
 <div class="tab-bar">
   <button class="tab-btn active" id="tab-recipes" onclick="switchTab('recipes')"><div class="tab-icon">🥃</div><div class="tab-label">Recipes</div></button>
+  <button class="tab-btn exp-tab" id="tab-experiments" onclick="switchTab('experiments')"><div class="tab-icon">⚗️</div><div class="tab-label">Lab</div></button>
   <button class="tab-btn" id="tab-palate" onclick="switchTab('palate')"><div class="tab-icon">◈</div><div class="tab-label">Palate</div></button>
 </div>
 
@@ -161,16 +214,15 @@ body{background:var(--bg);color:var(--text);font-family:'Crimson Text',Georgia,s
 <script>
 let R = [];
 
-// ── Load recipes from JSON ────────────────────────────────────────────────────
 fetch('recipes.json')
   .then(r => r.json())
-  .then(data => { R = data; buildList(); })
+  .then(data => { R = data; buildList(); buildExperiments(); })
   .catch(() => {
     document.getElementById('view-list').innerHTML =
       '<div class="loading" style="color:#b05050">Could not load recipes.json</div>';
   });
 
-// ── Build list view ───────────────────────────────────────────────────────────
+// ── Build recipe list ─────────────────────────────────────────────────────────
 function buildList() {
   const sections = [
     {key:'core',label:'Core Wheelhouse'},
@@ -197,11 +249,54 @@ function buildList() {
     });
   });
   list.innerHTML = html;
+  const recipeCount = R.filter(r => r.section !== 'experiments').length;
   document.getElementById('recipe-count').textContent =
-    `${R.length} recipes · spirit-forward · smoke-led`;
+    `${recipeCount} recipes · spirit-forward · smoke-led`;
 }
 
-// ── Android back button support ───────────────────────────────────────────────
+// ── Build experiments view ────────────────────────────────────────────────────
+function buildExperiments() {
+  const experiments = R.filter(r => r.section === 'experiments');
+  if (!experiments.length) {
+    document.getElementById('view-experiments').innerHTML =
+      '<div class="loading">No experiments yet</div>';
+    return;
+  }
+
+  const pending = experiments.filter(e => e.status === 'pending');
+  const tried = experiments.filter(e => e.status === 'tried');
+  const keepers = experiments.filter(e => e.status === 'keeper');
+
+  let html = '';
+
+  if (keepers.length) {
+    html += `<div class="exp-section-label">✓ Keeper</div>`;
+    keepers.forEach(e => { html += expCardHTML(e); });
+  }
+  if (tried.length) {
+    html += `<div class="exp-section-label">Tried — Results In</div>`;
+    tried.forEach(e => { html += expCardHTML(e); });
+  }
+  if (pending.length) {
+    html += `<div class="exp-section-label">Pending — To Try</div>`;
+    pending.forEach(e => { html += expCardHTML(e); });
+  }
+
+  document.getElementById('view-experiments').innerHTML = html;
+}
+
+function expCardHTML(e) {
+  const statusLabel = e.status === 'keeper' ? '✓ Keeper' : e.status === 'tried' ? '◎ Tried' : '◌ Pending';
+  return `<div class="exp-card ${e.status || 'pending'}">
+    <div class="exp-name">${e.name}</div>
+    <div class="exp-spec">${e.spec || ''}</div>
+    <div class="exp-status ${e.status || 'pending'}">${statusLabel}</div>
+    <div class="exp-note">${e.desc || ''}</div>
+    ${e.notes && e.notes.length ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--rule)">${e.notes.map(n => `<p style="font-size:12px;color:var(--text-muted);line-height:1.65;margin-bottom:6px;font-style:italic">${n}</p>`).join('')}</div>` : ''}
+  </div>`;
+}
+
+// ── Android back button ───────────────────────────────────────────────────────
 window.addEventListener('popstate', () => {
   const det = document.getElementById('view-detail');
   if (det.classList.contains('active')) closeRecipe();
@@ -280,6 +375,7 @@ function switchTab(tab) {
   document.getElementById('tab-'+tab).classList.add('active');
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   if (tab==='recipes') document.getElementById('view-list').classList.add('active');
+  else if (tab==='experiments') document.getElementById('view-experiments').classList.add('active');
   else document.getElementById('view-palate').classList.add('active');
 }
 </script>
