@@ -721,6 +721,108 @@
     "history": "The margarita's origins are genuinely contested. The mezcal margarita is a product of the craft cocktail revival, recognizing that mezcal's smoke brought something to the template that blanco tequila didn't."
   },
   {
+    "id": "spicy-margarita",
+    "section": "extended",
+    "name": "Spicy Smoked Margarita",
+    "spec": "Shaken · Rocks · Agave · Subtle Heat",
+    "desc": "The smoked reposado margarita with Ancho Reyes replacing half the Cointreau. Chile fruit and subtle heat from the Ancho Reyes, mezcal smoke, clean citrus. Heat builds slowly rather than announcing itself — the direction confirmed after the Spicy Mezcal Negroni was too aggressive.",
+    "glass": "Rocks glass · Ice · Half Tajín rim",
+    "ingredients": [
+      {
+        "name": "Reposado Tequila",
+        "amt": "1½ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "La Gritona Reposado",
+            "note": "The house reposado. Clean and slightly oaky. In cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Mezcal Espadin",
+        "amt": "½ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Del Maguey Vida Clasico",
+            "note": "Smoke present but not dominant at this ratio. In cabinet."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Divino Maguey Artesanal",
+            "note": "More rustic earthiness. In cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Fresh Lime Juice",
+        "amt": "¾ oz"
+      },
+      {
+        "name": "Cointreau",
+        "amt": "¼ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Cointreau",
+            "note": "Half the orange liqueur role — keeps dryness and citrus complexity. In cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Ancho Reyes",
+        "amt": "¼ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Ancho Reyes Original",
+            "note": "Takes the other half of the orange liqueur role. Chile fruit and slow-building heat — not aggressive. The key is keeping it at ¼ oz. In cabinet."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Ancho Reyes Verde",
+            "note": "Made with green poblano rather than dried ancho. Brighter, more vegetal heat — less fruity, more fresh chile. A different but compelling direction."
+          }
+        ]
+      },
+      {
+        "name": "Saline Solution",
+        "amt": "3 drops"
+      },
+      {
+        "name": "Tajín",
+        "amt": "half rim",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Tajín Clásico",
+            "note": "Chile-lime salt — more complex than plain kosher salt. Amplifies the Ancho Reyes chile thread without adding more heat. Half rim only."
+          }
+        ]
+      },
+      {
+        "name": "Lime Wheel or Twist",
+        "amt": "garnish"
+      }
+    ],
+    "steps": [
+      "Half-rim the glass with Tajín: run a lime wedge around one side only, dip in Tajín. Fill with ice.",
+      "Combine tequila, mezcal, lime juice, Cointreau, Ancho Reyes, and saline in a shaker with ice.",
+      "Shake hard for 12–15 seconds.",
+      "Strain over fresh ice in the prepared rocks glass.",
+      "Garnish with lime wheel or expressed twist."
+    ],
+    "notes": [
+      "<strong>Why this works where the Spicy Mezcal Negroni didn't:</strong> The margarita format — lime, agave, citrus — gives the chile heat somewhere to land. The Negroni's bitterness and the Ancho Reyes heat competed. Here they complement.",
+      "<strong>Ancho Reyes at ¼ oz is the key:</strong> This is a modifier, not a co-equal ingredient. Heat builds slowly rather than announcing itself. Don't increase until you've made it at spec.",
+      "<strong>Tajín over plain salt:</strong> The chile-lime character in the Tajín creates a rim that connects to the Ancho Reyes in the build. More coherent than a plain salt rim.",
+      "<strong>Smoke and chile affinity:</strong> Mezcal smoke and ancho chile are a natural pairing — both are products of smoke and heat. The reposado grounds everything with oak and agave sweetness.",
+      "<strong>Ancho Reyes Verde variation:</strong> Swap original Ancho Reyes for Verde — green poblano, brighter and more vegetal, less fruity. A different heat character worth trying once you know the original version."
+    ],
+    "history": "Developed after the Spicy Mezcal Negroni (Ancho Reyes replacing sweet vermouth) proved too aggressive — too much heat, too much Campari bitterness competing. The margarita format handles subtle heat better. Ancho Reyes as a partial Cointreau replacement rather than a primary ingredient is the insight that makes it work."
+  },
+  {
     "id": "mezcal-paloma",
     "section": "extended",
     "name": "Mezcal Paloma",
@@ -1976,13 +2078,14 @@
   {
     "id": "exp-spicy-mezcal-negroni",
     "section": "experiments",
-    "status": "pending",
+    "status": "tried",
     "name": "Spicy Mezcal Negroni",
     "spec": "1 oz Del Maguey Vida · 1 oz Campari · 1 oz Ancho Reyes (replacing sweet vermouth)",
-    "desc": "Bitter, smoky, and hot in equal measure. The highest-upside new agave drink in the repertoire. Unlocks the spicy category.",
+    "desc": "Bitter, smoky, and hot in equal measure — but fine rather than great. Too much spice and too much Campari bitterness competing simultaneously. The Negroni format asks too much of the palate at once when heat is also present.",
     "notes": [
-      "<strong>Requires:</strong> Ancho Reyes (~$30). Not yet in cabinet — next priority purchase alongside Cynar.",
-      "<strong>Hypothesis:</strong> Ancho Reyes' chile heat + Campari's orange bitterness + mezcal smoke = a genuinely new flavour combination. The most compelling agave experiment pending."
+      "<strong>Result:</strong> Fine but not great. Ancho Reyes as a full 1 oz replacing all sweet vermouth is too much chile liqueur. Campari's assertive bitterness competes with the heat rather than complementing it.",
+      "<strong>Redirect:</strong> Spicy heat works better in the margarita format where lime and agave give the chile somewhere to land. See Spicy Smoked Margarita.",
+      "<strong>Possible salvage:</strong> Reduce Ancho Reyes to ½ oz and add ½ oz Cocchi di Torino alongside — splits the vermouth role. Untested but may resolve the balance issue."
     ]
   }
 ]
