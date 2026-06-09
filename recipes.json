@@ -1947,6 +1947,181 @@
     "history": "The dirty Martini dates to at least 1901. The key upgrade: quality brine from quality olives. The rest of the arguments are mostly noise."
   },
   {
+    "id": "orchard-yours",
+    "section": "local",
+    "name": "The Orchard — Your Version",
+    "spec": "Stirred · Rocks · Spirit-Forward · Local",
+    "desc": "A Black Manhattan variation built around Ski-Hi Straight Rye — a local apple-rye from a friend's orchard. The apple whispers through Averna's herbal bitterness and Amontillado's nutty depth. First make without lemon twist: very very good. Lemon twist expected to improve further.",
+    "glass": "Rocks glass · Large single ice cube",
+    "ingredients": [
+      {
+        "name": "Ski-Hi Straight Rye",
+        "amt": "1 oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Ski-Hi Straight Rye (70 proof, apple-rye)",
+            "note": "Local bottle — straight rye with apple cider. Subtle and grain-forward; apple reads as gentle sweetness rather than fruit flavor. Low proof requires a split base."
+          }
+        ]
+      },
+      {
+        "name": "Rittenhouse 100 Rye",
+        "amt": "1 oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Rittenhouse 100",
+            "note": "Provides the proof and spice backbone. Ski-Hi provides the orchard thread. The 1:1 split is the right ratio — try 1.25/0.75 Ski-Hi-heavy to push apple slightly more forward."
+          }
+        ]
+      },
+      {
+        "name": "Averna Amaro",
+        "amt": "1 oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Averna Amaro",
+            "note": "The apple note makes Averna's caramel read slightly brighter and more orchard-forward. In cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Lustau Amontillado Sherry",
+        "amt": "¼ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Lustau Los Arcos Amontillado",
+            "note": "The secret weapon. Nutty oxidative depth connects apple to bitter in a way that feels intentional rather than accidental. In cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Bénédictine",
+        "amt": "¼ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Bénédictine D.O.M.",
+            "note": "Honey-herbal bridge between the apple sweetness and the amaro bitterness. In cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Angostura Bitters",
+        "amt": "2 dashes"
+      },
+      {
+        "name": "Orange Bitters",
+        "amt": "1 dash"
+      },
+      {
+        "name": "Saline Solution",
+        "amt": "3 drops"
+      },
+      {
+        "name": "Lemon Twist",
+        "amt": "garnish (essential)"
+      }
+    ],
+    "steps": [
+      "Chill a rocks glass in the freezer or fill with ice water while you build.",
+      "Add all ingredients to a mixing glass with ice.",
+      "Stir 30 seconds — the Amontillado needs full integration time.",
+      "Strain over a large cube in the chilled rocks glass.",
+      "Express lemon twist close to the surface — oils on the drink, not the air. Drop in. Lemon over orange; it lifts the apple note rather than obscuring it."
+    ],
+    "notes": [
+      "<strong>First make result:</strong> Very very good — without lemon twist. Lemon twist expected to improve further. Strong sign.",
+      "<strong>Why lemon over orange:</strong> Orange oil obscures the apple note. Lemon oil amplifies it. Worth making side by side once you have both to confirm.",
+      "<strong>Amontillado is the key:</strong> Nutty oxidative sherry connects apple sweetness to Averna's bitterness in a way that makes the drink feel cohesive. Don't omit it.",
+      "<strong>Proof note:</strong> Ski-Hi at 70 proof needs the Rittenhouse split to hold its own. If you ever find a full-proof version of this bottle, revisit the ratio.",
+      "<strong>Ratio variation:</strong> Try 1.25 oz Ski-Hi / 0.75 oz Rittenhouse to push the apple note slightly more forward without losing structure."
+    ],
+    "history": "Built around Ski-Hi Straight Rye — a local straight rye with apple cider made in collaboration with a friend's orchard and a local Minnesota distillery. The brief was a cocktail that acknowledges apple without leaning into fruit-forward sweetness. The Black Manhattan template with Amontillado as the connecting thread was the solution. First of what may become a Local series built around regional spirits."
+  },
+  {
+    "id": "orchard-crowd",
+    "section": "local",
+    "name": "The Orchard — Crowd Version",
+    "spec": "Shaken · Rocks · Honey Sour · Local",
+    "desc": "A Gold Rush riff where Ski-Hi's apple character leads rather than hides. Honey and lemon frame it naturally. Approachable, crowd-pleasing, the apple is the point. Bénédictine float bridges to a more complex version.",
+    "glass": "Rocks glass · Ice",
+    "ingredients": [
+      {
+        "name": "Ski-Hi Straight Rye",
+        "amt": "1½ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Ski-Hi Straight Rye (70 proof, apple-rye)",
+            "note": "Higher ratio here so the apple leads — this is the version where the orchard character is the point."
+          }
+        ]
+      },
+      {
+        "name": "Rittenhouse 100 Rye",
+        "amt": "½ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Rittenhouse 100",
+            "note": "Proof support — less than your version so the apple stays front and center."
+          }
+        ]
+      },
+      {
+        "name": "Honey Syrup (3:1)",
+        "amt": "¾ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Barr Hill Honey Syrup (diluted to 3:1)",
+            "note": "Echoes the Ski-Hi's apple sweetness without competing. In cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Fresh Lemon Juice",
+        "amt": "¾ oz"
+      },
+      {
+        "name": "Saline Solution",
+        "amt": "3 drops"
+      },
+      {
+        "name": "Bénédictine float",
+        "amt": "¼ oz",
+        "tiers": [
+          {
+            "label": "upgrade",
+            "bottle": "Bénédictine D.O.M.",
+            "note": "Optional — adds herbal depth without changing the drink's approachable character. Skip for the crowd; add for yourself. Same float technique as the Laphroaig in the Penicillin."
+          }
+        ]
+      },
+      {
+        "name": "Lemon Wheel",
+        "amt": "garnish"
+      }
+    ],
+    "steps": [
+      "Combine Ski-Hi, Rittenhouse, honey syrup, lemon juice, and saline in a shaker with ice.",
+      "Shake hard for 12–15 seconds.",
+      "Strain over fresh ice in a rocks glass.",
+      "Optional: float Bénédictine over the back of a bar spoon for added depth.",
+      "Garnish with lemon wheel."
+    ],
+    "notes": [
+      "<strong>Apple leads here:</strong> More Ski-Hi than Rittenhouse — the orchard character is the point, not the background.",
+      "<strong>Bénédictine float is the upgrade path:</strong> Skip it for the crowd, add it for yourself. Same technique as the Laphroaig float in the Penicillin.",
+      "<strong>Untested:</strong> Make this after confirming your version — the crowd spec follows the same logic but the shaken format needs its own trial."
+    ],
+    "history": "The crowd-friendly companion to The Orchard — your version. Same local bottle, different format. Where your version hides the apple in a spirit-forward stirred build, this one lets it lead in a honey sour format accessible to any palate."
+  },
+  {
     "id": "exp-atwood-roknar",
     "section": "experiments",
     "status": "keeper",
