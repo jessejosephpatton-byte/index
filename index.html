@@ -46,6 +46,7 @@ body{background:var(--bg);color:var(--text);font-family:'Crimson Text',Georgia,s
 .recipe-card.original::before{background:var(--gold);}
 .recipe-card.afield::before{background:#4a7a5a;}
 .recipe-card.friends::before{background:#5a6a8a;}
+.recipe-card.local::before{background:#6a4a2a;}
 .recipe-card:active{background:var(--card-hover);}
 .card-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--paper);margin-bottom:3px;}
 .card-spec{font-family:'Inconsolata',monospace;font-size:10px;color:var(--amber);letter-spacing:0.08em;margin-bottom:5px;}
@@ -229,6 +230,7 @@ function buildList() {
     {key:'original',label:'Original'},
     {key:'afield',label:'Further Afield'},
     {key:'friends',label:'Friends'},
+    {key:'local',label:'Local'},
   ];
   const list = document.getElementById('view-list');
   let html = '';
@@ -237,7 +239,7 @@ function buildList() {
     if (!items.length) return;
     html += `<div class="list-section-label">${sec.label}</div>`;
     items.forEach(r => {
-      const cls = r.section === 'original' ? 'original' : r.section === 'extended' ? 'extended' : r.section === 'afield' ? 'afield' : r.section === 'friends' ? 'friends' : '';
+      const cls = r.section === 'original' ? 'original' : r.section === 'extended' ? 'extended' : r.section === 'afield' ? 'afield' : r.section === 'friends' ? 'friends' : r.section === 'local' ? 'local' : '';
       const preview = r.desc.length > 95 ? r.desc.substring(0,95)+'…' : r.desc;
       html += `<div class="recipe-card ${cls}" onclick="openRecipe('${r.id}')">
         <div class="card-name">${r.name}</div>
