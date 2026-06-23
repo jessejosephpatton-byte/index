@@ -2122,6 +2122,45 @@
     "history": "The crowd-friendly companion to The Orchard — your version. Same local bottle, different format. Where your version hides the apple in a spirit-forward stirred build, this one lets it lead in a honey sour format accessible to any palate."
   },
   {
+    "id": "exp-port-manhattan",
+    "section": "experiments",
+    "status": "pending",
+    "name": "Port Manhattan",
+    "spec": "2 oz Rittenhouse · 1 oz 10-Year Tawny Port · 2 dash Angostura · 1 dash Orange Bitters · 3 drops Saline · Lemon twist",
+    "desc": "Sweet vermouth replaced entirely with 10-year tawny Port. The Port brings dried fruit and oxidative complexity instead of vermouth's herbal sweetness. The most direct and revealing test of how tawny Port behaves as a cocktail modifier. Make this first.",
+    "notes": [
+      "<strong>Why this first:</strong> Simplest structure, most direct comparison to the Black Manhattan. Tells you immediately whether Port wants to be a lead modifier or a supporting one.",
+      "<strong>Hypothesis:</strong> 10-year tawny's dried fruit and nutty oxidative character should work similarly to Barolo Chinato — wine-based bitterness grounding a high-proof rye. May be sweeter than the Chinato version; adjust saline accordingly.",
+      "<strong>Requires:</strong> 10-year Tawny Port — Quinta do Crasto or Graham's (~$25). Samplers from Madeira may work for a first trial."
+    ]
+  },
+  {
+    "id": "exp-port-float-sour",
+    "section": "experiments",
+    "status": "pending",
+    "name": "Tawny Port Float Sour",
+    "spec": "2 oz Rittenhouse · ¾ oz Honey Syrup · ¾ oz Fresh Lemon · 3 drops Saline · ½ oz Tawny Port float",
+    "desc": "A whiskey sour with a tawny Port float instead of red wine — the New York Sour format applied to Port. The Port's dried fruit and oxidative character sits on top exactly like the Laphroaig float in the Penicillin, hitting nose and palate first on every sip.",
+    "notes": [
+      "<strong>Float technique:</strong> Same as Laphroaig in the Penicillin — pour gently over the back of a bar spoon so the Port sits on top. It integrates as you drink.",
+      "<strong>Hypothesis:</strong> Port's dried fruit richness against honey and lemon should be a natural pairing. The float means the wine complexity leads every sip without being diluted into the base.",
+      "<strong>Requires:</strong> 10-year Tawny Port. Madeira samplers worth trying here."
+    ]
+  },
+  {
+    "id": "exp-atwood-port",
+    "section": "experiments",
+    "status": "pending",
+    "name": "The Atwood — Tawny Port Variation",
+    "spec": "2 oz Røknar · ½ oz Sfumato · ½ oz 10-Year Tawny Port (replacing Cocchi di Torino) · ¼ oz Bénédictine · 2 dash Peychaud's · 1 dash Angostura · 3 drops Saline · Lemon twist",
+    "desc": "The Cocchi di Torino replaced with tawny Port. The Port's dried fruit and oxidative complexity against Sfumato's rhubarb smoke and Røknar's grain smoke is the most intriguing Port experiment in the repertoire. The Barolo Chinato in the Winnequah is already in this flavor family — this is the Atwood equivalent.",
+    "notes": [
+      "<strong>Why this is compelling:</strong> Barolo Chinato (Winnequah) and tawny Port are related in character — both wine-based, both oxidative, both bitter-complex. The Atwood already has a wine-depth slot (Cocchi di Torino); Port fills it with more dried fruit and less chocolate.",
+      "<strong>Hypothesis:</strong> Røknar's Northern grain smoke + Sfumato's rhubarb smoke + Port's dried fruit oxidation = a darker, more autumnal version of The Atwood. The sweetness of the Port may need to be offset — reduce to ¼ oz Port + ¼ oz Cocchi di Torino as a halfway point if full substitution reads too sweet.",
+      "<strong>Requires:</strong> 10-year Tawny Port. Make the Port Manhattan first to understand how Port behaves as a modifier before attempting this."
+    ]
+  },
+  {
     "id": "exp-atwood-roknar",
     "section": "experiments",
     "status": "keeper",
