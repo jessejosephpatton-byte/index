@@ -102,7 +102,8 @@
       "<strong>Garnish:</strong> Luxardo cherries only. The neon-red grocery store maraschino is a completely different product. Orange twist is optional but adds aromatic lift.",
       "<strong>Røknar variation:</strong> Røknar's grain-forward Northern smoke paired with Sfumato's rhubarb smoke was confirmed as an absolute home run in The Atwood. Worth trying in the Black Manhattan too — double smoke against Averna is a distinctive direction."
     ],
-    "history": "The Black Manhattan was created by Todd Smith at Bourbon & Branch in San Francisco around 2005, substituting Averna amaro for sweet vermouth. The Barolo Chinato variation uses a wine-based digestif from Piedmont — a grape-and-quinine aperitif that adds tannin and bitter wine depth that standard amaro doesn't provide. The Barolo Chinato version was the drink that made this a personal favorite, ordered at Moody Tongue in Chicago."
+    "history": "The Black Manhattan was created by Todd Smith at Bourbon & Branch in San Francisco around 2005, substituting Averna amaro for sweet vermouth. The Barolo Chinato variation uses a wine-based digestif from Piedmont — a grape-and-quinine aperitif that adds tannin and bitter wine depth that standard amaro doesn't provide. The Barolo Chinato version was the drink that made this a personal favorite, ordered at Moody Tongue in Chicago.",
+    "status": "untried"
   },
   {
     "id": "toronto",
@@ -114,7 +115,7 @@
     "ingredients": [
       {
         "name": "Rye Whiskey",
-        "amt": "2 oz",
+        "amt": "2½ oz",
         "tiers": [
           {
             "label": "standard",
@@ -163,9 +164,11 @@
       "<strong>Simple syrup:</strong> Just enough to round Fernet's edges. It's structural — the drink should not taste sweet.",
       "<strong>Orange peel is essential:</strong> Not optional. The citrus oil lifts the Fernet's medicinal qualities and makes the drink approachable.",
       "<strong>Best off-menu ask:</strong> Simple to make, obscure enough to signal knowledge, always appreciated by bartenders who enjoy making it.",
-      "<strong>Røknar variation (pending trial):</strong> The Fernet is so assertive that Røknar's smoke may get lost behind it rather than adding a layer. Worth one trial but Rittenhouse is the canonical spec for a reason. File as experiment, not standard."
+      "<strong>Røknar variation (pending trial):</strong> The Fernet is so assertive that Røknar's smoke may get lost behind it rather than adding a layer. Worth one trial but Rittenhouse is the canonical spec for a reason. File as experiment, not standard.",
+      "<strong>Volume scaling:</strong> Rye scaled to 2.5 oz for additional volume. Fernet and simple syrup held fixed — scaling Fernet would overwhelm."
     ],
-    "history": "The Toronto is a classic Prohibition-era cocktail, likely developed in Canada where rye was legal and Fernet was available as medicine. It fell out of fashion for decades and was revived by the craft cocktail movement — Death & Co in New York was instrumental in putting it back on menus."
+    "history": "The Toronto is a classic Prohibition-era cocktail, likely developed in Canada where rye was legal and Fernet was available as medicine. It fell out of fashion for decades and was revived by the craft cocktail movement — Death & Co in New York was instrumental in putting it back on menus.",
+    "status": "untried"
   },
   {
     "id": "vieux-carre",
@@ -177,7 +180,7 @@
     "ingredients": [
       {
         "name": "Rye Whiskey",
-        "amt": "¾ oz",
+        "amt": "1 oz",
         "tiers": [
           {
             "label": "standard",
@@ -198,7 +201,7 @@
       },
       {
         "name": "Cognac",
-        "amt": "¾ oz",
+        "amt": "1 oz",
         "tiers": [
           {
             "label": "standard",
@@ -219,7 +222,7 @@
       },
       {
         "name": "Sweet Vermouth",
-        "amt": "¾ oz",
+        "amt": "1 oz",
         "tiers": [
           {
             "label": "standard",
@@ -235,7 +238,7 @@
       },
       {
         "name": "Bénédictine",
-        "amt": "1 tsp"
+        "amt": "½ oz"
       },
       {
         "name": "Peychaud's Bitters",
@@ -260,9 +263,12 @@
       "<strong>Bénédictine:</strong> One teaspoon only — it's made from 27 plants and spices. The herbal honey-spice quality should weave through the drink, not lead it.",
       "<strong>Both bitters:</strong> Peychaud's is lighter and anise-forward; Angostura is spicier and deeper. Together they create complexity neither achieves alone. Don't skip Peychaud's — its anise-tinged floral quality is the soul of this drink.",
       "<strong>Full splurge spec:</strong> WhistlePig 12 Old World + Pierre Ferrand Ambre + Barolo Chinato. The wine barrel finish on the Whistlepig complements the Ambre's dried fruit and the Chinato's bitter wine depth. The highest-upside version with current cabinet.",
-      "<strong>Born at Moody Tongue:</strong> The bartender used Barolo Chinato as the vermouth — his call, and the right one. This is now the preferred version."
+      "<strong>Born at Moody Tongue:</strong> The bartender used Barolo Chinato as the vermouth — his call, and the right one. This is now the preferred version.",
+      "<strong>Volume scaling:</strong> Scaled from ¾ oz to 1 oz per component for a more substantial pour (4 oz pre-dilution vs 3 oz).",
+      "<strong>Home trial note:</strong> Whiskey bite throughout — likely caused by oxidized Barolo Chinato. Ensure vermouth is fresh (within 6 weeks, refrigerated, vacuum sealed). Also stir a full 35 seconds — under-stirring leaves the rye exposed and sharp."
     ],
-    "history": "Created at the Hotel Monteleone in New Orleans around 1938 by head bartender Walter Bergeron. Named for the French Quarter. The Barolo Chinato version was discovered at Moody Tongue in Chicago — the bartender who introduced it also made the Black Manhattan that became a personal favorite that same evening."
+    "history": "Created at the Hotel Monteleone in New Orleans around 1938 by head bartender Walter Bergeron. Named for the French Quarter. The Barolo Chinato version was discovered at Moody Tongue in Chicago — the bartender who introduced it also made the Black Manhattan that became a personal favorite that same evening.",
+    "status": "refining"
   },
   {
     "id": "penicillin",
@@ -348,7 +354,8 @@
       "<strong>Barrow Ginger shortcut (pending trial):</strong> ½ oz Barrow Intense Ginger Liqueur + ¼ oz Barr Hill Honey Syrup in place of homemade syrup. More spirit-forward. Report results after first attempt.",
       "<strong>Fresh lemon only:</strong> Bottled lemon juice is a different product."
     ],
-    "history": "Created by Sam Ross at Milk & Honey in New York around 2005, the Penicillin is widely regarded as one of the most important cocktails of the modern craft era. The float technique was the key insight — by keeping the Islay Scotch separate, every sip delivers a different experience from nose to finish."
+    "history": "Created by Sam Ross at Milk & Honey in New York around 2005, the Penicillin is widely regarded as one of the most important cocktails of the modern craft era. The float technique was the key insight — by keeping the Islay Scotch separate, every sip delivers a different experience from nose to finish.",
+    "status": "untried"
   },
   {
     "id": "oaxacan-of",
@@ -427,7 +434,8 @@
       "<strong>Ancho Reyes variation (pending):</strong> Once Ancho Reyes is acquired, replace mole bitters with a small pour of Ancho Reyes. Adds chile heat alongside the chocolate-spice. Changes the drink's character substantially.",
       "<strong>Both mezcal bottles work:</strong> Del Maguey Vida is cleaner; Divino Maguey is more rustic and earthy. Both in cabinet."
     ],
-    "history": "Created by Phil Ward at Death & Co in New York around 2007. Ward's insight was treating mezcal as a modifier rather than a base, letting tequila carry the structure while mezcal provided smoke and complexity."
+    "history": "Created by Phil Ward at Death & Co in New York around 2007. Ward's insight was treating mezcal as a modifier rather than a base, letting tequila carry the structure while mezcal provided smoke and complexity.",
+    "status": "untried"
   },
   {
     "id": "naked-famous",
@@ -496,7 +504,8 @@
       "<strong>Yellow vs Green Chartreuse:</strong> Yellow only. Green makes a harder, less integrated drink here.",
       "<strong>Variation — Naked and Smoked:</strong> Replace ¼ oz of the mezcal with Laphroaig. The peat pushes the drink firmly into your wheelhouse."
     ],
-    "history": "Created by Joaquín Simó at Death & Co in New York, a direct riff on the Paper Plane replacing bourbon with mezcal and Amaro Nonino with Aperol."
+    "history": "Created by Joaquín Simó at Death & Co in New York, a direct riff on the Paper Plane replacing bourbon with mezcal and Amaro Nonino with Aperol.",
+    "status": "untried"
   },
   {
     "id": "de-la-louisiane",
@@ -508,7 +517,7 @@
     "ingredients": [
       {
         "name": "Rye Whiskey",
-        "amt": "1½ oz",
+        "amt": "2 oz",
         "tiers": [
           {
             "label": "standard",
@@ -519,7 +528,7 @@
       },
       {
         "name": "Sweet Vermouth",
-        "amt": "¾ oz",
+        "amt": "1 oz",
         "tiers": [
           {
             "label": "standard",
@@ -530,7 +539,7 @@
       },
       {
         "name": "Bénédictine",
-        "amt": "¾ oz"
+        "amt": "1 oz"
       },
       {
         "name": "Peychaud's Bitters",
@@ -562,9 +571,11 @@
     "notes": [
       "<strong>The absinthe rinse is a technique:</strong> You get the anise aroma and a ghost of flavor without absinthe dominating. Don't add it directly to the build.",
       "<strong>Peychaud's is specific:</strong> The anise connects the rinse to the body of the drink. Angostura doesn't carry that note.",
-      "<strong>Natural next step:</strong> If the Vieux Carré is in the wheelhouse, this lands similarly. The absinthe does what Laphroaig does in the Penicillin — announces itself first."
+      "<strong>Natural next step:</strong> If the Vieux Carré is in the wheelhouse, this lands similarly. The absinthe does what Laphroaig does in the Penicillin — announces itself first.",
+      "<strong>Volume scaling:</strong> Scaled up for volume: 2 oz rye + 1 oz each vermouth and Bénédictine = 4 oz pre-dilution."
     ],
-    "history": "The De La Louisiane dates to at least 1937, named for the Restaurant de la Louisiane in New Orleans. Built on the intersection of American rye, European liqueurs, and the New Orleans tradition of absinthe as aromatic seasoning."
+    "history": "The De La Louisiane dates to at least 1937, named for the Restaurant de la Louisiane in New Orleans. Built on the intersection of American rye, European liqueurs, and the New Orleans tradition of absinthe as aromatic seasoning.",
+    "status": "untried"
   },
   {
     "id": "scotch-boulevardier",
@@ -621,7 +632,8 @@
       "<strong>The Aviary version:</strong> Glenrothes 12, Cocchi di Torino, Campari — barrel-aged 6 months in new American oak. The oak mellowed the Campari and integrated everything. A benchmark to aim for.",
       "<strong>Variation — Smoked Negroni:</strong> Replace half the Scotch with mezcal (¾ oz each). Smoke comes from two directions — peat and agave."
     ],
-    "history": "The Boulevardier was created by American expat Erskine Gwynne in Paris and published in 1927. The Scotch substitution evolved naturally as bartenders explored the Negroni template with different spirits. The barrel-aged version at The Aviary in Chicago was a personal highlight."
+    "history": "The Boulevardier was created by American expat Erskine Gwynne in Paris and published in 1927. The Scotch substitution evolved naturally as bartenders explored the Negroni template with different spirits. The barrel-aged version at The Aviary in Chicago was a personal highlight.",
+    "status": "untried"
   },
   {
     "id": "smoked-margarita",
@@ -718,7 +730,8 @@
       "<strong>Tajín rim:</strong> More complex than plain salt — chile-lime character pairs well with smoky builds.",
       "<strong>Spicy variation (pending Ancho Reyes):</strong> Replace ¼ oz Cointreau with Ancho Reyes for chile heat and smoke simultaneously. Or replace agave nectar with jalapeño-infused agave syrup."
     ],
-    "history": "The margarita's origins are genuinely contested. The mezcal margarita is a product of the craft cocktail revival, recognizing that mezcal's smoke brought something to the template that blanco tequila didn't."
+    "history": "The margarita's origins are genuinely contested. The mezcal margarita is a product of the craft cocktail revival, recognizing that mezcal's smoke brought something to the template that blanco tequila didn't.",
+    "status": "refining"
   },
   {
     "id": "spicy-margarita",
@@ -820,7 +833,8 @@
       "<strong>Smoke and chile affinity:</strong> Mezcal smoke and ancho chile are a natural pairing — both are products of smoke and heat. The reposado grounds everything with oak and agave sweetness.",
       "<strong>Ancho Reyes Verde variation:</strong> Swap original Ancho Reyes for Verde — green poblano, brighter and more vegetal, less fruity. A different heat character worth trying once you know the original version."
     ],
-    "history": "Developed after the Spicy Mezcal Negroni (Ancho Reyes replacing sweet vermouth) proved too aggressive — too much heat, too much Campari bitterness competing. The margarita format handles subtle heat better. Ancho Reyes as a partial Cointreau replacement rather than a primary ingredient is the insight that makes it work."
+    "history": "Developed after the Spicy Mezcal Negroni (Ancho Reyes replacing sweet vermouth) proved too aggressive — too much heat, too much Campari bitterness competing. The margarita format handles subtle heat better. Ancho Reyes as a partial Cointreau replacement rather than a primary ingredient is the insight that makes it work.",
+    "status": "untried"
   },
   {
     "id": "mezcal-paloma",
@@ -894,7 +908,8 @@
       "<strong>From Nopalito:</strong> Gonzalo Guzmán's cookbook. High priority to make once Cynar is in the cabinet.",
       "<strong>Spicy variation:</strong> Add a few drops of jalapeño-infused agave syrup for heat."
     ],
-    "history": "From the Nopalito cookbook by Gonzalo Guzmán. Identified as a high-priority make given the mezcal cabinet build and Cynar evaluation."
+    "history": "From the Nopalito cookbook by Gonzalo Guzmán. Identified as a high-priority make given the mezcal cabinet build and Cynar evaluation.",
+    "status": "untried"
   },
   {
     "id": "killer-bee",
@@ -960,7 +975,8 @@
       "<strong>Hot weather drink:</strong> One of the best warm-weather options in the agave repertoire.",
       "<strong>Saline matters:</strong> 3 drops suppresses sweetness and amplifies the mezcal smoke."
     ],
-    "history": "From the Nopalito cookbook by Gonzalo Guzmán. Del Maguey Vida specifically called out in the original recipe."
+    "history": "From the Nopalito cookbook by Gonzalo Guzmán. Del Maguey Vida specifically called out in the original recipe.",
+    "status": "untried"
   },
   {
     "id": "mezcal-last-word",
@@ -1019,7 +1035,8 @@
       "<strong>Equal parts discipline:</strong> All four components must be exactly equal. The balance is the drink.",
       "<strong>Green vs Yellow Chartreuse:</strong> Green is correct here — the Last Word is one of the few builds where it's justified."
     ],
-    "history": "A variation on the classic Last Word (gin, green Chartreuse, maraschino, lime). Mezcal substitution identified as high-upside given the agave cabinet build."
+    "history": "A variation on the classic Last Word (gin, green Chartreuse, maraschino, lime). Mezcal substitution identified as high-upside given the agave cabinet build.",
+    "status": "untried"
   },
   {
     "id": "old-pal",
@@ -1086,7 +1103,8 @@
       "<strong>Drier than a Negroni:</strong> Dry vermouth instead of sweet — more bitter, less sweet, more rye-forward. Closer to the core palate.",
       "<strong>Vermouth freshness:</strong> Dry vermouth oxidizes fastest — 375ml and use within 3 weeks. Refrigerate always."
     ],
-    "history": "A Prohibition-era classic. Underrated and directly in the core palate — drier and more bitter than a Negroni, spirit-forward, no new purchases needed."
+    "history": "A Prohibition-era classic. Underrated and directly in the core palate — drier and more bitter than a Negroni, spirit-forward, no new purchases needed.",
+    "status": "untried"
   },
   {
     "id": "squeal-of-fortune",
@@ -1198,7 +1216,8 @@
       "<strong>Wood chip recommendation:</strong> Start with oak to replicate the original. Once confirmed, try applewood — apple-rye smoked over applewood connects to The Orchard thread in an interesting way.",
       "<strong>Why everything connects:</strong> Maple syrup amplifies the WhistlePig's Sauternes sweetness; Nonino amplifies the Cognac cask character. Every element is chosen to mirror something already in the barrel finish."
     ],
-    "history": "Directly inspired by the Squeal of Fortune at Liquid Assets, Madison — WhistlePig 12 Old World Rye, Amaro Nonino Quintessenia, WhistlePig Vermont Maple Syrup, Angostura, Orange Bitters, Walnut Bitters, Oak Wood Smoke. Ordered and confirmed perfect. Home version replicates the spec with a cocktail smoker for the smoke finish."
+    "history": "Directly inspired by the Squeal of Fortune at Liquid Assets, Madison — WhistlePig 12 Old World Rye, Amaro Nonino Quintessenia, WhistlePig Vermont Maple Syrup, Angostura, Orange Bitters, Walnut Bitters, Oak Wood Smoke. Ordered and confirmed perfect. Home version replicates the spec with a cocktail smoker for the smoke finish.",
+    "status": "untried"
   },
   {
     "id": "sazerac",
@@ -1284,7 +1303,8 @@
       "<strong>Split base variation:</strong> 1 oz Rittenhouse + 1 oz Hennessy VS — splits the difference between the two historical specs. The Vieux Carré evolved from exactly this tradition.",
       "<strong>Røknar variation:</strong> See Lab — smoked rye against absinthe rinse is specific and compelling enough to track as a deliberate experiment."
     ],
-    "history": "The Sazerac is arguably the oldest American cocktail, dating to 1830s New Orleans where Antoine Peychaud served his house bitters with Sazerac-de-Forge cognac. The drink switched to rye after phylloxera devastated French vineyards, and added the absinthe rinse as absinthe became the spirit of New Orleans culture. It's the direct ancestor of the Vieux Carré and De La Louisiane — the Peychaud's + absinthe combination that runs through The Winnequah and The Atwood traces its lineage here."
+    "history": "The Sazerac is arguably the oldest American cocktail, dating to 1830s New Orleans where Antoine Peychaud served his house bitters with Sazerac-de-Forge cognac. The drink switched to rye after phylloxera devastated French vineyards, and added the absinthe rinse as absinthe became the spirit of New Orleans culture. It's the direct ancestor of the Vieux Carré and De La Louisiane — the Peychaud's + absinthe combination that runs through The Winnequah and The Atwood traces its lineage here.",
+    "status": "untried"
   },
   {
     "id": "winnequah",
@@ -1296,12 +1316,12 @@
     "ingredients": [
       {
         "name": "Rye Whiskey",
-        "amt": "1½ oz",
+        "amt": "1¾ oz",
         "tiers": [
           {
             "label": "standard",
             "bottle": "Rittenhouse 100",
-            "note": "Big, spicy, assertive — holds its own against Laphroaig as a true co-equal. In cabinet."
+            "note": "Increased to 1¾ oz to compensate for Laphroaig reduction. Maintains overall volume while rebalancing smoke. In cabinet."
           },
           {
             "label": "splurge",
@@ -1312,12 +1332,12 @@
       },
       {
         "name": "Islay Scotch",
-        "amt": "¾ oz",
+        "amt": "½ oz",
         "tiers": [
           {
             "label": "standard",
             "bottle": "Laphroaig 10 Year",
-            "note": "Phenolic, iodine, seaweed smoke — what this drink was built around. In cabinet."
+            "note": "Reduced to ½ oz from ¾ oz after home trial — Laphroaig at ¾ oz overpowered the rye even for a smoke-forward palate. ½ oz keeps smoke as a strong presence without dominating. In cabinet."
           },
           {
             "label": "upgrade",
@@ -1378,13 +1398,15 @@
       "<strong>Orange twist is structural:</strong> Not optional or decorative. Express close to the surface so the oils hit the drink, not the air.",
       "<strong>Barolo Chinato is irreplaceable:</strong> Sweet vermouth doesn't work here. This drink was designed around that specific bottle.",
       "<strong>Røknar split (pending trial):</strong> Try 1 oz Røknar + ½ oz Laphroaig instead of 1.5 oz Rittenhouse + ¾ oz Laphroaig. Triple smoke — smoked rye, Islay peat, and absinthe anise — may be extraordinary or may be too much. Worth one deliberate trial.",
-      "<strong>Cocoa bitters variation (pending):</strong> Try 1 dash Angostura Cocoa alongside or replacing regular Angostura. The chocolate depth may connect interestingly with Barolo Chinato's wine character and Laphroaig's smoke."
+      "<strong>Cocoa bitters variation (pending):</strong> Try 1 dash Angostura Cocoa alongside or replacing regular Angostura. The chocolate depth may connect interestingly with Barolo Chinato's wine character and Laphroaig's smoke.",
+      "<strong>Smoke adjustment:</strong> Laphroaig reduced from ¾ oz to ½ oz after second home trial — smoke was overpowering the rye even for a smoke-forward palate. Røknar split (Lab) may further integrate the smoke character."
     ],
-    "history": "An original creation built from a palate profile — the through-lines of smoke (Laphroaig), anise (Peychaud's, absinthe), herbal depth (Bénédictine), and bitter wine complexity (Barolo Chinato) that emerged from an evening at Moody Tongue in Chicago. Named for Winnequah Road, Monona. There is no other copy of this drink."
+    "history": "An original creation built from a palate profile — the through-lines of smoke (Laphroaig), anise (Peychaud's, absinthe), herbal depth (Bénédictine), and bitter wine complexity (Barolo Chinato) that emerged from an evening at Moody Tongue in Chicago. Named for Winnequah Road, Monona. There is no other copy of this drink.",
+    "status": "refining"
   },
   {
     "id": "atwood",
-    "section": "original",
+    "section": "dialed-in",
     "name": "The Atwood",
     "spec": "Stirred · Rocks · Original Creation",
     "desc": "A darker, more austere companion to The Winnequah. Røknar smoked rye, Sfumato Rabarbaro, Cocchi di Torino, Bénédictine, both bitters, saline. Less smoke, more earth and root bitterness. Named for the Atwood neighborhood. First make: absolute home run.",
@@ -1491,7 +1513,8 @@
       "<strong>Base split to explore (pending):</strong> Røknar + Amontillado Sherry (1.25/0.75 oz) — the most compelling unexplored variation. Nutty oxidative sherry against rhubarb smoke. Requires Amontillado acquisition.",
       "<strong>Drambuie swap (pending):</strong> Replace Bénédictine with Drambuie. Scotch-honey liqueur character pairs especially well if the base is also split with Scotch."
     ],
-    "history": "A second original creation named for the Atwood neighborhood of Madison, Wisconsin. Where The Winnequah was built around the discovery of Barolo Chinato and Laphroaig, The Atwood was built around Sfumato Rabarbaro — a rare Cappelletti amaro from Trentino combining rhubarb root, alpine herbs, and distinctive smoky character unlike any other amaro. The Røknar house spec was discovered on first make and confirmed as an absolute home run."
+    "history": "A second original creation named for the Atwood neighborhood of Madison, Wisconsin. Where The Winnequah was built around the discovery of Barolo Chinato and Laphroaig, The Atwood was built around Sfumato Rabarbaro — a rare Cappelletti amaro from Trentino combining rhubarb root, alpine herbs, and distinctive smoky character unlike any other amaro. The Røknar house spec was discovered on first make and confirmed as an absolute home run.",
+    "status": "dialed-in"
   },
   {
     "id": "greenpoint",
@@ -1503,7 +1526,7 @@
     "ingredients": [
       {
         "name": "Rye Whiskey",
-        "amt": "2 oz",
+        "amt": "2½ oz",
         "tiers": [
           {
             "label": "standard",
@@ -1519,7 +1542,7 @@
       },
       {
         "name": "Yellow Chartreuse",
-        "amt": "½ oz",
+        "amt": "¾ oz",
         "tiers": [
           {
             "label": "standard",
@@ -1530,7 +1553,7 @@
       },
       {
         "name": "Sweet Vermouth",
-        "amt": "½ oz",
+        "amt": "¾ oz",
         "tiers": [
           {
             "label": "standard",
@@ -1562,9 +1585,11 @@
     "notes": [
       "<strong>Lemon over orange:</strong> The Chartreuse's herbal and honey notes are lifted by lemon in a way orange doesn't achieve.",
       "<strong>Why it fits the wheelhouse:</strong> Structure is pure Manhattan family. Chartreuse does the same job Bénédictine does in the Vieux Carré. If you love the Vieux Carré, this lands similarly.",
-      "<strong>Røknar — skip it here:</strong> Yellow Chartreuse's honey-herbal character and smoke don't have an obvious affinity — they'd compete rather than complement. Røknar is better deployed in the Black Manhattan or Vieux Carré where the modifiers have more affinity with smoke."
+      "<strong>Røknar — skip it here:</strong> Yellow Chartreuse's honey-herbal character and smoke don't have an obvious affinity — they'd compete rather than complement. Røknar is better deployed in the Black Manhattan or Vieux Carré where the modifiers have more affinity with smoke.",
+      "<strong>Volume scaling:</strong> Scaled from 2/½/½ to 2.5/¾/¾ for additional volume (4 oz pre-dilution). Clean scale across all components."
     ],
-    "history": "Created by Michael McIlroy at Milk & Honey in New York City in 2006. Part of an unofficial series of Brooklyn neighborhood cocktails — each a Manhattan riff with a different modifier."
+    "history": "Created by Michael McIlroy at Milk & Honey in New York City in 2006. Part of an unofficial series of Brooklyn neighborhood cocktails — each a Manhattan riff with a different modifier.",
+    "status": "refining"
   },
   {
     "id": "navy-pea-coat",
@@ -1654,7 +1679,8 @@
       "<strong>Double orange bitters:</strong> Two dashes rather than one — creates a citrus bridge between the glass and the clove garnish.",
       "<strong>Don't skip the studding:</strong> A plain orange twist is a different drink. The clove oil released during expression is what makes this distinct from the standard Black Manhattan."
     ],
-    "history": "Reverse-engineered from multiple visits to Tempest, Madison. Rye whiskey, Averna, maple, orange bitters, clove-studded orange peel — a Black Manhattan variant where maple replaces simple syrup and the clove garnish adds a whisper of spice through aromatics rather than as a built ingredient."
+    "history": "Reverse-engineered from multiple visits to Tempest, Madison. Rye whiskey, Averna, maple, orange bitters, clove-studded orange peel — a Black Manhattan variant where maple replaces simple syrup and the clove garnish adds a whisper of spice through aromatics rather than as a built ingredient.",
+    "status": "untried"
   },
   {
     "id": "mezcal-negroni",
@@ -1708,9 +1734,11 @@
     ],
     "notes": [
       "<strong>Equal parts is the discipline:</strong> The Negroni template only works in balance.",
-      "<strong>Spicy Mezcal Negroni (pending Ancho Reyes):</strong> Replace Cocchi di Torino with Ancho Reyes. Bitter, smoky, and hot in equal measure. One of the highest-upside agave drinks to explore once Ancho Reyes is acquired."
+      "<strong>Spicy Mezcal Negroni (pending Ancho Reyes):</strong> Replace Cocchi di Torino with Ancho Reyes. Bitter, smoky, and hot in equal measure. One of the highest-upside agave drinks to explore once Ancho Reyes is acquired.",
+      "<strong>Home trial result:</strong> Confirmed nice — solid second-tier cocktail for non-whiskey evenings. Not a primary go-to but reliable and enjoyable. Status: Refining."
     ],
-    "history": "The Mezcal Negroni emerged naturally as mezcal became a serious cocktail spirit in the early 2010s. The Negroni itself dates to 1919. The mezcal substitution turns out to be a better match than gin's botanicals — smoke and Campari's bitterness work beautifully together."
+    "history": "The Mezcal Negroni emerged naturally as mezcal became a serious cocktail spirit in the early 2010s. The Negroni itself dates to 1919. The mezcal substitution turns out to be a better match than gin's botanicals — smoke and Campari's bitterness work beautifully together.",
+    "status": "refining"
   },
   {
     "id": "frisco-sour",
@@ -1754,7 +1782,8 @@
       "<strong>Bénédictine as the star:</strong> This is the drink where you find out what Bénédictine tastes like when it's in charge. Worth making once for that reason.",
       "<strong>Fresh lemon only:</strong> Three ingredients means nowhere to hide."
     ],
-    "history": "The Frisco Sour dates to at least the 1930s. It predates the craft cocktail era by decades and was largely forgotten until bartenders rediscovered it as a showcase for Bénédictine specifically."
+    "history": "The Frisco Sour dates to at least the 1930s. It predates the craft cocktail era by decades and was largely forgotten until bartenders rediscovered it as a showcase for Bénédictine specifically.",
+    "status": "untried"
   },
   {
     "id": "espresso-martini",
@@ -1841,7 +1870,8 @@
       "<strong>For your palate — Rye Espresso Martini:</strong> Replace vodka with 1 oz Rittenhouse + ½ oz vodka. Use Mr. Black. Drop simple syrup entirely. Add 1 dash Angostura. Bold, bitter, coffee-driven. Spirit-forward.",
       "<strong>No espresso machine?</strong> Moka pot (~$30, Bialetti) is the permanent fix. Makes real crema, foams well, costs almost nothing per use."
     ],
-    "history": "Created by Dick Bradsell at the Soho Brasserie in London in 1983 when a model asked for a drink that would 'wake me up and then f*** me up.' Renamed the Espresso Martini in the 1990s, revived dramatically in the 2020s to become one of the most ordered cocktails in the world."
+    "history": "Created by Dick Bradsell at the Soho Brasserie in London in 1983 when a model asked for a drink that would 'wake me up and then f*** me up.' Renamed the Espresso Martini in the 1990s, revived dramatically in the 2020s to become one of the most ordered cocktails in the world.",
+    "status": "untried"
   },
   {
     "id": "gold-rush",
@@ -1899,7 +1929,8 @@
       "<strong>For your palate — Gold Rush with depth:</strong> Add ¼ oz Bénédictine and two dashes Angostura. The Bénédictine echoes the honey's sweetness while adding herbal complexity. Barely different to make, dramatically more interesting to drink.",
       "<strong>Rye variation:</strong> Replace bourbon with Rittenhouse. Sharper, more spirit-forward. The honey becomes a counterbalance rather than a complement."
     ],
-    "history": "Created by T.J. Siegel at Milk & Honey in New York City around 2000. Demonstrated that honey syrup makes a fundamentally better sour than simple syrup."
+    "history": "Created by T.J. Siegel at Milk & Honey in New York City around 2000. Demonstrated that honey syrup makes a fundamentally better sour than simple syrup.",
+    "status": "untried"
   },
   {
     "id": "gin-tonic",
@@ -1958,7 +1989,8 @@
       "<strong>For your palate — Mezcal Tonic:</strong> 1½ oz Barr Hill Gin + ½ oz Del Maguey Vida. Use Fever-Tree Aromatic Tonic. Add 2 dashes orange bitters. Garnish with grapefruit twist. The smoke plays against the tonic's quinine bitterness in a direction that's entirely your wheelhouse.",
       "<strong>Tanqueray for guests:</strong> Worth adding to the cabinet for guests who want a more classic G&T profile than Barr Hill provides."
     ],
-    "history": "Born from the British Empire's need to get quinine into soldiers in India to prevent malaria. Quinine's bitterness was masked with gin, sugar, and lime. By the 21st century the craft tonic movement — led by Fever-Tree founding in 2004 — transformed it from a basic drink into a serious one."
+    "history": "Born from the British Empire's need to get quinine into soldiers in India to prevent malaria. Quinine's bitterness was masked with gin, sugar, and lime. By the 21st century the craft tonic movement — led by Fever-Tree founding in 2004 — transformed it from a basic drink into a serious one.",
+    "status": "untried"
   },
   {
     "id": "black-irish",
@@ -2018,7 +2050,8 @@
       "<strong>Why single pot still Irish:</strong> Blended Irish is light and simple. Single pot still is oily, rich, and spice-forward — more in common with rye than its reputation suggests.",
       "<strong>Coffee as modifier:</strong> This is not a dessert drink. ½ oz coffee liqueur works like Averna in a Black Manhattan — adding bitter complexity, not flavoring."
     ],
-    "history": "Treats single pot still Irish the way a Manhattan treats rye. The category was nearly extinct by the 1990s but was revived by Redbreast and a handful of distilleries who recognized it as one of the world's truly distinctive whiskey styles."
+    "history": "Treats single pot still Irish the way a Manhattan treats rye. The category was nearly extinct by the 1990s but was revived by Redbreast and a handful of distilleries who recognized it as one of the world's truly distinctive whiskey styles.",
+    "status": "untried"
   },
   {
     "id": "white-negroni",
@@ -2086,7 +2119,8 @@
       "<strong>Try Suze first:</strong> Before making this drink, try a small pour of Suze on ice. The gentian root bitterness is the missing link between your amaro preferences and the gin world.",
       "<strong>Suze not yet in cabinet:</strong> Worth sourcing. The gentian bitterness is a genuinely new flavor direction."
     ],
-    "history": "Created by Wayne Collins in France around 2001 when he couldn't find Campari and substituted Suze and Lillet Blanc. Now considered one of the most important Negroni variations."
+    "history": "Created by Wayne Collins in France around 2001 when he couldn't find Campari and substituted Suze and Lillet Blanc. Now considered one of the most important Negroni variations.",
+    "status": "untried"
   },
   {
     "id": "dirty-martini",
@@ -2146,11 +2180,12 @@
       "<strong>Temperature is everything:</strong> The glass must be cold, the stir must be long, and it should be consumed before it warms.",
       "<strong>Castelvetrano specifically:</strong> Buttery, meaty olives produce more complex brine."
     ],
-    "history": "The dirty Martini dates to at least 1901. The key upgrade: quality brine from quality olives. The rest of the arguments are mostly noise."
+    "history": "The dirty Martini dates to at least 1901. The key upgrade: quality brine from quality olives. The rest of the arguments are mostly noise.",
+    "status": "untried"
   },
   {
     "id": "orchard-yours",
-    "section": "local",
+    "section": "dialed-in",
     "name": "The Orchard — Your Version",
     "spec": "Stirred · Rocks · Spirit-Forward · Local",
     "desc": "A Black Manhattan variation built around Ski-Hi Straight Rye — a local apple-rye from a friend's orchard. The apple whispers through Averna's herbal bitterness and Amontillado's nutty depth. First make without lemon twist: very very good. Lemon twist expected to improve further.",
@@ -2242,7 +2277,8 @@
       "<strong>Proof note:</strong> Ski-Hi at 70 proof needs the Rittenhouse split to hold its own. If you ever find a full-proof version of this bottle, revisit the ratio.",
       "<strong>Ratio variation:</strong> Try 1.25 oz Ski-Hi / 0.75 oz Rittenhouse to push the apple note slightly more forward without losing structure."
     ],
-    "history": "Built around Ski-Hi Straight Rye — a local straight rye with apple cider made in collaboration with a friend's orchard and a local Minnesota distillery. The brief was a cocktail that acknowledges apple without leaning into fruit-forward sweetness. The Black Manhattan template with Amontillado as the connecting thread was the solution. First of what may become a Local series built around regional spirits."
+    "history": "Built around Ski-Hi Straight Rye — a local straight rye with apple cider made in collaboration with a friend's orchard and a local Minnesota distillery. The brief was a cocktail that acknowledges apple without leaning into fruit-forward sweetness. The Black Manhattan template with Amontillado as the connecting thread was the solution. First of what may become a Local series built around regional spirits.",
+    "status": "dialed-in"
   },
   {
     "id": "orchard-crowd",
@@ -2321,7 +2357,8 @@
       "<strong>Bénédictine float is the upgrade path:</strong> Skip it for the crowd, add it for yourself. Same technique as the Laphroaig float in the Penicillin.",
       "<strong>Untested:</strong> Make this after confirming your version — the crowd spec follows the same logic but the shaken format needs its own trial."
     ],
-    "history": "The crowd-friendly companion to The Orchard — your version. Same local bottle, different format. Where your version hides the apple in a spirit-forward stirred build, this one lets it lead in a honey sour format accessible to any palate."
+    "history": "The crowd-friendly companion to The Orchard — your version. Same local bottle, different format. Where your version hides the apple in a spirit-forward stirred build, this one lets it lead in a honey sour format accessible to any palate.",
+    "status": "untried"
   },
   {
     "id": "exp-port-manhattan",
