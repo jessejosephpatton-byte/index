@@ -47,6 +47,15 @@ body{background:var(--bg);color:var(--text);font-family:'Crimson Text',Georgia,s
 .recipe-card.afield::before{background:#4a7a5a;}
 .recipe-card.friends::before{background:#5a6a8a;}
 .recipe-card.local::before{background:#6a4a2a;}
+.recipe-card.dialed-in-card::before{background:var(--gold);}
+.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-left:6px;vertical-align:middle;flex-shrink:0;}
+.status-dot.dialed-in{background:var(--gold);}
+.status-dot.refining{background:var(--amber);}
+.status-dot.untried{background:var(--rule-light);}
+.status-label{font-family:'Inconsolata',monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;padding:1px 6px;border-radius:10px;margin-left:6px;vertical-align:middle;}
+.status-label.dialed-in{color:var(--gold);border:1px solid var(--gold);background:rgba(212,168,83,0.08);}
+.status-label.refining{color:var(--amber);border:1px solid var(--amber-dim);background:rgba(200,121,65,0.08);}
+.status-label.untried{color:var(--text-muted);border:1px solid var(--rule-light);background:transparent;}
 .recipe-card:active{background:var(--card-hover);}
 .card-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--paper);margin-bottom:3px;}
 .card-spec{font-family:'Inconsolata',monospace;font-size:10px;color:var(--amber);letter-spacing:0.08em;margin-bottom:5px;}
@@ -192,7 +201,7 @@ body{background:var(--bg);color:var(--text);font-family:'Crimson Text',Georgia,s
     <div class="palate-card">
       <div class="palate-title">Next Acquisitions</div>
       <div class="palate-body" style="font-size:13px;line-height:1.9">
-        <strong style="color:var(--amber)">Soon:</strong> Buffalo Trace Bourbon · Tanqueray · Green Chartreuse<br>
+        <strong style="color:var(--amber)">Soon:</strong> Buffalo Trace Bourbon · Tanqueray · Green Chartreuse · Fee Brothers Walnut Bitters ($8)<br>
         <strong style="color:var(--amber)">Port:</strong> Quinta do Crasto 10-Year Tawny (~$25) · Graham's 10-Year Tawny (~$25) · Ramos Pinto 20-Year Tawny (~$45 — step up)<br>
         <strong style="color:var(--amber)">When ready:</strong> Pierre Ferrand Ambre Cognac ($40) · Braulio Amaro ($45)<br>
         <strong style="color:var(--amber)">Pantry:</strong> Prosecco
@@ -226,6 +235,7 @@ fetch('recipes.json')
 // ── Build recipe list ─────────────────────────────────────────────────────────
 function buildList() {
   const sections = [
+    {key:'dialed-in',label:'Dialed In'},
     {key:'core',label:'Core Wheelhouse'},
     {key:'extended',label:'Extended Repertoire'},
     {key:'original',label:'Original'},
@@ -240,10 +250,12 @@ function buildList() {
     if (!items.length) return;
     html += `<div class="list-section-label">${sec.label}</div>`;
     items.forEach(r => {
-      const cls = r.section === 'original' ? 'original' : r.section === 'extended' ? 'extended' : r.section === 'afield' ? 'afield' : r.section === 'friends' ? 'friends' : r.section === 'local' ? 'local' : '';
+      const cls = r.section === 'dialed-in' ? 'dialed-in-card' : r.section === 'original' ? 'original' : r.section === 'extended' ? 'extended' : r.section === 'afield' ? 'afield' : r.section === 'friends' ? 'friends' : r.section === 'local' ? 'local' : '';
       const preview = r.desc.length > 95 ? r.desc.substring(0,95)+'…' : r.desc;
+      const status = r.status || 'untried';
+      const statusLabel = status === 'dialed-in' ? 'Dialed In' : status === 'refining' ? 'Refining' : 'Untried';
       html += `<div class="recipe-card ${cls}" onclick="openRecipe('${r.id}')">
-        <div class="card-name">${r.name}</div>
+        <div class="card-name">${r.name}<span class="status-dot ${status}"></span></div>
         <div class="card-spec">${r.spec}</div>
         <div class="card-desc">${preview}</div>
         <div class="card-arrow">›</div>
