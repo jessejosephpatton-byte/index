@@ -1089,6 +1089,118 @@
     "history": "A Prohibition-era classic. Underrated and directly in the core palate — drier and more bitter than a Negroni, spirit-forward, no new purchases needed."
   },
   {
+    "id": "squeal-of-fortune",
+    "section": "extended",
+    "name": "Squeal of Fortune",
+    "spec": "Stirred · Rocks · Premium Old Fashioned · Optional Smoke",
+    "desc": "A premium Old Fashioned built around WhistlePig 12 Old World Rye and Amaro Nonino — two bottles already in cabinet. Replicates the Squeal of Fortune from Liquid Assets, Madison. The cocktail smoker version adds oak wood smoke finish. Without the smoker it's still an exceptional stirred drink.",
+    "glass": "Rocks glass · Large single ice cube",
+    "ingredients": [
+      {
+        "name": "WhistlePig 12 Year Old World Rye",
+        "amt": "2 oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "WhistlePig 12 Year Old World",
+            "note": "The wine barrel finish (Madeira, Sauternes, Cognac casks) means this rye already has oxidative wine complexity before any modifiers are added. In cabinet. This drink was designed around this specific bottle."
+          }
+        ]
+      },
+      {
+        "name": "Amaro Nonino Quintessenia",
+        "amt": "½ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Amaro Nonino Quintessenia",
+            "note": "Lighter and more elegant than Averna — grappa-based, dried fruit and alpine herbs. At ½ oz adds complexity without competing with the WhistlePig's wine barrel character. In cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Maple Syrup",
+        "amt": "¼ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Quality Grade A Dark Maple Syrup",
+            "note": "Echoes the WhistlePig 12's Sauternes and Port cask finish — they're in the same flavor family. WhistlePig makes their own Vermont maple syrup but any quality dark maple syrup works."
+          }
+        ]
+      },
+      {
+        "name": "Angostura Bitters",
+        "amt": "2 dashes"
+      },
+      {
+        "name": "Orange Bitters",
+        "amt": "1 dash"
+      },
+      {
+        "name": "Walnut Bitters",
+        "amt": "1 dash",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Fee Brothers Walnut Bitters",
+            "note": "Widely available, ~$8. Earthy and dark — the specific bitters used at Liquid Assets. Worth buying before making this drink."
+          },
+          {
+            "label": "substitute",
+            "bottle": "Angostura Cocoa Bitters",
+            "note": "In cabinet. A reasonable substitute — earthy and dark without being chocolate-forward. Not identical but works until walnut bitters are acquired."
+          }
+        ]
+      },
+      {
+        "name": "Saline Solution",
+        "amt": "3 drops"
+      },
+      {
+        "name": "Oak Wood Chips",
+        "amt": "for smoker (optional)",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Oak Wood Chips",
+            "note": "Closest to what Liquid Assets used. Replicates the original smoke character."
+          },
+          {
+            "label": "variation",
+            "bottle": "Cherry Wood Chips",
+            "note": "Slightly sweeter, fruitier smoke. Interesting variation."
+          },
+          {
+            "label": "variation",
+            "bottle": "Applewood Chips",
+            "note": "Connects to The Orchard thread — apple-rye smoked over applewood is a compelling combination worth trying."
+          }
+        ]
+      },
+      {
+        "name": "Orange Twist",
+        "amt": "garnish"
+      }
+    ],
+    "steps": [
+      "Place your rocks glass in the freezer to chill while you build.",
+      "Add WhistlePig 12, Amaro Nonino, maple syrup, both Angostura bitters, orange bitters, walnut bitters, and saline to a mixing glass with ice.",
+      "Stir 30–35 seconds. The Nonino needs full integration time — don't under-stir.",
+      "Drop large clear cube into the chilled rocks glass. Strain the cocktail over the cube.",
+      "Express orange twist close to the surface — oils on the drink, not the air. Rest on the rim.",
+      "SMOKER VERSION ONLY: Place smoker dome over the glass. Ignite oak wood chips and smoke for 45–60 seconds. Lift the dome — the smoke escapes dramatically and the first sip carries the most smoke. Don't over-smoke; 45 seconds is the ceiling."
+    ],
+    "notes": [
+      "<strong>Origin:</strong> Replicates the Squeal of Fortune from Liquid Assets, Madison — ordered and confirmed perfect. The $50 bar version is barrel-aged and oak smoke finished in-house.",
+      "<strong>Buy first:</strong> Fee Brothers Walnut Bitters (~$8) before making this. Angostura Cocoa is a reasonable sub but walnut bitters are what the original uses.",
+      "<strong>Unsmoked version:</strong> Still an exceptional drink. The WhistlePig 12's wine barrel finish already provides complexity most Old Fashioneds don't have. The smoker is an enhancement, not a requirement.",
+      "<strong>Wood chip recommendation:</strong> Start with oak to replicate the original. Once confirmed, try applewood — apple-rye smoked over applewood connects to The Orchard thread in an interesting way.",
+      "<strong>Why everything connects:</strong> Maple syrup amplifies the WhistlePig's Sauternes sweetness; Nonino amplifies the Cognac cask character. Every element is chosen to mirror something already in the barrel finish."
+    ],
+    "history": "Directly inspired by the Squeal of Fortune at Liquid Assets, Madison — WhistlePig 12 Old World Rye, Amaro Nonino Quintessenia, WhistlePig Vermont Maple Syrup, Angostura, Orange Bitters, Walnut Bitters, Oak Wood Smoke. Ordered and confirmed perfect. Home version replicates the spec with a cocktail smoker for the smoke finish."
+  },
+  {
     "id": "sazerac",
     "section": "extended",
     "name": "Sazerac",
@@ -1453,6 +1565,96 @@
       "<strong>Røknar — skip it here:</strong> Yellow Chartreuse's honey-herbal character and smoke don't have an obvious affinity — they'd compete rather than complement. Røknar is better deployed in the Black Manhattan or Vieux Carré where the modifiers have more affinity with smoke."
     ],
     "history": "Created by Michael McIlroy at Milk & Honey in New York City in 2006. Part of an unofficial series of Brooklyn neighborhood cocktails — each a Manhattan riff with a different modifier."
+  },
+  {
+    "id": "navy-pea-coat",
+    "section": "core",
+    "name": "Navy Pea Coat",
+    "spec": "Stirred · Rocks · Black Manhattan Variant",
+    "desc": "A Black Manhattan variant with maple syrup as the sweetener and clove expressed from the garnish rather than built into the drink. Slightly sweeter than the standard Black Manhattan but balanced by Averna's bitterness. Confirmed excellent across multiple visits at Tempest, Madison. The clove-studded orange peel is structural, not decorative.",
+    "glass": "Rocks glass · Large single ice cube",
+    "ingredients": [
+      {
+        "name": "Rye Whiskey",
+        "amt": "2 oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Rittenhouse 100",
+            "note": "The workhorse call. High proof holds up against Averna and maple. In cabinet."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Røknar Minnesota Straight Rye",
+            "note": "Smoked rye adds an interesting layer against the maple — worth trying once the standard spec is confirmed. In cabinet."
+          },
+          {
+            "label": "splurge",
+            "bottle": "WhistlePig 12 Old World",
+            "note": "Sauternes cask finish has natural maple affinity. The most elegant version of this drink. In cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Averna Amaro",
+        "amt": "¾ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Averna Amaro",
+            "note": "Slightly reduced from the standard Black Manhattan (¾ oz vs 1 oz) because maple syrup is doing some sweetness work. In cabinet."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Cocchi Barolo Chinato",
+            "note": "Premium version — wine depth connects beautifully with the maple sweetness. The most complex expression of this drink. In cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Maple Syrup (Grade A Dark)",
+        "amt": "¼ oz"
+      },
+      {
+        "name": "Angostura Bitters",
+        "amt": "2 dashes"
+      },
+      {
+        "name": "Orange Bitters",
+        "amt": "2 dashes",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Angostura Orange Bitters",
+            "note": "Two dashes rather than one — the clove garnish needs a citrus bridge in the glass to connect to the aromatics. In cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Saline Solution",
+        "amt": "3 drops"
+      },
+      {
+        "name": "Orange peel studded with 3 whole cloves",
+        "amt": "garnish (essential)"
+      }
+    ],
+    "steps": [
+      "Prepare the garnish first: cut a wide orange peel and stud it with 3 whole cloves evenly spaced. Set aside.",
+      "Chill your rocks glass in the freezer or fill with ice water while you build.",
+      "Add rye, Averna, maple syrup, both Angostura bitters, orange bitters, and saline to a mixing glass with ice.",
+      "Stir 25–30 seconds until well chilled and fully diluted.",
+      "Drop large clear cube into the chilled rocks glass. Strain the cocktail over the cube.",
+      "Hold the clove-studded peel close to the surface and express firmly — both orange oil and clove oil should hit the drink simultaneously. Rest the peel on the rim or drop it in."
+    ],
+    "notes": [
+      "<strong>Origin:</strong> Confirmed excellent across multiple visits at Tempest, Madison. The clove-studded orange peel garnish is the signature — three cloves evenly spaced, expressed firmly so clove oil hits the drink alongside the orange oil.",
+      "<strong>Clove is aromatics only:</strong> The clove should be a whisper in the aroma, not a flavor in the drink. Don't add clove bitters to the build — the garnish does the job precisely.",
+      "<strong>On the ratios:</strong> If it reads too dry, nudge Averna back to 1 oz and reduce maple to ⅛ oz. If too sweet, reduce maple to ⅛ oz and hold Averna at ¾ oz.",
+      "<strong>Double orange bitters:</strong> Two dashes rather than one — creates a citrus bridge between the glass and the clove garnish.",
+      "<strong>Don't skip the studding:</strong> A plain orange twist is a different drink. The clove oil released during expression is what makes this distinct from the standard Black Manhattan."
+    ],
+    "history": "Reverse-engineered from multiple visits to Tempest, Madison. Rye whiskey, Averna, maple, orange bitters, clove-studded orange peel — a Black Manhattan variant where maple replaces simple syrup and the clove garnish adds a whisper of spice through aromatics rather than as a built ingredient."
   },
   {
     "id": "mezcal-negroni",
