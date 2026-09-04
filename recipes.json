@@ -1683,6 +1683,77 @@
     "status": "untried"
   },
   {
+    "id": "negroni",
+    "section": "core",
+    "status": "refining",
+    "name": "Negroni",
+    "spec": "Stirred · Rocks · Equal Parts · Gin",
+    "desc": "The classic equal-parts cocktail — gin, Campari, sweet vermouth. Repeatedly surprising given a non-gin palate. The go-to fallback when rye whiskey isn't available or already ordered. Bitter, spirit-forward, structured. Everything that makes a great cocktail in three ingredients.",
+    "glass": "Rocks glass · Large single ice cube",
+    "ingredients": [
+      {
+        "name": "Gin",
+        "amt": "1¼ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Barr Hill Gin",
+            "note": "In cabinet. Honey-forward and distinctive — less classic than London Dry but excellent quality. The Negroni's bitterness reframes the honey character interestingly."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Tanqueray London Dry",
+            "note": "The canonical Negroni gin — assertive juniper, dry, holds up against Campari without flinching. On acquisition list. Buy this before making the Negroni seriously at home."
+          },
+          {
+            "label": "splurge",
+            "bottle": "Monkey 47",
+            "note": "47 botanicals, complex and herbal. Makes the Negroni more elaborate — worth trying once Tanqueray is the confirmed baseline."
+          }
+        ]
+      },
+      {
+        "name": "Campari",
+        "amt": "1¼ oz"
+      },
+      {
+        "name": "Sweet Vermouth",
+        "amt": "1¼ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Cocchi di Torino",
+            "note": "Rich, chocolatey, complex — the best standard sweet vermouth in cabinet. Refrigerate after opening, use within 6 weeks. In cabinet."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Carpano Antica Formula",
+            "note": "Richer and more vanilla-forward than Cocchi. The classic Negroni vermouth — worth acquiring in 375ml for freshness."
+          }
+        ]
+      },
+      {
+        "name": "Orange Twist or Peel",
+        "amt": "garnish"
+      }
+    ],
+    "steps": [
+      "Chill your rocks glass in the freezer or fill with ice water while you build.",
+      "Add gin, Campari, and sweet vermouth to a mixing glass with ice.",
+      "Stir 25–30 seconds until well chilled and properly diluted.",
+      "Strain over a large single ice cube in the chilled rocks glass.",
+      "Express orange peel over the surface — hold close and squeeze firmly so oils hit the drink. Run around the rim and drop in."
+    ],
+    "notes": [
+      "<strong>Equal parts discipline:</strong> All three components at equal volume — the Negroni only works in balance. Scaled here to 1¼ oz each (3.75 oz pre-dilution) for a more substantial pour without changing the ratio.",
+      "<strong>Why it works despite not being a gin drinker:</strong> The Negroni isn't really a gin drink — it's a bitter drink that uses gin as the base. Campari and vermouth carry the flavor; gin provides the proof and structure. The same instinct that draws you to Averna and Campari is what makes the Negroni work.",
+      "<strong>Buy Tanqueray first:</strong> Barr Hill works but Tanqueray London Dry is the correct base for a classic Negroni. Its assertive juniper stands up to Campari in a way the softer Barr Hill doesn't quite match.",
+      "<strong>Vermouth freshness:</strong> Sweet vermouth oxidizes quickly — refrigerate always, use within 6 weeks, consider vacuum seal or Private Preserve gas spray between pours. Buy Cocchi di Torino in 375ml format.",
+      "<strong>Natural fallback:</strong> The go-to when rye whiskey isn't available or already ordered. Between the Negroni and a classic margarita, these two cover nearly any bar menu."
+    ],
+    "history": "Created in Florence in 1919 when Count Camillo Negroni asked bartender Fosco Scarselli to strengthen his Americano by replacing soda water with gin. One of the most replicated and riffed-upon cocktails in history — the Mezcal Negroni, Scotch Boulevardier, and White Negroni in this app are all direct descendants."
+  },
+  {
     "id": "mezcal-negroni",
     "section": "extended",
     "name": "Mezcal Negroni",
