@@ -1221,6 +1221,123 @@
     "status": "untried"
   },
   {
+    "id": "night-in-madrid",
+    "section": "extended",
+    "status": "untried",
+    "name": "Night in Madrid",
+    "spec": "Stirred · Rocks · Rye-Cognac Split · Coffee",
+    "desc": "A stirred, spirit-forward cocktail built on a rye-cognac split with coffee liqueur and chocolate bitters. The Vieux Carré's structural cousin — same split base logic, but coffee and chocolate replacing vermouth and Bénédictine. Confirmed excellent at Old Hickory Steakhouse, Gaylord Hotel, Grapevine TX.",
+    "glass": "Rocks glass · Large single ice cube",
+    "ingredients": [
+      {
+        "name": "Rye Whiskey",
+        "amt": "1½ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Rittenhouse 100",
+            "note": "Home equivalent of Bulleit Rye used at Old Hickory. High proof holds up against the coffee modifier. In cabinet."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Angel's Envy Rye",
+            "note": "Port barrel finish — dried fruit character connects to both the coffee liqueur and chocolate bitters in an interesting way. The most compelling upgrade for this specific build."
+          },
+          {
+            "label": "splurge",
+            "bottle": "WhistlePig 12 Old World",
+            "note": "Wine barrel finish adds oxidative complexity. Different direction than Angel's Envy but equally worth trying. In cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Cognac",
+        "amt": "1 oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Hennessy VS",
+            "note": "Solid neutral cognac — covers the role. In cabinet."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Pierre Ferrand Ambre",
+            "note": "Dried fruit complexity amplifies the coffee liqueur's depth. The recommended upgrade when acquired."
+          }
+        ]
+      },
+      {
+        "name": "Coffee Liqueur",
+        "amt": "1 oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Cazadores Cafe Coffee Liqueur",
+            "note": "In cabinet — evaluate here. Coffee modifier should be bitter and present, not syrupy. If it reads too sweet, upgrade to Mr. Black."
+          },
+          {
+            "label": "upgrade",
+            "bottle": "Mr. Black Cold Brew Coffee Liqueur",
+            "note": "Lower sugar than Kahlúa, genuinely coffee-forward. The preferred call if Cazadores reads sweet."
+          }
+        ]
+      },
+      {
+        "name": "Liquor 43 (optional)",
+        "amt": "¼ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Licor 43",
+            "note": "Spanish vanilla-citrus liqueur used in the original Old Hickory bar spec. Adds subtle sweetness and a warm vanilla thread. Not yet in cabinet (~$25 when ready to acquire). Omit if unavailable — the drink works without it."
+          }
+        ]
+      },
+      {
+        "name": "Chocolate Bitters",
+        "amt": "2 dashes",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Bittermens Xocolatl Mole Bitters",
+            "note": "Chocolate, cinnamon, and dried chile — more complex than standard chocolate bitters. In cabinet and the preferred call here."
+          },
+          {
+            "label": "alternate",
+            "bottle": "Angostura Cocoa Bitters",
+            "note": "Secondary option. In cabinet."
+          }
+        ]
+      },
+      {
+        "name": "Angostura Bitters",
+        "amt": "1 dash"
+      },
+      {
+        "name": "Saline Solution",
+        "amt": "3 drops"
+      },
+      {
+        "name": "Orange Twist",
+        "amt": "garnish"
+      }
+    ],
+    "steps": [
+      "Chill your rocks glass in the freezer or fill with ice water while you build.",
+      "Add rye, cognac, coffee liqueur, chocolate bitters, Angostura, and saline to a mixing glass with ice.",
+      "Stir 30 seconds — the cognac and coffee liqueur need full integration time.",
+      "Drop large clear cube into chilled rocks glass. Strain over the cube.",
+      "Express orange twist close to the surface — oils on the drink, not the air. Drop in or rest on rim."
+    ],
+    "notes": [
+      "<strong>Origin:</strong> Confirmed excellent at Old Hickory Steakhouse, Gaylord Hotel, Grapevine TX. Bar spec: Bulleit Rye, coffee liqueur, cognac, Liquor 43, chocolate bitters.",
+      "<strong>Why it works:</strong> Rye + cognac is Vieux Carré territory. Coffee + chocolate bitters replacing vermouth + Bénédictine makes this darker and more bitter-forward. The split base logic is identical — spice from the rye, fruit from the cognac — but the modifiers take it somewhere the Vieux Carré doesn't go.",
+      "<strong>Cazadores evaluation:</strong> This is a good test for the Cazadores Cafe in cabinet. If it reads syrupy rather than coffee-forward, Mr. Black is the immediate upgrade.",
+      "<strong>Volume:</strong> Scaled to 1.5/1/1 oz (3.5 oz pre-dilution) for a substantial pour."
+    ],
+    "history": "Ordered at Old Hickory Steakhouse, Gaylord Texan Hotel, Grapevine TX. Bar spec used Bulleit Rye, coffee liqueur, cognac, Liquor 43, and chocolate bitters. Home version substitutes Rittenhouse for Bulleit and omits Liquor 43 pending acquisition — otherwise faithful to the original build."
+  },
+  {
     "id": "sazerac",
     "section": "extended",
     "name": "Sazerac",
