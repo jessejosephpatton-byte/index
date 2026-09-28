@@ -1931,6 +1931,109 @@
     "status": "refining"
   },
   {
+    "id": "cafe-negroni",
+    "section": "extended",
+    "status": "untried",
+    "name": "Café Negroni",
+    "spec": "Stirred · Rocks · Negroni Variant · Coffee",
+    "desc": "A five-ingredient Negroni built with coffee liqueur and Amaro Montenegro alongside the classic Campari and sweet vermouth. Confirmed excellent at Graze, Madison during Negroni Week — Death's Door Gin, Stateline Coffee Liqueur, Montenegro, Campari, sweet vermouth. Connects the Negroni format directly to the confirmed coffee modifier preference.",
+    "glass": "Rocks glass · Large single ice cube",
+    "ingredients": [
+      {
+        "name": "Gin",
+        "amt": "1¼ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Death's Door Gin",
+            "note": "Wisconsin gin used at Graze — clean and juniper-forward. Widely available locally."
+          },
+          {
+            "label": "alternate",
+            "bottle": "Tanqueray London Dry",
+            "note": "The home equivalent once acquired. Assertive juniper holds up against five ingredients. On acquisition list."
+          },
+          {
+            "label": "current",
+            "bottle": "Barr Hill Gin",
+            "note": "In cabinet. Honey-forward — a softer result than Death's Door but works until Tanqueray is acquired."
+          }
+        ]
+      },
+      {
+        "name": "Campari",
+        "amt": "¾ oz"
+      },
+      {
+        "name": "Sweet Vermouth",
+        "amt": "¾ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Cocchi di Torino",
+            "note": "Rich and chocolatey — the coffee and chocolate thread connects well. In cabinet. Refrigerate after opening."
+          }
+        ]
+      },
+      {
+        "name": "Coffee Liqueur",
+        "amt": "½ oz",
+        "tiers": [
+          {
+            "label": "preferred",
+            "bottle": "Stateline Coffee Liqueur (Dancing Goat Distillery, Madison)",
+            "note": "The bar spec — local Madison roaster-based liqueur. Track down at Dancing Goat or local retailers. The preferred call for this specific drink."
+          },
+          {
+            "label": "substitute",
+            "bottle": "Mr. Black Cold Brew Coffee Liqueur",
+            "note": "Best widely available substitute — bitter and coffee-forward rather than sweet. In cabinet (pending evaluation)."
+          },
+          {
+            "label": "avoid",
+            "bottle": "Kahlúa",
+            "note": "Too sweet — would pull the drink in the wrong direction."
+          }
+        ]
+      },
+      {
+        "name": "Amaro Montenegro",
+        "amt": "¼ oz",
+        "tiers": [
+          {
+            "label": "standard",
+            "bottle": "Amaro Montenegro",
+            "note": "Lighter and more floral than Averna — softens Campari's bitterness while adding herbal complexity. Not yet in cabinet (~$28). Worth acquiring specifically for this drink."
+          },
+          {
+            "label": "substitute",
+            "bottle": "Averna Amaro (½ the amount — ⅛ oz)",
+            "note": "In cabinet. Heavier and more caramel-forward than Montenegro — use sparingly or the drink tips too dark."
+          }
+        ]
+      },
+      {
+        "name": "Orange Twist",
+        "amt": "garnish"
+      }
+    ],
+    "steps": [
+      "Chill your rocks glass in the freezer or fill with ice water while you build.",
+      "Add gin, Campari, sweet vermouth, coffee liqueur, and Amaro Montenegro to a mixing glass with ice.",
+      "Stir 25–30 seconds until well chilled and integrated.",
+      "Strain over a large single ice cube in the chilled rocks glass.",
+      "Express orange twist close to the surface — oils on the drink, not the air. Drop in or rest on rim."
+    ],
+    "notes": [
+      "<strong>Origin:</strong> Confirmed excellent at Graze, Madison during Negroni Week — a Dancing Goat Distillery collaboration. Bar spec: Death's Door Gin, Stateline Coffee Liqueur, Amaro Montenegro, Campari, sweet vermouth.",
+      "<strong>Stateline Coffee Liqueur:</strong> Local Madison product from Dancing Goat Distillery. Track down at the distillery directly or local retailers. The preferred bottle for this drink — the local provenance matters.",
+      "<strong>Why five ingredients works:</strong> Montenegro softens Campari's edge while the coffee liqueur adds a dark bitter thread that neither standard Negroni ingredient provides. Each element has a distinct role — nothing is redundant.",
+      "<strong>Coffee modifier thread:</strong> Connects to Night in Madrid and the confirmed preference for coffee as a primary modifier in stirred builds. The Café Negroni proves the format works beyond the Manhattan family.",
+      "<strong>Amaro Montenegro acquisition:</strong> Worth buying specifically for this drink (~$28). Lighter and more floral than Averna — fills a gap in the cabinet between Averna's weight and Aperol's sweetness."
+    ],
+    "history": "Tried during Negroni Week at Graze, Madison — a collaboration with Dancing Goat Distillery featuring Death's Door Gin and Stateline Coffee Liqueur. Confirmed excellent. Directly informed by the palate refinement noting coffee as a primary modifier in stirred spirit-forward builds."
+  },
+  {
     "id": "frisco-sour",
     "section": "extended",
     "name": "Frisco Sour",
